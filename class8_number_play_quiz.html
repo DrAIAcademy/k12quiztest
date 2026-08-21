@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Prayatnam Academy - Class 8 Maths Chapter 5 Number Play MCQ Quiz" />
+  <title>Class 8 Maths | Number Play Quiz | Prayatnam Academy</title>
+  <style>
+    :root{
+      --bg:#f5f7fb; --card:#ffffff; --ink:#172033; --muted:#667085;
+      --primary:#5b4bdb; --primary2:#7c6ff2; --good:#087a55; --bad:#c83532;
+      --gold:#b88116; --line:#e6e8ef; --shadow:0 18px 50px rgba(25,31,52,.10);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(124,111,242,.13), transparent 26%),
+        radial-gradient(circle at 90% 0%, rgba(91,75,219,.10), transparent 23%),
+        var(--bg);
+    }
+    button,input{font:inherit}
+    .topbar{
+      background:#12172a; color:#fff; padding:15px 22px; display:flex; align-items:center;
+      justify-content:space-between; gap:16px; box-shadow:0 4px 18px rgba(0,0,0,.12);
+    }
+    .brand{font-weight:800; letter-spacing:.3px}
+    .tag{font-size:13px; opacity:.82}
+    .wrap{width:min(920px,calc(100% - 28px)); margin:34px auto 60px}
+    .hero{
+      background:linear-gradient(135deg,#5b4bdb,#7868ed); color:#fff; border-radius:24px;
+      padding:32px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+    }
+    .hero:after{
+      content:""; position:absolute; width:260px; height:260px; border-radius:50%;
+      background:rgba(255,255,255,.08); right:-90px; top:-100px;
+    }
+    .eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:1.6px;font-weight:800;opacity:.9}
+    h1{margin:8px 0 8px;font-size:clamp(28px,5vw,46px);line-height:1.08}
+    .hero p{margin:0;max-width:680px;line-height:1.65;opacity:.92}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+    .chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);padding:8px 12px;border-radius:999px;font-size:13px}
+    .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px;margin-top:22px;box-shadow:var(--shadow)}
+    .hidden{display:none!important}
+    .name-row{display:grid;grid-template-columns:1fr auto;gap:12px;margin-top:18px}
+    input[type="text"]{
+      width:100%;padding:14px 16px;border:1.5px solid #d7dae4;border-radius:12px;outline:none;
+      transition:.2s;background:#fff;
+    }
+    input[type="text"]:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(91,75,219,.10)}
+    .btn{
+      border:0;border-radius:12px;padding:13px 18px;font-weight:800;cursor:pointer;transition:.18s;
+      background:var(--primary);color:#fff;box-shadow:0 8px 22px rgba(91,75,219,.22);
+    }
+    .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+    .btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+    .btn.secondary{background:#eef0ff;color:#4033bc;box-shadow:none}
+    .btn.dark{background:#172033}
+    .error{color:var(--bad);font-size:13px;margin-top:8px;font-weight:700}
+    .quiz-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:16px}
+    .student{font-weight:800}.small{font-size:13px;color:var(--muted)}
+    .progress-track{height:9px;border-radius:999px;background:#eceef4;overflow:hidden;margin:12px 0 25px}
+    .progress{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#8e7fff);transition:.25s}
+    .qnum{font-weight:900;color:var(--primary);font-size:14px;text-transform:uppercase;letter-spacing:.8px}
+    .question{font-size:clamp(20px,3vw,26px);font-weight:800;line-height:1.4;margin:8px 0 20px}
+    .options{display:grid;gap:12px}
+    .option{
+      width:100%;text-align:left;border:1.5px solid #e1e4ec;background:#fff;border-radius:14px;padding:15px 16px;
+      cursor:pointer;display:flex;gap:12px;align-items:flex-start;color:var(--ink);transition:.16s;
+    }
+    .option:hover{border-color:#afa7f5;background:#faf9ff}
+    .option.selected{border-color:var(--primary);background:#f2f0ff;box-shadow:0 0 0 3px rgba(91,75,219,.08)}
+    .letter{
+      width:28px;height:28px;border-radius:8px;background:#f0f1f6;display:grid;place-items:center;font-weight:900;
+      flex:0 0 auto;
+    }
+    .selected .letter{background:var(--primary);color:white}
+    .nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+    .result{text-align:center}
+    .score-ring{
+      width:170px;height:170px;border-radius:50%;margin:20px auto;display:grid;place-items:center;
+      background:conic-gradient(var(--primary) var(--pct,0%),#eceef5 0);position:relative;
+    }
+    .score-ring:after{content:"";position:absolute;width:135px;height:135px;border-radius:50%;background:#fff}
+    .score-text{position:relative;z-index:2;font-weight:900;font-size:30px}
+    .grade{
+      display:inline-flex;padding:8px 15px;border-radius:999px;font-weight:900;margin:5px 0 12px;
+      background:#f1efff;color:#4738c9;
+    }
+    .result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
+    .metric{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fafbfc}
+    .metric b{display:block;font-size:22px;margin-top:4px}
+    .cert-wrap{margin-top:22px}
+    .certificate{
+      width:min(900px,100%); margin:0 auto; background:#fffdf8; border:10px double #b78b2d;
+      padding:36px; text-align:center; position:relative; color:#2d2b27;
+      box-shadow:0 18px 50px rgba(73,57,24,.12);
+    }
+    .certificate:before,.certificate:after{
+      content:"✦"; position:absolute;color:#b78b2d;font-size:28px;
+    }
+    .certificate:before{left:18px;top:14px}.certificate:after{right:18px;bottom:14px}
+    .cert-brand{font-weight:900;letter-spacing:2px;color:#6d5018;text-transform:uppercase}
+    .cert-title{font-family:Georgia,serif;font-size:clamp(34px,6vw,58px);margin:13px 0 4px;color:#332915}
+    .cert-sub{font-size:14px;text-transform:uppercase;letter-spacing:2px;color:#7a6a4a}
+    .cert-name{font-family:Georgia,serif;font-size:clamp(30px,5vw,48px);margin:20px 0 8px;color:#4b3a16;border-bottom:1px solid #cdbb92;padding-bottom:8px}
+    .cert-text{line-height:1.65;max-width:680px;margin:0 auto}
+    .cert-grade{font-size:24px;font-weight:900;color:#7a5916;margin:14px}
+    .cert-foot{display:flex;justify-content:space-between;gap:20px;margin-top:30px;font-size:13px;color:#6d6250}
+    .notice{padding:15px;border-radius:12px;background:#fff6e6;color:#7a5412;font-weight:700;margin-top:16px}
+    .review{margin-top:24px;text-align:left}
+    details{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;background:#fff}
+    summary{cursor:pointer;font-weight:800}
+    .correct-line{color:var(--good);font-weight:800;margin-top:8px}
+    .wrong-line{color:var(--bad);font-weight:800;margin-top:8px}
+    footer{text-align:center;color:var(--muted);font-size:13px;margin-top:24px} footer a{color:var(--primary);font-weight:800;text-decoration:none} footer a:hover{text-decoration:underline}
+    @media(max-width:650px){
+      .wrap{width:min(100% - 18px,920px);margin-top:18px}.hero,.panel{padding:20px;border-radius:18px}
+      .name-row{grid-template-columns:1fr}.quiz-head{align-items:flex-start;flex-direction:column}
+      .result-grid{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav .btn{width:100%}
+      .cert-foot{flex-direction:column;gap:8px}.certificate{padding:26px 18px;border-width:7px}
+    }
+    @media print{
+      body{background:white}.topbar,.hero,#startPanel,#quizPanel,#resultSummary,footer,.print-hide{display:none!important}
+      .wrap{width:100%;margin:0}.panel{box-shadow:none;border:0;padding:0;margin:0}
+      #resultPanel{display:block!important}.cert-wrap{display:block!important}.certificate{box-shadow:none;width:100%;min-height:650px;display:flex;flex-direction:column;justify-content:center}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Prayatnam Academy</div>
+    <div class="tag">Class 8 • Mathematics</div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Interactive Assessment</div>
+      <h1>Chapter 5: Number Play</h1>
+      <p>Test your understanding of parity, consecutive numbers, divisibility, remainders, digital roots, digit patterns and number puzzles.</p>
+      <div class="chips">
+        <span class="chip">25 MCQs</span>
+        <span class="chip">1 mark each</span>
+        <span class="chip">60 minute limit</span>
+        <span class="chip">Certificate at 70%+</span>
+        <span class="chip">A+ above 90%</span>
+      </div>
+    </section>
+
+    <section class="panel" id="startPanel">
+      <h2 style="margin:0">Enter Student Details</h2>
+      <p class="small">Student name is mandatory and will appear on the certificate. Time limit: <b>60 minutes</b>. Only <b>one attempt</b> is allowed on this browser/device.</p>
+      <div class="name-row">
+        <input id="studentName" type="text" maxlength="60" autocomplete="name" placeholder="Enter full name" />
+        <button class="btn" id="startBtn">Start Quiz</button>
+      </div>
+      <div id="nameError" class="error hidden">Please enter the student's name before starting.</div>
+    </section>
+
+    <section class="panel hidden" id="quizPanel">
+      <div class="quiz-head">
+        <div>
+          <div class="small">Student</div>
+          <div class="student" id="studentDisplay"></div>
+        </div>
+        <div style="text-align:right"><div class="small" id="counter">Question 1 of 25</div><div id="timer" style="margin-top:5px;font-weight:900;color:var(--bad);font-size:18px">60:00</div></div>
+      </div>
+      <div class="progress-track"><div class="progress" id="progress"></div></div>
+      <div class="qnum" id="qnum"></div>
+      <div class="question" id="questionText"></div>
+      <div class="options" id="options"></div>
+      <div class="nav">
+        <button class="btn secondary" id="prevBtn">Previous</button>
+        <button class="btn" id="nextBtn">Next</button>
+      </div>
+    </section>
+
+    <section class="panel hidden result" id="resultPanel">
+      <div id="resultSummary">
+        <div class="eyebrow" style="color:var(--primary)">Quiz Completed</div>
+        <h2 style="font-size:32px;margin:8px 0">Your Result</h2>
+        <div class="score-ring" id="scoreRing"><div class="score-text" id="percentText">0%</div></div>
+        <div class="grade" id="gradeBadge">Grade</div>
+        <p id="resultMessage"></p>
+        <div class="result-grid">
+          <div class="metric"><span class="small">Correct</span><b id="correctCount">0</b></div>
+          <div class="metric"><span class="small">Score</span><b id="scoreDisplay">0 / 25</b></div>
+          <div class="metric"><span class="small">Percentage</span><b id="percentageDisplay">0%</b></div>
+        </div>
+        <div class="print-hide" style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
+          <button class="btn dark hidden" id="printBtn">Print / Save Certificate</button>
+          
+        </div>
+      </div>
+
+      <div class="cert-wrap hidden" id="certificateWrap">
+        <div class="certificate" id="certificate">
+          <div class="cert-brand">Prayatnam Academy</div>
+          <div class="cert-title">Certificate of Achievement</div>
+          <div class="cert-sub">Class 8 Mathematics • Chapter 5: Number Play</div>
+          <p style="margin-top:26px">This certificate is proudly presented to</p>
+          <div class="cert-name" id="certName"></div>
+          <p class="cert-text">for successfully completing the <b>Number Play MCQ Quiz</b> and demonstrating strong understanding of the chapter concepts.</p>
+          <div class="cert-grade" id="certGrade"></div>
+          <p class="cert-text" id="certScore"></p>
+          <div class="cert-foot">
+            <div><b>Date</b><br><span id="certDate"></span></div>
+            <div><b>Certificate ID</b><br><span id="certId"></span></div>
+            <div><b>Prayatnam Academy</b><br>Academic Assessment</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice hidden" id="noCertificate">
+        Certificate is awarded only for scores of 70% or above. Review the answers and try again.
+      </div>
+
+      <div class="review" id="reviewArea"></div>
+    </section>
+
+    <footer>© Prayatnam Academy • <a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a> • Contact: <a href="tel:+918115749450">8115749450</a></footer>
+  </main>
+
+<script>
+const questions = [
+  {
+    q: "When + and − signs are placed between four consecutive integers in all possible ways, what is always true about the result?",
+    options: ["It is always even", "It is always odd", "It is always positive", "It is always zero"],
+    answer: 0,
+    explanation: "For four consecutive integers, every such +/− combination gives an even result."
+  },
+  {
+    q: "How many different +/− sign arrangements are possible between four numbers?",
+    options: ["4", "6", "8", "16"],
+    answer: 2,
+    explanation: "There are three sign positions, each with 2 choices, so 2³ = 8 arrangements."
+  },
+  {
+    q: "Which expression is always even for integer values of its letters?",
+    options: ["3g + 5h", "4m + 2n", "6m − 3n", "x² + 2"],
+    answer: 1,
+    explanation: "Both 4m and 2n are multiples of 2, so their sum is always even."
+  },
+  {
+    q: "The sum of four consecutive integers is 34. Which are the four integers?",
+    options: ["5, 6, 7, 8", "6, 7, 8, 9", "7, 8, 9, 10", "8, 9, 10, 11"],
+    answer: 2,
+    explanation: "7 + 8 + 9 + 10 = 34."
+  },
+  {
+    q: "If p is the greatest of five consecutive integers, which expression gives the smallest integer?",
+    options: ["p − 1", "p − 2", "p − 3", "p − 4"],
+    answer: 3,
+    explanation: "The five integers are p−4, p−3, p−2, p−1 and p."
+  },
+  {
+    q: "The sum of a multiple of 6 and a multiple of 9 is always a multiple of which number?",
+    options: ["2 only", "3", "5", "8"],
+    answer: 1,
+    explanation: "6m + 9n = 3(2m + 3n), so it is always divisible by 3."
+  },
+  {
+    q: "Which algebraic form represents all integers that leave remainder 2 when divided by 3?",
+    options: ["3k + 1", "3k + 2", "2k + 3", "4k + 2"],
+    answer: 1,
+    explanation: "A quotient k with remainder 2 gives number = 3k + 2."
+  },
+  {
+    q: "Three numbers each leave remainder 2 when divided by 6. What can be said about their sum?",
+    options: ["Always divisible by 6", "Always leaves remainder 2", "Always odd", "Never divisible by 3"],
+    answer: 0,
+    explanation: "Their sum is (6a+2)+(6b+2)+(6c+2) = 6(a+b+c+1), a multiple of 6."
+  },
+  {
+    q: "A number leaves remainder 5 on division by 7 and another leaves remainder 3. What remainder does their sum leave on division by 7?",
+    options: ["0", "1", "2", "3"],
+    answer: 1,
+    explanation: "5 + 3 = 8, and 8 leaves remainder 1 when divided by 7."
+  },
+  {
+    q: "What is the smallest positive integer that leaves remainders 2, 3 and 4 when divided by 3, 4 and 5 respectively?",
+    options: ["49", "54", "59", "64"],
+    answer: 2,
+    explanation: "59 is one less than 60 = LCM(3,4,5), so it gives remainders 2, 3 and 4 respectively."
+  },
+  {
+    q: "Which rule correctly tests divisibility by 9?",
+    options: ["The last digit must be 9", "The number must be even", "The digit sum must be divisible by 9", "The last two digits must be divisible by 9"],
+    answer: 2,
+    explanation: "A number is divisible by 9 exactly when the sum of its digits is divisible by 9."
+  },
+  {
+    q: "Which of these numbers is divisible by 9?",
+    options: ["123", "405", "8888", "93547"],
+    answer: 1,
+    explanation: "For 405, 4 + 0 + 5 = 9, which is divisible by 9."
+  },
+  {
+    q: "What is the smallest multiple of 9 whose digits are all even?",
+    options: ["198", "228", "288", "468"],
+    answer: 2,
+    explanation: "288 has only even digits and 2+8+8 = 18, a multiple of 9."
+  },
+  {
+    q: "Which multiple of 9 is closest to 6000?",
+    options: ["5991", "5994", "6003", "6009"],
+    answer: 2,
+    explanation: "6003 is divisible by 9 and is only 3 away from 6000."
+  },
+  {
+    q: "How many multiples of 9 lie from 4300 to 4400?",
+    options: ["9", "10", "11", "12"],
+    answer: 2,
+    explanation: "They run from 4302 through 4392. The count is (4392−4302)/9 + 1 = 11."
+  },
+  {
+    q: "What happens to digital roots as you move through consecutive integers?",
+    options: ["They repeat in a cycle of 9", "They repeat in a cycle of 10", "They are always even", "They continually increase without repeating"],
+    answer: 0,
+    explanation: "Digital roots cycle through 1 to 9 and then repeat."
+  },
+  {
+    q: "What is the digital root of 9a + 36b + 13 for integer values of a and b?",
+    options: ["2", "4", "6", "9"],
+    answer: 1,
+    explanation: "9a and 36b contribute 0 modulo 9; 13 has digital root 4."
+  },
+  {
+    q: "If 31z5 is divisible by 9 and z is a digit, which values can z take?",
+    options: ["0 or 9", "1 or 8", "2 or 7", "4 or 5"],
+    answer: 0,
+    explanation: "The digit sum is 3+1+z+5 = 9+z, which is a multiple of 9 for z = 0 or 9."
+  },
+  {
+    q: "A number is divisible by 9. What happens if all its digits are reversed?",
+    options: ["It is still divisible by 9", "It becomes divisible by 2", "It is never divisible by 9", "It becomes a prime number"],
+    answer: 0,
+    explanation: "Reversing digits does not change their sum, so divisibility by 9 is preserved."
+  },
+  {
+    q: "Which statement about the sum of two multiples of 3 is correct?",
+    options: ["It is always a multiple of 6", "It is never a multiple of 6", "It is a multiple of 6 exactly when the two quotient indices have the same parity", "It is always odd"],
+    answer: 2,
+    explanation: "Writing the numbers as 3a and 3b gives 3(a+b); it is divisible by 6 when a+b is even."
+  },
+  {
+    q: "Triples like (2,3,4), where the first is divisible by 2, second by 3 and third by 4, repeat after how many numbers?",
+    options: ["6", "8", "10", "12"],
+    answer: 3,
+    explanation: "The pattern repeats every LCM(2,3,4) = 12."
+  },
+  {
+    q: "The sum of three consecutive even integers is always divisible by:",
+    options: ["4 only", "5", "6", "9"],
+    answer: 2,
+    explanation: "2n+(2n+2)+(2n+4) = 6(n+1), so the sum is always divisible by 6."
+  },
+  {
+    q: "Choose three integers. When is their sum divisible by 3, in terms of their remainders on division by 3?",
+    options: ["Only when all three remainders are 0", "When all three remainders are the same or all three are different", "Only when two remainders are equal", "Whenever at least one number is divisible by 3"],
+    answer: 1,
+    explanation: "The remainder sum is divisible by 3 when the residues are 0,0,0; 1,1,1; 2,2,2; or 0,1,2 in any order."
+  },
+  {
+    q: "The product of any two consecutive integers is always a multiple of:",
+    options: ["2", "3", "4", "6"],
+    answer: 0,
+    explanation: "Among any two consecutive integers, one is even, making their product divisible by 2."
+  },
+  {
+    q: "Which numerical substitution correctly solves the cryptarithm EF × E = GGG?",
+    options: ["24 × 2 = 48", "37 × 3 = 111", "48 × 4 = 192", "55 × 5 = 275"],
+    answer: 1,
+    explanation: "With E=3, F=7 and G=1, 37 × 3 = 111, matching EF × E = GGG."
+  }
+];
+
+let current = 0;
+let answers = Array(questions.length).fill(null);
+let studentName = "";
+const QUIZ_DURATION_SECONDS = 60 * 60;
+const ATTEMPT_KEY = "prayatnam_class8_number_play_attempted_v1";
+let timeLeft = QUIZ_DURATION_SECONDS;
+let timerInterval = null;
+
+const $ = id => document.getElementById(id);
+const startPanel = $("startPanel"), quizPanel = $("quizPanel"), resultPanel = $("resultPanel");
+
+$("startBtn").addEventListener("click", startQuiz);
+$("studentName").addEventListener("keydown", e => { if(e.key === "Enter") startQuiz(); });
+$("prevBtn").addEventListener("click", () => { if(current > 0){ current--; renderQuestion(); }});
+$("nextBtn").addEventListener("click", nextQuestion);
+$("printBtn").addEventListener("click", () => window.print());
+
+if(localStorage.getItem(ATTEMPT_KEY) === "yes"){
+  $("startBtn").disabled = true;
+  $("studentName").disabled = true;
+  $("nameError").textContent = "This quiz has already been attempted on this browser/device. Only one attempt is allowed.";
+  $("nameError").classList.remove("hidden");
+}
+
+function startQuiz(){
+  if(localStorage.getItem(ATTEMPT_KEY) === "yes"){
+    $("nameError").textContent = "This quiz has already been attempted on this browser/device. Only one attempt is allowed.";
+    $("nameError").classList.remove("hidden");
+    $("startBtn").disabled = true;
+    return;
+  }
+
+  const name = $("studentName").value.trim().replace(/\s+/g," ");
+  if(name.length < 2){
+    $("nameError").textContent = "Please enter the student's name before starting.";
+    $("nameError").classList.remove("hidden");
+    $("studentName").focus();
+    return;
+  }
+
+  studentName = name;
+  localStorage.setItem(ATTEMPT_KEY, "yes");
+  $("nameError").classList.add("hidden");
+  $("studentDisplay").textContent = studentName;
+  startPanel.classList.add("hidden");
+  quizPanel.classList.remove("hidden");
+  startTimer();
+  renderQuestion();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function startTimer(){
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if(timeLeft <= 0){
+      clearInterval(timerInterval);
+      timerInterval = null;
+      alert("Time is over. Your quiz will be submitted automatically.");
+      submitQuiz(true);
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay(){
+  const mins = Math.floor(Math.max(0,timeLeft) / 60);
+  const secs = Math.max(0,timeLeft) % 60;
+  $("timer").textContent = `${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+  if(timeLeft <= 300){
+    $("timer").style.color = "#c83532";
+  }
+}
+
+function renderQuestion(){
+  const item = questions[current];
+  $("counter").textContent = `Question ${current+1} of ${questions.length}`;
+  $("qnum").textContent = `Question ${current+1}`;
+  $("questionText").textContent = item.q;
+  $("progress").style.width = `${((current+1)/questions.length)*100}%`;
+  $("prevBtn").disabled = current === 0;
+  $("nextBtn").textContent = current === questions.length-1 ? "Submit Quiz" : "Next";
+  $("nextBtn").disabled = answers[current] === null;
+
+  const box = $("options");
+  box.innerHTML = "";
+  item.options.forEach((text, i) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "option" + (answers[current] === i ? " selected" : "");
+    btn.innerHTML = `<span class="letter">${String.fromCharCode(65+i)}</span><span>${escapeHtml(text)}</span>`;
+    btn.addEventListener("click", () => {
+      answers[current] = i;
+      renderQuestion();
+    });
+    box.appendChild(btn);
+  });
+}
+
+function nextQuestion(){
+  if(answers[current] === null) return;
+  if(current < questions.length - 1){
+    current++;
+    renderQuestion();
+    window.scrollTo({top:quizPanel.offsetTop-15,behavior:"smooth"});
+  }else{
+    submitQuiz();
+  }
+}
+
+function submitQuiz(timedOut = false){
+  if(timerInterval){
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+  const correct = questions.reduce((sum,q,i) => sum + (answers[i] === q.answer ? 1 : 0),0);
+  const pct = Math.round((correct/questions.length)*100);
+  let grade, eligible;
+  if(pct > 90){ grade = "A+"; eligible = true; }
+  else if(pct >= 80){ grade = "A"; eligible = true; }
+  else if(pct >= 70){ grade = "B"; eligible = true; }
+  else { grade = "No Certificate"; eligible = false; }
+
+  quizPanel.classList.add("hidden");
+  resultPanel.classList.remove("hidden");
+  $("scoreRing").style.setProperty("--pct", `${pct}%`);
+  $("percentText").textContent = `${pct}%`;
+  $("gradeBadge").textContent = eligible ? `Grade ${grade}` : grade;
+  $("correctCount").textContent = `${correct}`;
+  $("scoreDisplay").textContent = `${correct} / ${questions.length}`;
+  $("percentageDisplay").textContent = `${pct}%`;
+  $("resultMessage").textContent = timedOut
+    ? (eligible
+        ? `Time is over. Congratulations, ${studentName}! You have qualified for a Prayatnam Academy certificate.`
+        : `Time is over. ${studentName}, your score is below the 70% certificate threshold.`)
+    : (eligible
+        ? `Congratulations, ${studentName}! You have qualified for a Prayatnam Academy certificate.`
+        : `${studentName}, your score is below the 70% certificate threshold.`);
+
+  if(eligible){
+    $("certificateWrap").classList.remove("hidden");
+    $("printBtn").classList.remove("hidden");
+    $("noCertificate").classList.add("hidden");
+    $("certName").textContent = studentName;
+    $("certGrade").textContent = `Grade ${grade}`;
+    $("certScore").textContent = `Score: ${correct}/${questions.length} • Percentage: ${pct}%`;
+    $("certDate").textContent = new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    $("certId").textContent = makeCertificateId(studentName, correct);
+  }else{
+    $("certificateWrap").classList.add("hidden");
+    $("printBtn").classList.add("hidden");
+    $("noCertificate").classList.remove("hidden");
+  }
+
+  renderReview();
+  window.scrollTo({top:resultPanel.offsetTop-15,behavior:"smooth"});
+}
+
+function renderReview(){
+  const area = $("reviewArea");
+  area.innerHTML = `<h3>Answer Review</h3><p class="small">Open any question to check the correct answer and explanation.</p>`;
+  questions.forEach((q,i)=>{
+    const d = document.createElement("details");
+    const isCorrect = answers[i] === q.answer;
+    d.innerHTML = `
+      <summary>Q${i+1}. ${escapeHtml(q.q)}</summary>
+      <div class="${isCorrect ? "correct-line":"wrong-line"}">Your answer: ${answers[i] === null ? "Not answered" : escapeHtml(q.options[answers[i]])}</div>
+      <div class="correct-line">Correct answer: ${escapeHtml(q.options[q.answer])}</div>
+      <p class="small" style="font-size:14px;line-height:1.55">${escapeHtml(q.explanation)}</p>`;
+    area.appendChild(d);
+  });
+}
+
+function makeCertificateId(name, score){
+  const base = name.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,5).padEnd(5,"X");
+  const stamp = Date.now().toString().slice(-6);
+  return `PA-NP-${base}-${score}${stamp}`;
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[s]));
+}
+</script>
+</body>
+</html>
