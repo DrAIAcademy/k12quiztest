@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 7 Maths Chapter 5 Parallel and Intersecting Lines Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5545d8;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:900px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,#5545d8,#8172f2);color:#fff;padding:30px;border-radius:22px}
+.hero h1{margin:6px 0;font-size:clamp(28px,5vw,42px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px}
+.timer{font-size:20px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.4;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:24px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:25px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px}
+summary{font-weight:800;cursor:pointer}
+.good{color:var(--good);font-weight:800}
+.bad,.error{color:var(--bad);font-weight:800}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row,.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 7 Mathematics</header>
+<main class="wrap">
+<section class="hero">
+<small>EXAM-ORIENTED INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 5: Parallel and Intersecting Lines</h1>
+<p>25 MCQs covering intersecting lines, vertically opposite angles, linear pairs, parallel and perpendicular lines, transversals, angle relationships and constructions.</p>
+<div class="chips">
+<span class="chip">25 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Unlimited Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate.</p>
+<div class="row">
+<input id="studentName" placeholder="Enter full name" maxlength="60">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="errorMsg" class="error hidden">Please enter the student's name.</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="studentDisplay" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="questionText" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prevBtn" onclick="prevQuestion()">Previous</button>
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percentage"></h1>
+<h3 id="grade"></h3>
+<p id="message"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="percentage2"></b></div>
+</div>
+<button id="printBtn" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="certificate" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 7 Mathematics • Chapter 5: Parallel and Intersecting Lines</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the 25-question assessment.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="certDate"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="certId"></span></p>
+</div>
+
+<div id="noCertificate" class="hidden bad" style="margin-top:20px">
+Certificate is awarded only for scores of 70% or above.
+</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>
+© Prayatnam Academy •
+<a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+• Number: <a href="tel:+918115749450">8115749450</a>
+</footer>
+
+<script>
+const questions=[{"q": "How many points can two distinct straight lines have in common?", "options": ["At most one point", "Exactly two points", "Infinitely many points", "At least three points"], "answer": 0, "explanation": "Two distinct straight lines can intersect at only one point. If they share more than one point, they are actually the same line."}, {"q": "When two lines intersect, vertically opposite angles are always:", "options": ["Equal", "Supplementary", "Complementary", "Right angles"], "answer": 0, "explanation": "Vertically opposite angles formed by two intersecting lines are equal."}, {"q": "The sum of the angles in a linear pair is:", "options": ["90°", "120°", "180°", "360°"], "answer": 2, "explanation": "A linear pair forms a straight angle, so the two angles add to 180°."}, {"q": "If one angle of a linear pair is 42°, the other angle is:", "options": ["42°", "48°", "138°", "148°"], "answer": 2, "explanation": "180° − 42° = 138°."}, {"q": "Two lines that never meet even when extended indefinitely are called:", "options": ["Intersecting lines", "Parallel lines", "Perpendicular lines", "Coincident lines"], "answer": 1, "explanation": "Parallel lines remain the same distance apart and never intersect."}, {"q": "Two lines that intersect at 90° are called:", "options": ["Parallel lines", "Perpendicular lines", "Transversal lines", "Coincident lines"], "answer": 1, "explanation": "Perpendicular lines meet to form a right angle of 90°."}, {"q": "If two lines are perpendicular to the same line, then the two lines are:", "options": ["Parallel to each other", "Perpendicular to each other", "Always intersecting", "The same line"], "answer": 0, "explanation": "Two lines perpendicular to the same line are parallel to each other."}, {"q": "A line that crosses two or more lines at distinct points is called a:", "options": ["Ray", "Bisector", "Transversal", "Segment"], "answer": 2, "explanation": "A transversal is a line that intersects two or more other lines at different points."}, {"q": "When a transversal cuts two parallel lines, corresponding angles are:", "options": ["Equal", "Supplementary", "Always 90°", "Unequal"], "answer": 0, "explanation": "Corresponding angles formed by a transversal with parallel lines are equal."}, {"q": "When a transversal cuts two parallel lines, alternate interior angles are:", "options": ["Equal", "Supplementary", "Complementary", "Always obtuse"], "answer": 0, "explanation": "Alternate interior angles between parallel lines are equal."}, {"q": "Interior angles on the same side of a transversal between two parallel lines add up to:", "options": ["90°", "120°", "180°", "360°"], "answer": 2, "explanation": "Co-interior angles on the same side of a transversal are supplementary and sum to 180°."}, {"q": "If one of a pair of alternate interior angles is 48°, the other is:", "options": ["42°", "48°", "132°", "138°"], "answer": 1, "explanation": "Alternate interior angles are equal when the lines are parallel."}, {"q": "If one pair of same-side interior angles contains an angle of 99°, the other angle is:", "options": ["81°", "91°", "99°", "101°"], "answer": 0, "explanation": "Same-side interior angles total 180°, so 180° − 99° = 81°."}, {"q": "If a corresponding angle is 122° when a transversal cuts two parallel lines, its corresponding partner is:", "options": ["58°", "68°", "122°", "180°"], "answer": 2, "explanation": "Corresponding angles between parallel lines are equal."}, {"q": "If an angle is 62° and its adjacent angle forms a linear pair, the adjacent angle is:", "options": ["28°", "62°", "118°", "128°"], "answer": 2, "explanation": "180° − 62° = 118°."}, {"q": "Two parallel lines are cut by a transversal. If an alternate interior angle is 69°, the matching alternate interior angle is:", "options": ["21°", "69°", "111°", "121°"], "answer": 1, "explanation": "Alternate interior angles are equal."}, {"q": "If one same-side interior angle is 132°, the other is:", "options": ["38°", "42°", "48°", "58°"], "answer": 2, "explanation": "180° − 132° = 48°."}, {"q": "In the chapter example, ∠1 = 42° and ∠1 with ∠2 form a linear pair. If ∠2 is alternate interior to angle a, then a equals:", "options": ["42°", "48°", "132°", "138°"], "answer": 3, "explanation": "∠2 = 180° − 42° = 138°, and alternate interior angles are equal, so a = 138°."}, {"q": "In the chapter example, a straight line contains angles 90°, 67° and x. Find x.", "options": ["13°", "23°", "33°", "43°"], "answer": 1, "explanation": "90° + 67° + x = 180°, so x = 23°."}, {"q": "If two parallel lines are cut by a transversal and one angle is 110°, the corresponding angle is:", "options": ["70°", "90°", "110°", "250°"], "answer": 2, "explanation": "Corresponding angles are equal for parallel lines."}, {"q": "In a figure, two adjacent angles on a straight line are 45° and 78°, along with a third angle x. Find x.", "options": ["47°", "57°", "67°", "77°"], "answer": 1, "explanation": "45° + 78° + x = 180°, giving x = 57°."}, {"q": "If AB ∥ CD and CD ∥ EF, then which conclusion is correct?", "options": ["AB ∥ EF", "AB ⟂ EF", "AB intersects EF at 90°", "No relation can be stated"], "answer": 0, "explanation": "Lines parallel to the same line are parallel to each other, so AB is parallel to EF."}, {"q": "If one same-side interior angle is 55°, the other is:", "options": ["55°", "105°", "125°", "135°"], "answer": 2, "explanation": "Same-side interior angles sum to 180°, so 180° − 55° = 125°."}, {"q": "Which tools are used in the chapter to construct a line parallel to a given line through a point?", "options": ["Compass only", "Ruler and set-square", "Protractor only", "Divider only"], "answer": 1, "explanation": "The chapter construction uses a ruler and set-square, along with a pencil."}, {"q": "Why can parallel lines sometimes appear bent or non-parallel in certain diagrams?", "options": ["Their lengths change", "They are actually curved", "Surrounding patterns can create an optical illusion", "Parallel lines always meet at infinity in the drawing"], "answer": 2, "explanation": "The chapter explains that surrounding slanted or radiating lines can distort visual perception and create an optical illusion."}];
+let current=0, answers=Array(questions.length).fill(null), student="", seconds=3600, timerHandle=null;
+
+function startQuiz(){
+  student=document.getElementById("studentName").value.trim().replace(/\s+/g," ");
+  if(student.length<2){
+    errorMsg.classList.remove("hidden");
+    return;
+  }
+  errorMsg.classList.add("hidden");
+  studentDisplay.textContent=student;
+  start.classList.add("hidden");
+  quiz.classList.remove("hidden");
+  seconds=3600;
+  runTimer();
+  renderQuestion();
+}
+
+function runTimer(){
+  updateTimer();
+  timerHandle=setInterval(()=>{
+    seconds--;
+    updateTimer();
+    if(seconds<=0){
+      clearInterval(timerHandle);
+      timerHandle=null;
+      submitQuiz(true);
+    }
+  },1000);
+}
+
+function updateTimer(){
+  const m=Math.floor(Math.max(0,seconds)/60);
+  const s=Math.max(0,seconds)%60;
+  timer.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function renderQuestion(){
+  const q=questions[current];
+  counter.textContent=`Question ${current+1} of ${questions.length}`;
+  progress.style.width=((current+1)/questions.length*100)+"%";
+  questionText.textContent=q.q;
+  options.innerHTML="";
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+text;
+    b.onclick=()=>{answers[current]=i;renderQuestion();};
+    options.appendChild(b);
+  });
+  prevBtn.disabled=current===0;
+  nextBtn.disabled=answers[current]===null;
+  nextBtn.textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+
+function prevQuestion(){
+  if(current>0){current--;renderQuestion();}
+}
+
+function nextQuestion(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){current++;renderQuestion();}
+  else submitQuiz(false);
+}
+
+function submitQuiz(timedOut){
+  if(timerHandle){clearInterval(timerHandle);timerHandle=null;}
+  const c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  const p=Math.round(c/questions.length*100);
+  let g="", eligible=p>=70;
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  quiz.classList.add("hidden");
+  result.classList.remove("hidden");
+  percentage.textContent=p+"%";
+  grade.textContent=eligible?"Grade "+g:g;
+  correct.textContent=c;
+  score.textContent=c+" / "+questions.length;
+  percentage2.textContent=p+"%";
+  message.textContent=(timedOut?"Time is over. ":"")+(eligible
+    ?"Congratulations! You qualified for a Prayatnam Academy certificate."
+    :"Your score is below the certificate threshold. Review the answers and try again.");
+
+  if(eligible){
+    certificate.classList.remove("hidden");
+    printBtn.classList.remove("hidden");
+    certName.textContent=student;
+    certGrade.textContent="Grade "+g;
+    certScore.textContent=`Score: ${c}/${questions.length} • Percentage: ${p}%`;
+    certDate.textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    certId.textContent="PA-C7M5-"+Date.now().toString().slice(-8);
+  } else {
+    noCertificate.classList.remove("hidden");
+  }
+
+  review.innerHTML="<h3>Answer Review & Explanations</h3>";
+  questions.forEach((q,i)=>{
+    const d=document.createElement("details");
+    const ua=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+    <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${ua}</p>
+    <p class="good">Correct answer: ${q.options[q.answer]}</p>
+    <p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
