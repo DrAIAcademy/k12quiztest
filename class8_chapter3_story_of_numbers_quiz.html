@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Prayatnam Academy Class 8 Maths A Story of Numbers MCQ Quiz">
+<title>Class 8 Maths | A Story of Numbers Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5b4bdb;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:900px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,#5545d8,#8172f2);color:#fff;padding:30px;border-radius:22px}
+.hero h1{margin:6px 0;font-size:clamp(28px,5vw,42px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px}
+.timer{font-size:20px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.4;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:24px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:25px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px}
+summary{font-weight:800;cursor:pointer}
+.good{color:var(--good);font-weight:800} .bad{color:var(--bad);font-weight:800}
+.error{color:var(--bad);font-weight:700;font-size:13px;margin-top:8px}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}.cert{padding:24px 14px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}.cert{display:block!important}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 8 Mathematics</header>
+<main class="wrap">
+<section class="hero">
+<small>INTERACTIVE ASSESSMENT</small>
+<h1>A Story of Numbers</h1>
+<p>25 MCQs on number systems, place value, Roman and Egyptian numerals, Gumulgal counting, base systems, Hindu numerals, and binary representation.</p>
+<div class="chips">
+<span class="chip">25 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Multiple Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate. Multiple attempts are allowed.</p>
+<div class="row">
+<input id="name" placeholder="Enter full name" maxlength="60">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="err" class="error hidden">Please enter the student's name.</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="student" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="question" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prev" onclick="prevQ()">Previous</button>
+<button id="next" onclick="nextQ()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percent"></h1>
+<h3 id="grade"></h3>
+<p id="msg"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="pct2"></b></div>
+</div>
+<button id="print" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="cert" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 8 Mathematics • A Story of Numbers</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the A Story of Numbers MCQ Quiz.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="date"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="cid"></span></p>
+</div>
+
+<div id="nocert" class="hidden bad" style="margin-top:20px">Certificate is awarded only for scores of 70% or above.</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>© Prayatnam Academy • <a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a> • Number: <a href="tel:+918115749450">8115749450</a></footer>
+
+<script>
+const questions=[{"q": "In the stick number system, addition is performed by:", "options": ["Combining two groups of sticks", "Removing sticks from a group", "Making equal groups", "Replacing sticks with letters"], "answer": 0, "explanation": "The chapter describes addition with sticks as putting two collections together."}, {"q": "In the stick number system, subtraction is performed by:", "options": ["Taking away sticks", "Combining equal groups", "Writing Roman numerals", "Changing the base"], "answer": 0, "explanation": "Subtraction is represented by removing the smaller collection from the larger one."}, {"q": "Multiplication using sticks is represented as:", "options": ["Repeated addition", "Repeated subtraction only", "Equal sharing only", "Place-value shifting"], "answer": 0, "explanation": "The chapter represents multiplication as forming several equal groups and counting all sticks."}, {"q": "Division using sticks is represented by:", "options": ["Equal sharing or grouping", "Combining all sticks", "Writing powers", "Repeated addition only"], "answer": 0, "explanation": "Division is explained as either sharing equally or making equal-sized groups."}, {"q": "In the extended letter system where a=1, b=2, …, z=26, what does aa represent?", "options": ["26", "27", "28", "52"], "answer": 1, "explanation": "The chapter extends the system after z=26 so that aa represents 27."}, {"q": "In the sample base-5 'ABC Number System', the five symbols represent:", "options": ["0 to 4", "1 to 5", "0 to 5", "1 to 4"], "answer": 0, "explanation": "The sample system uses five symbols for the five base-5 digits 0,1,2,3,4."}, {"q": "What is the Roman numeral for 1222?", "options": ["MCCXXII", "MCCXII", "MMCCXXII", "MCCCXXII"], "answer": 0, "explanation": "1222 = 1000 + 200 + 20 + 2 = MCCXXII."}, {"q": "What is the Roman numeral for 2999?", "options": ["MMCMXCIX", "MMCCXCIX", "MMMIX", "MMCMXIX"], "answer": 0, "explanation": "2999 = 2000 + 900 + 90 + 9 = MMCMXCIX."}, {"q": "What number does the Roman numeral CCCII represent?", "options": ["202", "302", "312", "320"], "answer": 1, "explanation": "CCCII = 300 + 2 = 302."}, {"q": "What number does the Roman numeral DCCXV represent?", "options": ["615", "705", "715", "725"], "answer": 2, "explanation": "DCCXV = 500 + 200 + 10 + 5 = 715."}, {"q": "In the Gumulgal system used in the chapter, ukasar represents:", "options": ["0", "1", "2", "5"], "answer": 2, "explanation": "For the Gumulgal additive system in the chapter, ukasar = 2."}, {"q": "In the Gumulgal system, urapon represents:", "options": ["0", "1", "2", "10"], "answer": 1, "explanation": "The chapter states that urapon = 1."}, {"q": "What value does ukasar-ukasar-ukasar-urapon represent in the Gumulgal system?", "options": ["5", "6", "7", "8"], "answer": 2, "explanation": "It represents 2+2+2+1 = 7."}, {"q": "Which feature makes the Hindu number system efficient compared with Roman numerals?", "options": ["Place value and zero", "A separate symbol for every number", "No zero", "Only additive notation"], "answer": 0, "explanation": "The chapter highlights place value, zero, and only ten digits as major advantages."}, {"q": "How many basic symbols are used in the Hindu number system?", "options": ["5", "8", "9", "10"], "answer": 3, "explanation": "The system uses the ten digits 0 through 9."}, {"q": "In a base-5 system, the place values are powers of:", "options": ["2", "5", "7", "10"], "answer": 1, "explanation": "Base-5 place values are 5⁰, 5¹, 5², 5³, and so on."}, {"q": "Can every whole number be represented in the base-5 system described in the chapter?", "options": ["Yes", "No", "Only numbers below 100", "Only multiples of 5"], "answer": 0, "explanation": "The chapter states that any whole number can be represented using base-5 digits and powers of 5."}, {"q": "Which of the following is a landmark number in base 7?", "options": ["25", "49", "64", "100"], "answer": 1, "explanation": "Landmark numbers are powers of the base; 49 = 7²."}, {"q": "In a general base-n system, landmark numbers are:", "options": ["Powers of n", "Multiples of 10", "Prime numbers", "Only even numbers"], "answer": 0, "explanation": "The chapter defines landmark numbers as n⁰, n¹, n², n³, and so on."}, {"q": "Why does a correct Egyptian numeral not need one symbol repeated 10 or more times?", "options": ["Ten copies are replaced by one symbol of the next higher value", "Egyptian numerals cannot represent large numbers", "Repeated symbols are forbidden", "Only nine symbols exist in total"], "answer": 0, "explanation": "The Egyptian system replaces ten of a symbol with one symbol of the next higher value."}, {"q": "In the chapter's base-5 system with A as zero, how can a number be multiplied by 5?", "options": ["Append A to the right", "Append A to the left", "Remove the last symbol", "Reverse the symbols"], "answer": 0, "explanation": "Appending the zero symbol shifts the representation one place left, multiplying its value by 5."}, {"q": "Why did the ancient Chinese alternate Zong and Heng symbols?", "options": ["To distinguish successive place values", "To show negative numbers", "To represent fractions", "To eliminate all spacing"], "answer": 0, "explanation": "Alternating vertical and horizontal forms made place values easier to distinguish."}, {"q": "In the chapter's base-2 system using ukasar and urapon as digits, the assigned values are:", "options": ["ukasar=0, urapon=1", "ukasar=1, urapon=0", "ukasar=2, urapon=1", "ukasar=1, urapon=2"], "answer": 0, "explanation": "For the positional base-2 system, ukasar is assigned 0 and urapon is assigned 1."}, {"q": "What is 25 in base 8?", "options": ["30₈", "31₈", "32₈", "41₈"], "answer": 1, "explanation": "25 = 3×8 + 1, so 25₁₀ = 31₈."}, {"q": "What is 25 in base 2?", "options": ["10101₂", "11001₂", "11100₂", "10011₂"], "answer": 1, "explanation": "25 = 16 + 8 + 1, so its binary form is 11001₂."}];
+let current=0,answers=Array(questions.length).fill(null),studentName="",left=3600,timer=null;
+
+function startQuiz(){
+  studentName=document.getElementById("name").value.trim().replace(/\s+/g," ");
+  if(studentName.length<2){err.classList.remove("hidden");return;}
+  err.classList.add("hidden");
+  student.textContent=studentName;
+  start.classList.add("hidden");
+  quiz.classList.remove("hidden");
+  left=3600;
+  runTimer();
+  render();
+}
+
+function runTimer(){
+  showTime();
+  timer=setInterval(()=>{
+    left--;
+    showTime();
+    if(left<=0){clearInterval(timer);timer=null;submit(true);}
+  },1000);
+}
+
+function showTime(){
+  let m=Math.floor(Math.max(0,left)/60), s=Math.max(0,left)%60;
+  document.getElementById("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function render(){
+  let q=questions[current];
+  counter.textContent=`Question ${current+1} of ${questions.length}`;
+  progress.style.width=((current+1)/questions.length*100)+"%";
+  question.textContent=q.q;
+  options.innerHTML="";
+  q.options.forEach((x,i)=>{
+    let b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+x;
+    b.onclick=()=>{answers[current]=i;render();};
+    options.appendChild(b);
+  });
+  prev.disabled=current===0;
+  next.disabled=answers[current]===null;
+  next.textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+
+function prevQ(){if(current>0){current--;render();}}
+
+function nextQ(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){current++;render();}
+  else submit(false);
+}
+
+function submit(timed){
+  if(timer){clearInterval(timer);timer=null;}
+  let c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  let p=Math.round(c/questions.length*100), g="", ok=p>=70;
+
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  quiz.classList.add("hidden");
+  result.classList.remove("hidden");
+  percent.textContent=p+"%";
+  grade.textContent=ok?"Grade "+g:g;
+  correct.textContent=c;
+  score.textContent=c+" / "+questions.length;
+  pct2.textContent=p+"%";
+  msg.textContent=(timed?"Time is over. ":"")+(ok?"Congratulations! You qualified for a Prayatnam Academy certificate.":"Your score is below the certificate threshold.");
+
+  if(ok){
+    cert.classList.remove("hidden");
+    print.classList.remove("hidden");
+    certName.textContent=studentName;
+    certGrade.textContent="Grade "+g;
+    certScore.textContent=`Score: ${c}/${questions.length} • Percentage: ${p}%`;
+    date.textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    cid.textContent="PA-ASN-"+Date.now().toString().slice(-8);
+  } else {
+    nocert.classList.remove("hidden");
+  }
+
+  review.innerHTML="<h3>Answer Review</h3>";
+  questions.forEach((q,i)=>{
+    let d=document.createElement("details");
+    let a=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+    <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${a}</p>
+    <p class="good">Correct answer: ${q.options[q.answer]}</p>
+    <p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
