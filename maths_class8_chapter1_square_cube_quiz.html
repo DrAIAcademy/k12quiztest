@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Class 8 Maths Chapter 1 Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5b4bdb;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:900px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,#5545d8,#8172f2);color:#fff;padding:30px;border-radius:22px}
+.hero h1{margin:6px 0;font-size:clamp(28px,5vw,42px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45}
+.head{display:flex;justify-content:space-between;gap:15px}
+.timer{font-size:20px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.4;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:24px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:25px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px}
+summary{font-weight:800;cursor:pointer}
+.good{color:var(--good);font-weight:800} .bad{color:var(--bad);font-weight:800}
+.error{color:var(--bad);font-weight:700;font-size:13px;margin-top:8px}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}.cert{padding:24px 14px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}.cert{display:block!important}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 8 Mathematics</header>
+<main class="wrap">
+<section class="hero">
+<small>INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 1: A Square and A Cube</h1>
+<p>25 MCQs covering perfect squares, square roots, patterns, prime factorisation, perfect cubes, cube roots and number properties.</p>
+<div class="chips">
+<span class="chip">25 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Multiple Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate. Multiple attempts are allowed.</p>
+<div class="row">
+<input id="name" placeholder="Enter full name" maxlength="60">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="err" class="error hidden">Please enter the student's name.</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="student" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="question" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prev" onclick="prevQ()">Previous</button>
+<button id="next" onclick="nextQ()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percent"></h1>
+<h3 id="grade"></h3>
+<p id="msg"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="pct2"></b></div>
+</div>
+<button id="print" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="cert" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 8 Mathematics • Chapter 1: A Square and A Cube</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the Chapter 1 MCQ Quiz.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="date"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="cid"></span></p>
+</div>
+
+<div id="nocert" class="hidden bad" style="margin-top:20px">Certificate is awarded only for scores of 70% or above.</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>© Prayatnam Academy • <a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a> • Number: <a href="tel:+918115749450">8115749450</a></footer>
+
+<script>
+const questions=[{"q": "Which of the following is a perfect square?", "options": ["2032", "2048", "1027", "1089"], "answer": 3, "explanation": "1089 = 33². Numbers ending in 2, 3, 7 or 8 cannot be perfect squares."}, {"q": "Which last digit can a perfect square have?", "options": ["2", "3", "6", "8"], "answer": 2, "explanation": "A perfect square can end in 0, 1, 4, 5, 6 or 9; therefore 6 is possible."}, {"q": "Which square has last digit 4?", "options": ["64²", "108²", "36²", "25²"], "answer": 1, "explanation": "108² = 11664, whose last digit is 4."}, {"q": "Given 125² = 15625, what is 126²?", "options": ["15750", "15876", "15925", "15626"], "answer": 1, "explanation": "126² = 125² + 2×125 + 1 = 15625 + 250 + 1 = 15876."}, {"q": "How many integers lie strictly between n² and (n+1)²?", "options": ["n", "2n", "2n+1", "n²"], "answer": 1, "explanation": "(n+1)² − n² − 1 = 2n."}, {"q": "How many integers lie strictly between 16² and 17²?", "options": ["16", "31", "32", "33"], "answer": 2, "explanation": "For n=16, the number is 2n = 32."}, {"q": "What is the side length of a square whose area is 441 m²?", "options": ["19 m", "20 m", "21 m", "22 m"], "answer": 2, "explanation": "The side is √441 = 21 m."}, {"q": "What is the smallest perfect square divisible by 4, 9 and 10?", "options": ["180", "360", "450", "900"], "answer": 3, "explanation": "The required square is 2²×3²×5² = 900."}, {"q": "In the prime factorisation of a perfect square, the exponent of every prime factor is:", "options": ["Odd", "Even", "Prime", "Always 1"], "answer": 1, "explanation": "A perfect square has even exponents for every prime factor."}, {"q": "What is the smallest number by which 9408 must be multiplied to make a perfect square?", "options": ["2", "3", "6", "7"], "answer": 1, "explanation": "9408 = 2⁶×3×7². Multiplying by 3 makes all prime exponents even."}, {"q": "What is √28224?", "options": ["148", "158", "168", "178"], "answer": 2, "explanation": "28224 = 2⁶×3²×7², so its square root is 2³×3×7 = 168."}, {"q": "Complete the pattern: 4² + 5² + 20² = ?", "options": ["19²", "20²", "21²", "25²"], "answer": 2, "explanation": "16 + 25 + 400 = 441 = 21²."}, {"q": "Complete the pattern: 9² + 10² + 90² = ?", "options": ["89²", "90²", "91²", "100²"], "answer": 2, "explanation": "81 + 100 + 8100 = 8281 = 91²."}, {"q": "A picture has 9 big squares in each row, 9 in each column, and 25 tiny squares in each big square. How many tiny squares are there?", "options": ["2025", "1825", "2250", "8100"], "answer": 0, "explanation": "9×9×25 = 2025."}, {"q": "What is the prime-power factorisation of 2025?", "options": ["3²×5²", "3⁴×5²", "3³×5³", "5⁴×3"], "answer": 1, "explanation": "2025 = 81×25 = 3⁴×5²."}, {"q": "What is ∛27000?", "options": ["20", "30", "40", "90"], "answer": 1, "explanation": "27000 = 27×1000 = 3³×10³ = 30³."}, {"q": "What is ∛10648?", "options": ["18", "20", "22", "24"], "answer": 2, "explanation": "10648 = 22³."}, {"q": "What number should multiply 1323 to make the product a perfect cube?", "options": ["3", "5", "7", "9"], "answer": 2, "explanation": "1323 = 3³×7². Multiplying by 7 gives 3³×7³ = 21³."}, {"q": "Which statement is true?", "options": ["The cube of every odd number is even", "No perfect cube ends in 8", "The cube of an odd number is odd", "Every cube has an odd number of factors"], "answer": 2, "explanation": "Odd × odd × odd is odd, so the cube of an odd number is odd."}, {"q": "Which number is a perfect cube ending in 8?", "options": ["8", "18", "28", "38"], "answer": 0, "explanation": "8 = 2³, showing that a perfect cube can end in 8."}, {"q": "What is the smallest possible number of digits in the cube of a two-digit positive integer?", "options": ["2", "3", "4", "5"], "answer": 2, "explanation": "The smallest two-digit positive integer is 10, and 10³ = 1000, which has 4 digits."}, {"q": "What is ∛1331?", "options": ["9", "10", "11", "12"], "answer": 2, "explanation": "11³ = 1331."}, {"q": "What is ∛12167?", "options": ["21", "22", "23", "24"], "answer": 2, "explanation": "23³ = 12167."}, {"q": "What is ∛32768?", "options": ["28", "30", "32", "34"], "answer": 2, "explanation": "32³ = 32768."}, {"q": "Which of these is greatest?", "options": ["67³ − 66³", "43³ − 42³", "67² − 66²", "43² − 42²"], "answer": 0, "explanation": "The values are 13267, 5419, 133 and 85 respectively, so 67³−66³ is greatest."}];
+let current=0, answers=Array(questions.length).fill(null), studentName="", left=3600, timer=null;
+
+function startQuiz(){
+  studentName=document.getElementById("name").value.trim().replace(/\s+/g," ");
+  if(studentName.length<2){err.classList.remove("hidden");return;}
+  err.classList.add("hidden");
+  student.textContent=studentName;
+  start.classList.add("hidden");
+  quiz.classList.remove("hidden");
+  left=3600;
+  runTimer();
+  render();
+}
+
+function runTimer(){
+  showTime();
+  timer=setInterval(()=>{
+    left--;
+    showTime();
+    if(left<=0){clearInterval(timer);timer=null;submit(true);}
+  },1000);
+}
+
+function showTime(){
+  let m=Math.floor(Math.max(0,left)/60), s=Math.max(0,left)%60;
+  document.getElementById("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function render(){
+  let q=questions[current];
+  counter.textContent=`Question ${current+1} of ${questions.length}`;
+  progress.style.width=((current+1)/questions.length*100)+"%";
+  question.textContent=q.q;
+  options.innerHTML="";
+  q.options.forEach((x,i)=>{
+    let b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+x;
+    b.onclick=()=>{answers[current]=i;render();};
+    options.appendChild(b);
+  });
+  prev.disabled=current===0;
+  next.disabled=answers[current]===null;
+  next.textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+
+function prevQ(){if(current>0){current--;render();}}
+function nextQ(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){current++;render();}
+  else submit(false);
+}
+
+function submit(timed){
+  if(timer){clearInterval(timer);timer=null;}
+  let c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  let p=Math.round(c/questions.length*100), g="", ok=p>=70;
+
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  quiz.classList.add("hidden");
+  result.classList.remove("hidden");
+  percent.textContent=p+"%";
+  grade.textContent=ok?"Grade "+g:g;
+  correct.textContent=c;
+  score.textContent=c+" / "+questions.length;
+  pct2.textContent=p+"%";
+  msg.textContent=(timed?"Time is over. ":"")+(ok?"Congratulations! You qualified for a Prayatnam Academy certificate.":"Your score is below the certificate threshold.");
+
+  if(ok){
+    cert.classList.remove("hidden");
+    print.classList.remove("hidden");
+    certName.textContent=studentName;
+    certGrade.textContent="Grade "+g;
+    certScore.textContent=`Score: ${c}/${questions.length} • Percentage: ${p}%`;
+    date.textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    cid.textContent="PA-SC-"+Date.now().toString().slice(-8);
+  } else {
+    nocert.classList.remove("hidden");
+  }
+
+  review.innerHTML="<h3>Answer Review</h3>";
+  questions.forEach((q,i)=>{
+    let d=document.createElement("details");
+    let a=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+    <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${a}</p>
+    <p class="good">Correct answer: ${q.options[q.answer]}</p>
+    <p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
