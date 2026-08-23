@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 6 Maths Chapter 5 Prime Time Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5545d8;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:900px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,#5545d8,#8172f2);color:#fff;padding:30px;border-radius:22px}
+.hero h1{margin:6px 0;font-size:clamp(28px,5vw,42px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px}
+.timer{font-size:20px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.4;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:24px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:25px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px}
+summary{font-weight:800;cursor:pointer}
+.good{color:var(--good);font-weight:800}
+.bad,.error{color:var(--bad);font-weight:800}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row,.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 6 Mathematics</header>
+<main class="wrap">
+
+<section class="hero">
+<small>EXAM-ORIENTED INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 5: Prime Time</h1>
+<p>30 MCQs covering common multiples, common factors, LCM, prime and composite numbers, twin primes, co-primes, prime factorisation and divisibility tests.</p>
+<div class="chips">
+<span class="chip">30 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Unlimited Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate.</p>
+<div class="row">
+<input id="studentName" placeholder="Enter full name" maxlength="60">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="errorMsg" class="error hidden">Please enter the student's name.</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="studentDisplay" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="questionText" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prevBtn" onclick="prevQuestion()">Previous</button>
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percentage"></h1>
+<h3 id="grade"></h3>
+<p id="message"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="percentage2"></b></div>
+</div>
+<button id="printBtn" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="certificate" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 6 Mathematics • Chapter 5: Prime Time</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the 30-question assessment.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="certDate"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="certId"></span></p>
+</div>
+
+<div id="noCertificate" class="hidden bad" style="margin-top:20px">
+Certificate is awarded only for scores of 70% or above.
+</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>
+© Prayatnam Academy •
+<a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+• Number: <a href="tel:+918115749450">8115749450</a>
+</footer>
+
+<script>
+const questions=[{"q": "In the 'idli-vada' game with 3 and 5, at what number is 'idli-vada' said for the 10th time?", "options": ["120", "135", "150", "165"], "answer": 2, "explanation": "Common multiples of 3 and 5 are multiples of 15. The 10th multiple of 15 is 150."}, {"q": "Between 1 and 90, how many times is 'idli' said if it is said at every multiple of 3?", "options": ["18", "24", "30", "45"], "answer": 2, "explanation": "There are 90÷3 = 30 multiples of 3 from 1 to 90."}, {"q": "Between 1 and 90, how many times is 'vada' said if it is said at every multiple of 5?", "options": ["15", "18", "20", "30"], "answer": 1, "explanation": "There are 90÷5 = 18 multiples of 5 from 1 to 90."}, {"q": "Between 1 and 90, how many times is 'idli-vada' said for common multiples of 3 and 5?", "options": ["3", "5", "6", "9"], "answer": 2, "explanation": "The common multiples are 15, 30, 45, 60, 75 and 90, so there are 6."}, {"q": "Numbers that are multiples of both 3 and 5 are called:", "options": ["Prime numbers", "Common multiples", "Co-primes", "Perfect numbers"], "answer": 1, "explanation": "A number that is a multiple of each of two numbers is a common multiple."}, {"q": "What is the smallest common multiple of 3 and 5?", "options": ["5", "10", "15", "30"], "answer": 2, "explanation": "15 is the first positive number divisible by both 3 and 5."}, {"q": "Which of the following is a common multiple of 4 and 6?", "options": ["8", "12", "18", "20"], "answer": 1, "explanation": "12 is divisible by both 4 and 6."}, {"q": "Which are the common factors of 15 and 30?", "options": ["1, 3, 5, 15", "1, 2, 3, 5", "3, 5, 10, 15", "1, 5, 10, 30"], "answer": 0, "explanation": "The factors common to both 15 and 30 are 1, 3, 5 and 15."}, {"q": "Which are the multiples of 40 that lie between 310 and 410?", "options": ["320, 360, 400", "320, 350, 400", "300, 360, 420", "310, 350, 390"], "answer": 0, "explanation": "The multiples of 40 in that interval are 320, 360 and 400."}, {"q": "A number less than 40 has 7 as a factor and its digit sum is 8. Which number is it?", "options": ["21", "28", "35", "42"], "answer": 2, "explanation": "35 is divisible by 7 and 3+5=8."}, {"q": "Which number between 1 and 10 is a perfect number according to the chapter?", "options": ["4", "6", "8", "10"], "answer": 1, "explanation": "The factors of 6 sum to 12 when including 6 as in the source's definition, which is twice 6."}, {"q": "What are the common factors of 20 and 28?", "options": ["1, 2", "1, 2, 4", "1, 4, 7", "2, 4, 14"], "answer": 1, "explanation": "The common factors are 1, 2 and 4."}, {"q": "Which of the following is a multiple of 25 but not a multiple of 50?", "options": ["50", "75", "100", "150"], "answer": 1, "explanation": "75 is divisible by 25 but not by 50."}, {"q": "If the first common multiple of two numbers smaller than 10 comes just after 50, which pair is given in the chapter?", "options": ["4 and 8", "5 and 9", "6 and 9", "7 and 8"], "answer": 2, "explanation": "LCM(6,9)=54, so 6 and 9 fit the condition."}, {"q": "What are the common factors of 28 and 70?", "options": ["1, 2, 7, 14", "1, 2, 5, 10", "1, 4, 7, 28", "2, 7, 14, 35"], "answer": 0, "explanation": "The chapter lists 1, 2, 7 and 14 as common factors."}, {"q": "What is the smallest number that is a multiple of all numbers from 1 to 10 except 7?", "options": ["180", "240", "360", "720"], "answer": 2, "explanation": "The LCM of 1,2,3,4,5,6,8,9,10 is 360."}, {"q": "What is the smallest number that is a multiple of all numbers from 1 to 10?", "options": ["720", "1260", "2520", "5040"], "answer": 2, "explanation": "The LCM of 1 through 10 is 2520."}, {"q": "Which is the only even prime number?", "options": ["1", "2", "4", "6"], "answer": 1, "explanation": "2 has exactly two factors, 1 and 2, and is the only even prime."}, {"q": "Which pair consists only of prime numbers?", "options": ["23 and 37", "23 and 51", "37 and 26", "51 and 26"], "answer": 0, "explanation": "23 and 37 are prime; 51 and 26 are composite."}, {"q": "Twin primes are prime pairs whose difference is:", "options": ["1", "2", "3", "5"], "answer": 1, "explanation": "The chapter defines twin primes as primes differing by 2."}, {"q": "Which of the following is a twin-prime pair?", "options": ["11 and 13", "13 and 17", "17 and 23", "29 and 37"], "answer": 0, "explanation": "11 and 13 are both prime and differ by 2."}, {"q": "Which statement about prime numbers is true?", "options": ["Prime numbers have no factors", "Prime numbers have exactly two factors", "All even numbers are prime", "A product of two primes is always prime"], "answer": 1, "explanation": "A prime number has exactly two factors: 1 and itself."}, {"q": "Which number is the product of exactly three distinct primes 3 × 5 × 7?", "options": ["45", "60", "91", "105"], "answer": 3, "explanation": "3×5×7 = 105."}, {"q": "How many three-digit prime numbers can be formed using 2, 4 and 5 exactly once?", "options": ["0", "1", "2", "6"], "answer": 0, "explanation": "Any such number ends in 2, 4 or 5, making it divisible by 2 or 5, so none is prime."}, {"q": "What is the prime factorization of 105?", "options": ["3 × 5 × 7", "3 × 5 × 5", "2 × 3 × 5", "5 × 7 × 7"], "answer": 0, "explanation": "105 = 3 × 5 × 7."}, {"q": "A number has prime factors 2 × 3 × 3 × 11. What is the number?", "options": ["99", "132", "198", "297"], "answer": 2, "explanation": "2×3×3×11 = 198."}, {"q": "Which pair is co-prime?", "options": ["30 and 45", "57 and 85", "121 and 1331", "30 and 415"], "answer": 1, "explanation": "57=3×19 and 85=5×17 share no common factor other than 1."}, {"q": "Which pair is also co-prime according to the chapter?", "options": ["343 and 216", "121 and 1331", "30 and 45", "15 and 25"], "answer": 0, "explanation": "343=7³ and 216=2³×3³ have no common prime factor."}, {"q": "Which divisibility test for 4 is correct?", "options": ["Check only the last digit", "Check whether the last two digits form a number divisible by 4", "Check the sum of digits", "Check the last three digits"], "answer": 1, "explanation": "A number is divisible by 4 if the number formed by its last two digits is divisible by 4."}, {"q": "Which is the largest 4-digit palindrome divisible by 4 given in the chapter?", "options": ["8008", "8448", "8888", "9999"], "answer": 2, "explanation": "The chapter gives 8888 as the largest 4-digit palindrome divisible by 4."}];
+let current=0,answers=Array(questions.length).fill(null),student="",seconds=3600,timerHandle=null;
+
+function startQuiz(){
+  student=document.getElementById("studentName").value.trim().replace(/\s+/g," ");
+  if(student.length<2){
+    errorMsg.classList.remove("hidden");
+    return;
+  }
+  errorMsg.classList.add("hidden");
+  studentDisplay.textContent=student;
+  start.classList.add("hidden");
+  quiz.classList.remove("hidden");
+  seconds=3600;
+  runTimer();
+  renderQuestion();
+}
+function runTimer(){
+  updateTimer();
+  timerHandle=setInterval(()=>{
+    seconds--;
+    updateTimer();
+    if(seconds<=0){
+      clearInterval(timerHandle);
+      timerHandle=null;
+      submitQuiz(true);
+    }
+  },1000);
+}
+function updateTimer(){
+  const m=Math.floor(Math.max(0,seconds)/60);
+  const s=Math.max(0,seconds)%60;
+  timer.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+function renderQuestion(){
+  const q=questions[current];
+  counter.textContent=`Question ${current+1} of ${questions.length}`;
+  progress.style.width=((current+1)/questions.length*100)+"%";
+  questionText.textContent=q.q;
+  options.innerHTML="";
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+text;
+    b.onclick=()=>{answers[current]=i;renderQuestion();};
+    options.appendChild(b);
+  });
+  prevBtn.disabled=current===0;
+  nextBtn.disabled=answers[current]===null;
+  nextBtn.textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+function prevQuestion(){if(current>0){current--;renderQuestion();}}
+function nextQuestion(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){current++;renderQuestion();}
+  else submitQuiz(false);
+}
+function submitQuiz(timedOut){
+  if(timerHandle){clearInterval(timerHandle);timerHandle=null;}
+  const c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  const p=Math.round(c/questions.length*100);
+  let g="",eligible=p>=70;
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  quiz.classList.add("hidden");
+  result.classList.remove("hidden");
+  percentage.textContent=p+"%";
+  grade.textContent=eligible?"Grade "+g:g;
+  correct.textContent=c;
+  score.textContent=c+" / "+questions.length;
+  percentage2.textContent=p+"%";
+  message.textContent=(timedOut?"Time is over. ":"")+(eligible
+    ?"Congratulations! You qualified for a Prayatnam Academy certificate."
+    :"Your score is below the certificate threshold. Review the answers and try again.");
+
+  if(eligible){
+    certificate.classList.remove("hidden");
+    printBtn.classList.remove("hidden");
+    certName.textContent=student;
+    certGrade.textContent="Grade "+g;
+    certScore.textContent=`Score: ${c}/${questions.length} • Percentage: ${p}%`;
+    certDate.textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    certId.textContent="PA-C6M5-"+Date.now().toString().slice(-8);
+  }else{
+    noCertificate.classList.remove("hidden");
+  }
+
+  review.innerHTML="<h3>Answer Review & Explanations</h3>";
+  questions.forEach((q,i)=>{
+    const d=document.createElement("details");
+    const ua=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+      <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${ua}</p>
+      <p class="good">Correct answer: ${q.options[q.answer]}</p>
+      <p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
