@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Prayatnam Academy Class 8 Maths Chapter 2 Power Play MCQ Quiz">
+<title>Class 8 Maths Chapter 2 Power Play Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5b4bdb;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:900px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,#5545d8,#8172f2);color:#fff;padding:30px;border-radius:22px}
+.hero h1{margin:5px 0;font-size:clamp(28px,5vw,44px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px}
+.timer{font-size:20px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.4;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:45px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:24px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:25px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px}
+summary{font-weight:800;cursor:pointer}
+.good{color:var(--good);font-weight:800}
+.bad{color:var(--bad);font-weight:800}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+.error{color:var(--bad);font-weight:700;font-size:13px;margin-top:8px}
+@media(max-width:600px){.row{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}.cert{padding:24px 14px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}.cert{display:block!important}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 8 Mathematics</header>
+
+<main class="wrap">
+<section class="hero">
+<small>INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 2: Power Play</h1>
+<p>25 MCQs covering exponential form, prime-power factorisation, numerical values, laws of exponents, powers, squares and cubes, comparisons, code-counting and scientific notation concepts.</p>
+<div class="chips">
+<span class="chip">25 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Multiple Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate. Multiple attempts are allowed.</p>
+<div class="row">
+<input id="name" placeholder="Enter full name" maxlength="60">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="err" class="error hidden">Please enter the student's name.</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="student" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="question" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prev" onclick="prevQ()">Previous</button>
+<button id="next" onclick="nextQ()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percent"></h1>
+<h3 id="grade"></h3>
+<p id="msg"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="pct2"></b></div>
+</div>
+<button id="print" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="cert" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 8 Mathematics • Chapter 2: Power Play</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the Power Play MCQ Quiz.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="date"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="cid"></span></p>
+</div>
+
+<div id="nocert" class="hidden bad" style="margin-top:20px">Certificate is awarded only for scores of 70% or above.</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>© Prayatnam Academy • <a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a> • Number: <a href="tel:+918115749450">8115749450</a></footer>
+
+<script>
+const questions=[{"q": "Which exponential form represents 6 × 6 × 6 × 6?", "options": ["6²", "6³", "6⁴", "4⁶"], "answer": 2, "explanation": "The factor 6 is multiplied by itself four times, so the exponential form is 6⁴."}, {"q": "Which exponential form represents 5 × 5 × 7 × 7 × 7?", "options": ["5² × 7³", "5³ × 7²", "35⁵", "5 × 7⁵"], "answer": 0, "explanation": "There are two factors of 5 and three factors of 7, giving 5² × 7³."}, {"q": "For a positive integer n, what is the value of 0ⁿ?", "options": ["0", "1", "n", "Undefined for every positive n"], "answer": 0, "explanation": "The chapter states that 0ⁿ = 0 for every positive integer n."}, {"q": "How is 5⁴ correctly read?", "options": ["5 multiplied by 4", "5 raised to the power 4", "4 raised to the power 5", "5 divided by 4"], "answer": 1, "explanation": "5⁴ is read as '5 raised to the power 4' or 'the fourth power of 5'."}, {"q": "Which is the prime-power factorisation of 648?", "options": ["2³ × 3⁴", "2⁴ × 3³", "2³ × 3³", "2² × 3⁵"], "answer": 0, "explanation": "The chapter gives 648 = 2³ × 3⁴."}, {"q": "Which is the prime-power factorisation of 540?", "options": ["2 × 3³ × 5²", "2² × 3³ × 5", "2³ × 3² × 5", "2² × 3² × 5²"], "answer": 1, "explanation": "540 = 2² × 3³ × 5."}, {"q": "What is the numerical value of 2 × 10³?", "options": ["200", "2000", "20,000", "1000"], "answer": 1, "explanation": "10³ = 1000, so 2 × 1000 = 2000."}, {"q": "What is the value of 7² × 2³?", "options": ["196", "294", "392", "784"], "answer": 2, "explanation": "7² = 49 and 2³ = 8, so 49 × 8 = 392."}, {"q": "What is the value of 3 × 4⁴?", "options": ["192", "384", "768", "1024"], "answer": 2, "explanation": "4⁴ = 256, and 3 × 256 = 768."}, {"q": "What is the value of (−3)² × (−5)²?", "options": ["−225", "225", "75", "−75"], "answer": 1, "explanation": "(−3)² = 9 and (−5)² = 25, so the product is 225."}, {"q": "The units digit of 2²²⁴ ÷ 4³² is:", "options": ["2", "4", "6", "8"], "answer": 2, "explanation": "4³² = 2⁶⁴, so the expression is 2¹⁶⁰. Powers of 2 cycle 2,4,8,6; 160 is divisible by 4, so the units digit is 6."}, {"q": "Which statement about cube numbers is correct?", "options": ["Every cube number is a square number", "Cube numbers are never square numbers", "Cube numbers are only sometimes square numbers", "Every square number is a cube number"], "answer": 2, "explanation": "The chapter says this is only sometimes true; for example, 64 is both a cube and a square, while 8 is not a square."}, {"q": "Which statement about fourth powers is correct?", "options": ["Every fourth power is a square number", "No fourth power is a square number", "Only prime fourth powers are squares", "Only even fourth powers are squares"], "answer": 0, "explanation": "n⁴ = (n²)², so every fourth power is a square."}, {"q": "For non-zero n, n⁵ ÷ n³ simplifies to:", "options": ["n²", "n³", "n⁸", "1"], "answer": 0, "explanation": "Using division of powers with the same base, n⁵ ÷ n³ = n⁵⁻³ = n²."}, {"q": "The product of two cube numbers a³ and b³ equals:", "options": ["(a+b)³", "(ab)³", "a⁶b⁶", "(a−b)³"], "answer": 1, "explanation": "a³ × b³ = (ab)³, so the product of two cube numbers is again a cube number."}, {"q": "Simplify 10⁻² × 10⁻⁵.", "options": ["10⁻³", "10⁻⁷", "10³", "10⁷"], "answer": 1, "explanation": "When multiplying powers with the same base, add exponents: −2 + (−5) = −7."}, {"q": "Simplify 5⁷ ÷ 5⁴.", "options": ["5³", "5¹¹", "5²⁸", "5"], "answer": 0, "explanation": "When dividing powers with the same base, subtract exponents: 7 − 4 = 3."}, {"q": "Simplify (13⁻²)⁻³.", "options": ["13⁻⁶", "13⁵", "13⁶", "13⁻⁵"], "answer": 2, "explanation": "For a power raised to a power, multiply exponents: (−2)(−3) = 6."}, {"q": "If 12² = 144, what is (1.2)²?", "options": ["0.144", "1.44", "14.4", "144"], "answer": 1, "explanation": "(1.2)² = 1.44."}, {"q": "If 12² = 144, what is (0.12)²?", "options": ["0.00144", "0.0144", "0.144", "1.44"], "answer": 1, "explanation": "(0.12)² = 0.0144."}, {"q": "Which is greater: 4³ or 3⁴?", "options": ["4³", "3⁴", "They are equal", "Cannot be compared"], "answer": 1, "explanation": "4³ = 64 while 3⁴ = 81, so 3⁴ is greater."}, {"q": "Which is greater: 2⁸ or 8²?", "options": ["2⁸", "8²", "They are equal", "Both are 128"], "answer": 0, "explanation": "2⁸ = 256 while 8² = 64."}, {"q": "A dairy needs a unique numeric code for 8.5 billion packets using digits 0–9. What is the minimum code length?", "options": ["8 digits", "9 digits", "10 digits", "11 digits"], "answer": 2, "explanation": "A d-digit code gives 10ᵈ possibilities. Since 10⁹ is too small for 8.5 billion but 10¹⁰ is enough, 10 digits are required."}, {"q": "Numbers that are both perfect squares and perfect cubes are exactly:", "options": ["Fourth powers", "Fifth powers", "Sixth powers", "Eighth powers"], "answer": 2, "explanation": "The chapter states that numbers which are both squares and cubes are sixth powers, n⁶."}, {"q": "A 5-character alphanumeric code uses 10 digits and 26 letters. How many different codes are possible?", "options": ["36⁵", "10⁵", "26⁵", "5³⁶"], "answer": 0, "explanation": "There are 36 choices for each of the 5 positions, so the number of codes is 36⁵ = 60,466,176."}];
+let current=0,answers=Array(questions.length).fill(null),studentName="",left=3600,timer=null;
+
+function startQuiz(){
+  studentName=document.getElementById("name").value.trim().replace(/\s+/g," ");
+  if(studentName.length<2){err.classList.remove("hidden");return}
+  err.classList.add("hidden");
+  student.textContent=studentName;
+  start.classList.add("hidden");
+  quiz.classList.remove("hidden");
+  left=3600;
+  runTimer();
+  render();
+}
+
+function runTimer(){
+  showTime();
+  timer=setInterval(()=>{
+    left--;
+    showTime();
+    if(left<=0){clearInterval(timer);timer=null;submit(true)}
+  },1000);
+}
+
+function showTime(){
+  let m=Math.floor(Math.max(0,left)/60),s=Math.max(0,left)%60;
+  document.getElementById("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function render(){
+  let q=questions[current];
+  counter.textContent=`Question ${current+1} of ${questions.length}`;
+  progress.style.width=((current+1)/questions.length*100)+"%";
+  question.textContent=q.q;
+  options.innerHTML="";
+  q.options.forEach((x,i)=>{
+    let b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+x;
+    b.onclick=()=>{answers[current]=i;render()};
+    options.appendChild(b);
+  });
+  prev.disabled=current===0;
+  next.disabled=answers[current]===null;
+  next.textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+
+function prevQ(){if(current>0){current--;render()}}
+function nextQ(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){current++;render()}else submit(false);
+}
+
+function submit(timed){
+  if(timer){clearInterval(timer);timer=null}
+  let c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  let p=Math.round(c/questions.length*100),g="",ok=p>=70;
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  quiz.classList.add("hidden");
+  result.classList.remove("hidden");
+  percent.textContent=p+"%";
+  grade.textContent=ok?"Grade "+g:g;
+  correct.textContent=c;
+  score.textContent=c+" / "+questions.length;
+  pct2.textContent=p+"%";
+  msg.textContent=(timed?"Time is over. ":"")+(ok?"Congratulations! You qualified for a Prayatnam Academy certificate.":"Your score is below the certificate threshold.");
+
+  if(ok){
+    cert.classList.remove("hidden");
+    print.classList.remove("hidden");
+    certName.textContent=studentName;
+    certGrade.textContent="Grade "+g;
+    certScore.textContent=`Score: ${c}/${questions.length} • Percentage: ${p}%`;
+    date.textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    cid.textContent="PA-PP-"+Date.now().toString().slice(-8);
+  }else{
+    nocert.classList.remove("hidden");
+  }
+
+  review.innerHTML="<h3>Answer Review</h3>";
+  questions.forEach((q,i)=>{
+    let d=document.createElement("details");
+    let a=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+    <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${a}</p>
+    <p class="good">Correct answer: ${q.options[q.answer]}</p>
+    <p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
