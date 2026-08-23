@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 7 Maths Chapter 1 Large Numbers Around Us Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5545d8;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:900px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,#5545d8,#8172f2);color:#fff;padding:30px;border-radius:22px}
+.hero h1{margin:6px 0;font-size:clamp(28px,5vw,42px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px}
+.timer{font-size:20px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.4;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:24px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:25px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px}
+summary{font-weight:800;cursor:pointer}
+.good{color:var(--good);font-weight:800}
+.bad,.error{color:var(--bad);font-weight:800}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row,.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 7 Mathematics</header>
+<main class="wrap">
+<section class="hero">
+<small>EXAM-ORIENTED INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 1: Large Numbers Around Us</h1>
+<p>30 MCQs covering lakh and crore, number names, Indian and American place-value systems, approximation, estimation, calculator patterns, products, and real-life applications.</p>
+<div class="chips">
+<span class="chip">30 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Unlimited Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate.</p>
+<div class="row">
+<input id="studentName" placeholder="Enter full name" maxlength="60">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="errorMsg" class="error hidden">Please enter the student's name.</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="studentDisplay" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="questionText" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prevBtn" onclick="prevQuestion()">Previous</button>
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percentage"></h1>
+<h3 id="grade"></h3>
+<p id="message"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="percentage2"></b></div>
+</div>
+<button id="printBtn" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="certificate" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 7 Mathematics • Chapter 1: Large Numbers Around Us</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the 30-question assessment.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="certDate"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="certId"></span></p>
+</div>
+
+<div id="noCertificate" class="hidden bad" style="margin-top:20px">
+Certificate is awarded only for scores of 70% or above.
+</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>
+© Prayatnam Academy •
+<a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+• Number: <a href="tel:+918115749450">8115749450</a>
+</footer>
+
+<script>
+const questions=[{"q": "How much less than one lakh is 75,000?", "options": ["15,000", "20,000", "25,000", "30,000"], "answer": 2, "explanation": "1,00,000 − 75,000 = 25,000."}, {"q": "How much more than one lakh is 1,06,000?", "options": ["4,000", "5,000", "6,000", "10,000"], "answer": 2, "explanation": "1,06,000 − 1,00,000 = 6,000."}, {"q": "The population of Chintamani increased from 75,000 to 1,06,000. What was the increase?", "options": ["21,000", "25,000", "31,000", "41,000"], "answer": 2, "explanation": "1,06,000 − 75,000 = 31,000."}, {"q": "A building has 11 floors, each approximately 4 m high. What is its approximate height?", "options": ["40 m", "44 m", "48 m", "55 m"], "answer": 1, "explanation": "11 × 4 = 44 m."}, {"q": "The Statue of Unity is about 180 m tall and a building is 44 m tall. How much taller is the statue?", "options": ["126 m", "136 m", "146 m", "156 m"], "answer": 1, "explanation": "180 − 44 = 136 m."}, {"q": "A waterfall is about 450 m high. If each floor is about 4 m, approximately how many floors would match its height?", "options": ["103", "108", "113", "125"], "answer": 2, "explanation": "450 ÷ 4 = 112.5, so approximately 113 floors."}, {"q": "Which is the correct number name for 3,00,600?", "options": ["Three lakh six hundred", "Three lakh six thousand", "Thirty lakh six hundred", "Three hundred thousand six"], "answer": 0, "explanation": "3,00,600 is read as three lakh six hundred."}, {"q": "Which is the correct Indian notation for 'Fifty lakh five thousand fifty'?", "options": ["50,50,050", "50,05,050", "5,05,050", "50,00,550"], "answer": 1, "explanation": "Fifty lakh + five thousand + fifty = 50,05,050."}, {"q": "How many thousands make one lakh?", "options": ["10", "100", "1,000", "10,000"], "answer": 1, "explanation": "1,00,000 ÷ 1,000 = 100."}, {"q": "How many tens make one lakh?", "options": ["1,000", "5,000", "10,000", "100,000"], "answer": 2, "explanation": "1,00,000 ÷ 10 = 10,000."}, {"q": "How many hundreds make one lakh?", "options": ["100", "500", "1,000", "10,000"], "answer": 2, "explanation": "1,00,000 ÷ 100 = 1,000."}, {"q": "Which expression gives 5,072 using the fewest place-value button clicks?", "options": ["50×100 + 7×10 + 2×1", "5×1,000 + 7×10 + 2×1", "3×1,000 + 20×100 + 72×1", "507×10 + 2×1"], "answer": 1, "explanation": "Using place-value buttons directly, 5×1,000 + 7×10 + 2×1 uses 14 clicks."}, {"q": "What is the minimum number of button clicks needed to make 8,300 using +1000 and +100 buttons?", "options": ["8", "10", "11", "13"], "answer": 2, "explanation": "8 clicks of +1000 and 3 clicks of +100 make 8,300, for 11 clicks total."}, {"q": "What is the place value of 7 in 3,67,813?", "options": ["700", "7,000", "70,000", "7,00,000"], "answer": 1, "explanation": "In 3,67,813, 7 is in the thousands place, so its place value is 7,000."}, {"q": "How many zeros are there in 1,000 lakh?", "options": ["6", "7", "8", "9"], "answer": 2, "explanation": "1,000 lakh = 10,00,00,000, which contains 8 zeros."}, {"q": "100 thousand is equal to:", "options": ["10,000", "50,000", "1,00,000", "10,00,000"], "answer": 2, "explanation": "100 × 1,000 = 1,00,000."}, {"q": "48,121,620 is read in the American system as:", "options": ["Four crore eighty-one lakh twenty-one thousand six hundred twenty", "Forty-eight million one hundred twenty-one thousand six hundred twenty", "Four hundred eighty-one million twenty-one thousand six hundred twenty", "Forty-eight billion one hundred twenty-one million six hundred twenty"], "answer": 1, "explanation": "48,121,620 = 48 million 121 thousand 620."}, {"q": "Which comparison is correct?", "options": ["30 thousand > 3 lakh", "500 lakh < 5 million", "800 thousand < 8 million", "640 crore > 60 billion"], "answer": 2, "explanation": "800 thousand = 0.8 million, which is less than 8 million."}, {"q": "What is 3,87,69,957 rounded to the nearest lakh?", "options": ["3,87,00,000", "3,88,00,000", "3,90,00,000", "4,00,00,000"], "answer": 1, "explanation": "The ten-thousands digit causes 3,87,69,957 to round to 3,88,00,000."}, {"q": "What is the exact value of 4,63,128 + 4,19,682?", "options": ["8,72,810", "8,82,810", "8,83,810", "9,82,810"], "answer": 1, "explanation": "4,63,128 + 4,19,682 = 8,82,810."}, {"q": "The sum 4,63,128 + 4,19,682 is closest to:", "options": ["8,00,000", "8,50,000", "9,00,000", "10,00,000"], "answer": 2, "explanation": "The exact sum is 8,82,810, which is closest to 9,00,000."}, {"q": "What is the exact value of 14,63,128 − 4,90,020?", "options": ["9,63,108", "9,73,108", "9,83,108", "10,73,108"], "answer": 1, "explanation": "14,63,128 − 4,90,020 = 9,73,108."}, {"q": "Pune's population rose from about 25,38,473 to 31,15,431. The approximate increase is:", "options": ["4 lakh", "5 lakh", "6 lakh", "8 lakh"], "answer": 2, "explanation": "Approximating gives 31 lakh − 25 lakh ≈ 6 lakh."}, {"q": "Which city showed the highest population increase in the chapter's city data?", "options": ["Patna", "Bengaluru", "Pune", "Indore"], "answer": 1, "explanation": "The chapter states that Bengaluru showed the highest rise in population."}, {"q": "Why is multiplying a number by 5 equivalent to dividing it by 2 and then multiplying by 10?", "options": ["Because 5 = 10 ÷ 2", "Because 5 = 2 × 10", "Because 5 = 10 + 2", "Because 5 = 10 − 2"], "answer": 0, "explanation": "Since 5 = 10/2, multiplying by 5 is the same as multiplying by 10 and dividing by 2."}, {"q": "Calculate quickly: 25 × 240.", "options": ["3,000", "6,000", "12,000", "24,000"], "answer": 1, "explanation": "25×240 = 25×4×60 = 100×60 = 6,000."}, {"q": "Calculate quickly: 250 × 120.", "options": ["3,000", "15,000", "30,000", "300,000"], "answer": 2, "explanation": "250×120 = 250×4×30 = 1,000×30 = 30,000."}, {"q": "If one coin is counted every second, how many coins can be counted in one day?", "options": ["3,600", "36,000", "86,400", "1,00,000"], "answer": 2, "explanation": "24×60×60 = 86,400 seconds in one day."}, {"q": "Using the digits 0–9 exactly once, what is the largest 10-digit multiple of 5?", "options": ["9,876,543,210", "9,876,543,215", "9,875,643,210", "9,876,540,321"], "answer": 0, "explanation": "A multiple of 5 must end in 0 or 5. Ending with 0 allows the remaining digits to be in descending order for the largest value."}, {"q": "If each coin is 1 mm thick, how many coins are needed to make a stack 180 m high?", "options": ["18,000", "1,80,000", "18,00,000", "1,800"], "answer": 1, "explanation": "180 m = 1,80,000 mm, so 1,80,000 coins are needed."}];
+let current=0,answers=Array(questions.length).fill(null),student="",seconds=3600,timerHandle=null;
+
+function startQuiz(){
+  student=document.getElementById("studentName").value.trim().replace(/\s+/g," ");
+  if(student.length<2){
+    errorMsg.classList.remove("hidden");
+    return;
+  }
+  errorMsg.classList.add("hidden");
+  studentDisplay.textContent=student;
+  start.classList.add("hidden");
+  quiz.classList.remove("hidden");
+  seconds=3600;
+  runTimer();
+  renderQuestion();
+}
+
+function runTimer(){
+  updateTimer();
+  timerHandle=setInterval(()=>{
+    seconds--;
+    updateTimer();
+    if(seconds<=0){
+      clearInterval(timerHandle);
+      timerHandle=null;
+      submitQuiz(true);
+    }
+  },1000);
+}
+
+function updateTimer(){
+  const m=Math.floor(Math.max(0,seconds)/60);
+  const s=Math.max(0,seconds)%60;
+  timer.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function renderQuestion(){
+  const q=questions[current];
+  counter.textContent=`Question ${current+1} of ${questions.length}`;
+  progress.style.width=((current+1)/questions.length*100)+"%";
+  questionText.textContent=q.q;
+  options.innerHTML="";
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+text;
+    b.onclick=()=>{answers[current]=i;renderQuestion();};
+    options.appendChild(b);
+  });
+  prevBtn.disabled=current===0;
+  nextBtn.disabled=answers[current]===null;
+  nextBtn.textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+
+function prevQuestion(){
+  if(current>0){
+    current--;
+    renderQuestion();
+  }
+}
+
+function nextQuestion(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){
+    current++;
+    renderQuestion();
+  }else{
+    submitQuiz(false);
+  }
+}
+
+function submitQuiz(timedOut){
+  if(timerHandle){
+    clearInterval(timerHandle);
+    timerHandle=null;
+  }
+
+  const c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  const p=Math.round(c/questions.length*100);
+  let g="",eligible=p>=70;
+
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  quiz.classList.add("hidden");
+  result.classList.remove("hidden");
+
+  percentage.textContent=p+"%";
+  grade.textContent=eligible?"Grade "+g:g;
+  correct.textContent=c;
+  score.textContent=c+" / "+questions.length;
+  percentage2.textContent=p+"%";
+
+  message.textContent=(timedOut?"Time is over. ":"")+
+    (eligible
+      ?"Congratulations! You qualified for a Prayatnam Academy certificate."
+      :"Your score is below the certificate threshold. Review the answers and try again.");
+
+  if(eligible){
+    certificate.classList.remove("hidden");
+    printBtn.classList.remove("hidden");
+    certName.textContent=student;
+    certGrade.textContent="Grade "+g;
+    certScore.textContent=`Score: ${c}/${questions.length} • Percentage: ${p}%`;
+    certDate.textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    certId.textContent="PA-C7M1-"+Date.now().toString().slice(-8);
+  }else{
+    noCertificate.classList.remove("hidden");
+  }
+
+  review.innerHTML="<h3>Answer Review & Explanations</h3>";
+
+  questions.forEach((q,i)=>{
+    const d=document.createElement("details");
+    const ua=answers[i]===null?"Not answered":q.options[answers[i]];
+
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+    <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${ua}</p>
+    <p class="good">Correct answer: ${q.options[q.answer]}</p>
+    <p>${q.explanation}</p>`;
+
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
