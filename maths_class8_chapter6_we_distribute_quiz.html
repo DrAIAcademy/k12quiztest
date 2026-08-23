@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Class 8 Maths Chapter 6 Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5b4bdb;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:900px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,#5545d8,#8172f2);color:#fff;padding:30px;border-radius:22px}
+.hero h1{margin:6px 0;font-size:clamp(28px,5vw,42px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45}
+.head{display:flex;justify-content:space-between;gap:15px}
+.timer{font-size:20px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.4;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:24px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:25px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px}
+summary{font-weight:800;cursor:pointer}
+.good{color:var(--good);font-weight:800}.bad{color:var(--bad);font-weight:800}
+.error{color:var(--bad);font-weight:700;font-size:13px;margin-top:8px}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}.cert{padding:24px 14px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}.cert{display:block!important}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 8 Mathematics</header>
+<main class="wrap">
+<section class="hero">
+<small>INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 6: We Distribute, Yet Things Multiply</h1>
+<p>25 MCQs on distributive property, algebraic expansion, identities, products, patterns, and applications.</p>
+<div class="chips">
+<span class="chip">25 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Multiple Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate. Multiple attempts are allowed.</p>
+<div class="row">
+<input id="name" placeholder="Enter full name" maxlength="60">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="err" class="error hidden">Please enter the student's name.</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="student" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="question" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prev" onclick="prevQ()">Previous</button>
+<button id="next" onclick="nextQ()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percent"></h1>
+<h3 id="grade"></h3>
+<p id="msg"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="pct2"></b></div>
+</div>
+<button id="print" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="cert" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 8 Mathematics • Chapter 6: We Distribute, Yet Things Multiply</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the Chapter 6 MCQ Quiz.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="date"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="cid"></span></p>
+</div>
+
+<div id="nocert" class="hidden bad" style="margin-top:20px">Certificate is awarded only for scores of 70% or above.</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>© Prayatnam Academy • <a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a> • Number: <a href="tel:+918115749450">8115749450</a></footer>
+
+<script>
+const questions=[{"q": "Expand (3 + u)(v − 3).", "options": ["3v − 3u + uv − 9", "3v + 3u + uv − 9", "3v − uv − 3u + 9", "uv + 9"], "answer": 0, "explanation": "Using the distributive property: 3(v−3)+u(v−3)=3v−9+uv−3u."}, {"q": "Simplify (2/3)(15 + 6a).", "options": ["10 + 4a", "10 + 6a", "15 + 4a", "4 + 10a"], "answer": 0, "explanation": "(2/3)×15 = 10 and (2/3)×6a = 4a."}, {"q": "Expand (10a + b)(10c + d).", "options": ["100ac + 10ad + 10bc + bd", "10ac + 10ad + bc + bd", "100ac + ad + bc + bd", "100abcd"], "answer": 0, "explanation": "Multiply each term of the first bracket by each term of the second bracket."}, {"q": "Expand (3 − x)(x − 6).", "options": ["−x² + 9x − 18", "x² − 9x + 18", "−x² − 3x − 18", "x² + 9x − 18"], "answer": 0, "explanation": "3(x−6)−x(x−6)=3x−18−x²+6x=−x²+9x−18."}, {"q": "Expand (−5a + b)(c + d).", "options": ["−5ac − 5ad + bc + bd", "−5ac + 5ad + bc − bd", "5ac + 5ad + bc + bd", "−5a(c+d+b)"], "answer": 0, "explanation": "Distributing both terms gives −5ac−5ad+bc+bd."}, {"q": "Expand (5 + z)(y + 9).", "options": ["5y + 45 + yz + 9z", "5y + 9 + yz + 45z", "45y + yz + 5z", "5yz + 45z"], "answer": 0, "explanation": "5(y+9)+z(y+9)=5y+45+yz+9z."}, {"q": "If ab = (a + 2)(b − 4), which relation between a and b follows?", "options": ["b = 2a + 4", "b = a + 2", "b = 4a + 2", "a = 2b + 4"], "answer": 0, "explanation": "Expanding gives ab=ab−4a+2b−8, so 4a+8=2b and hence b=2a+4."}, {"q": "Which pair satisfies ab = (a + 2)(b − 4)?", "options": ["(1, 6)", "(1, 5)", "(2, 6)", "(3, 8)"], "answer": 0, "explanation": "For a=1, b=6: ab=6 and (a+2)(b−4)=3×2=6."}, {"q": "What is (a − b)(a + b)?", "options": ["a² − b²", "a² + b²", "a² − 2ab + b²", "a² + 2ab + b²"], "answer": 0, "explanation": "The middle terms cancel, giving the difference of squares a²−b²."}, {"q": "What is (a − b)(a² + ab + b²)?", "options": ["a³ − b³", "a³ + b³", "a² − b²", "a⁴ − b⁴"], "answer": 0, "explanation": "On expansion, the middle terms cancel and the result is a³−b³."}, {"q": "What is (a − b)(a³ + a²b + ab² + b³)?", "options": ["a⁴ − b⁴", "a³ − b³", "a⁴ + b⁴", "a⁵ − b⁵"], "answer": 0, "explanation": "The chapter's pattern gives a⁴−b⁴."}, {"q": "According to the pattern, (a − b)(a⁴ + a³b + a²b² + ab³ + b⁴) equals:", "options": ["a⁵ − b⁵", "a⁴ − b⁴", "a⁵ + b⁵", "a⁶ − b⁶"], "answer": 0, "explanation": "This is the next identity in the pattern: a⁵−b⁵."}, {"q": "Which is greater: (a − b)² or (b − a)²?", "options": ["They are equal", "(a−b)² is always greater", "(b−a)² is always greater", "Cannot be determined"], "answer": 0, "explanation": "Both expand to a²+b²−2ab."}, {"q": "Which expresses 100 as a difference of two squares, as shown in the chapter?", "options": ["26² − 24²", "25² − 23²", "20² − 10²", "15² − 5²"], "answer": 0, "explanation": "26²−24²=(26+24)(26−24)=50×2=100."}, {"q": "What is 406²?", "options": ["164836", "164436", "160836", "165836"], "answer": 0, "explanation": "406²=(400+6)²=160000+4800+36=164836."}, {"q": "What is 145²?", "options": ["21025", "21125", "20925", "21225"], "answer": 0, "explanation": "145²=(150−5)²=22500−1500+25=21025."}, {"q": "What is 397 × 403?", "options": ["159991", "160009", "159909", "160991"], "answer": 0, "explanation": "(400−3)(400+3)=400²−3²=160000−9=159991."}, {"q": "What is 43 × 45?", "options": ["1935", "1890", "1975", "1849"], "answer": 0, "explanation": "43×45=(44−1)(44+1)=44²−1=1936−1=1935."}, {"q": "Expand (p − 1)(p + 11).", "options": ["p² + 10p − 11", "p² + 12p − 11", "p² + 10p + 11", "p² − 10p − 11"], "answer": 0, "explanation": "p²+11p−p−11=p²+10p−11."}, {"q": "Expand (3a − 9b)(3a + 9b).", "options": ["9a² − 81b²", "9a² + 81b²", "6a² − 18b²", "3a² − 9b²"], "answer": 0, "explanation": "Use (x−y)(x+y)=x²−y² with x=3a and y=9b."}, {"q": "Expand (6x + 5y)².", "options": ["36x² + 60xy + 25y²", "36x² + 30xy + 25y²", "6x² + 60xy + 5y²", "36x² − 60xy + 25y²"], "answer": 0, "explanation": "(a+b)²=a²+2ab+b², giving 36x²+60xy+25y²."}, {"q": "Which expression means 'two more than a square number'?", "options": ["s² + 2", "(s + 2)²", "2s²", "s² + 4"], "answer": 0, "explanation": "If the square number is s², two more than it is s²+2."}, {"q": "Which expression represents the sum of the squares of two consecutive numbers?", "options": ["m² + (m + 1)²", "(m + m + 1)²", "m² + 1", "(2m)² + 1"], "answer": 0, "explanation": "Two consecutive numbers can be written as m and m+1, so their squared sum is m²+(m+1)²."}, {"q": "In any 2 × 2 calendar square, what is the difference between the two diagonal products?", "options": ["7", "1", "14", "It changes each time"], "answer": 0, "explanation": "The chapter shows the diagonal products differ by 7."}, {"q": "For three consecutive numbers (a−1), a, (a+1), what is a² − (a−1)(a+1)?", "options": ["1", "0", "a", "2a"], "answer": 0, "explanation": "(a−1)(a+1)=a²−1, so a²−(a²−1)=1."}];
+let current=0, answers=Array(questions.length).fill(null), studentName="", left=3600, timer=null;
+
+function startQuiz(){
+  studentName=document.getElementById("name").value.trim().replace(/\s+/g," ");
+  if(studentName.length<2){err.classList.remove("hidden");return;}
+  err.classList.add("hidden");
+  student.textContent=studentName;
+  start.classList.add("hidden");
+  quiz.classList.remove("hidden");
+  left=3600;
+  runTimer();
+  render();
+}
+
+function runTimer(){
+  showTime();
+  timer=setInterval(()=>{
+    left--;
+    showTime();
+    if(left<=0){clearInterval(timer);timer=null;submit(true);}
+  },1000);
+}
+
+function showTime(){
+  let m=Math.floor(Math.max(0,left)/60), s=Math.max(0,left)%60;
+  document.getElementById("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function render(){
+  let q=questions[current];
+  counter.textContent=`Question ${current+1} of ${questions.length}`;
+  progress.style.width=((current+1)/questions.length*100)+"%";
+  question.textContent=q.q;
+  options.innerHTML="";
+  q.options.forEach((x,i)=>{
+    let b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+x;
+    b.onclick=()=>{answers[current]=i;render();};
+    options.appendChild(b);
+  });
+  prev.disabled=current===0;
+  next.disabled=answers[current]===null;
+  next.textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+
+function prevQ(){if(current>0){current--;render();}}
+function nextQ(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){current++;render();}
+  else submit(false);
+}
+
+function submit(timed){
+  if(timer){clearInterval(timer);timer=null;}
+  let c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  let p=Math.round(c/questions.length*100), g="", ok=p>=70;
+
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  quiz.classList.add("hidden");
+  result.classList.remove("hidden");
+  percent.textContent=p+"%";
+  grade.textContent=ok?"Grade "+g:g;
+  correct.textContent=c;
+  score.textContent=c+" / "+questions.length;
+  pct2.textContent=p+"%";
+  msg.textContent=(timed?"Time is over. ":"")+(ok?"Congratulations! You qualified for a Prayatnam Academy certificate.":"Your score is below the certificate threshold.");
+
+  if(ok){
+    cert.classList.remove("hidden");
+    print.classList.remove("hidden");
+    certName.textContent=studentName;
+    certGrade.textContent="Grade "+g;
+    certScore.textContent=`Score: ${c}/${questions.length} • Percentage: ${p}%`;
+    date.textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    cid.textContent="PA-WD-"+Date.now().toString().slice(-8);
+  } else {
+    nocert.classList.remove("hidden");
+  }
+
+  review.innerHTML="<h3>Answer Review</h3>";
+  questions.forEach((q,i)=>{
+    let d=document.createElement("details");
+    let a=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+    <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${a}</p>
+    <p class="good">Correct answer: ${q.options[q.answer]}</p>
+    <p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
