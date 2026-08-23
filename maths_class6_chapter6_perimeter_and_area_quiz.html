@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 6 Maths Chapter 6 Perimeter and Area Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5545d8;--p2:#8172f2;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55;--gold:#a97813}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:920px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:30px;border-radius:22px;box-shadow:0 18px 45px #5545d833}
+.hero h1{margin:6px 0;font-size:clamp(29px,5vw,44px)}
+.hero p{line-height:1.6}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}
+.timer{font-size:21px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.45;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option:hover{border-color:#aaa4eb;background:#faf9ff}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:25px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:28px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px;background:#fff}
+summary{font-weight:800;cursor:pointer;line-height:1.45}
+.good{color:var(--good);font-weight:800}
+.bad,.error{color:var(--bad);font-weight:800}
+.note{background:#fff7e6;border:1px solid #f0d7a0;padding:12px;border-radius:10px;margin-top:15px;color:#684e16}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row,.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}.cert h2{font-size:32px}.cert .name{font-size:29px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review,#noCertificate{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}.cert{display:block!important}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 6 Mathematics</header>
+<main class="wrap">
+<section class="hero">
+<small>EXAM-ORIENTED INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 6: Perimeter and Area</h1>
+<p>30 carefully selected MCQs covering perimeter of rectangles and regular figures, fencing and running-track applications, area of rectangles, missing dimensions, composite figures, tangram area reasoning, uncovered area and real-life applications.</p>
+<div class="chips">
+<span class="chip">30 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Unlimited Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate.</p>
+<div class="row">
+<input id="studentName" placeholder="Enter full name" maxlength="60" autocomplete="name">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="errorMsg" class="error hidden">Please enter the student's name.</div>
+<div class="note">Grading: Above 90% = A+ • 80%–90% = A • 70%–79% = B • Below 70% = No Certificate</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="studentDisplay" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="questionText" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prevBtn" onclick="prevQuestion()">Previous</button>
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percentage"></h1>
+<h3 id="grade"></h3>
+<p id="message"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="percentage2"></b></div>
+</div>
+<button id="printBtn" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="certificate" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 6 Mathematics • Chapter 6: Perimeter and Area</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the 30-question assessment.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="certDate"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="certId"></span></p>
+</div>
+
+<div id="noCertificate" class="hidden bad" style="margin-top:20px">
+Certificate is awarded only for scores of 70% or above.
+</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>
+© Prayatnam Academy •
+<a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+• Number: <a href="tel:+918115749450">8115749450</a>
+</footer>
+
+<script>
+const questions=[{"q": "A rectangle has perimeter 14 cm and breadth 2 cm. What is its length?", "options": ["3 cm", "4 cm", "5 cm", "7 cm"], "answer": 2, "explanation": "2 × (length + 2) = 14, so length + 2 = 7 and length = 5 cm."}, {"q": "A square has perimeter 20 cm. What is the length of each side?", "options": ["4 cm", "5 cm", "6 cm", "10 cm"], "answer": 1, "explanation": "Side = perimeter ÷ 4 = 20 ÷ 4 = 5 cm."}, {"q": "A rectangle has perimeter 12 m and length 3 m. What is its breadth?", "options": ["2 m", "3 m", "4 m", "6 m"], "answer": 1, "explanation": "2 × (3 + breadth) = 12, so 3 + breadth = 6 and breadth = 3 m."}, {"q": "A wire forms a rectangle of length 5 cm and breadth 3 cm. If the same wire is bent into a square, what is the side of the square?", "options": ["3 cm", "4 cm", "5 cm", "8 cm"], "answer": 1, "explanation": "Rectangle perimeter = 2 × (5 + 3) = 16 cm. Square side = 16 ÷ 4 = 4 cm."}, {"q": "A triangle has perimeter 55 cm. Two sides are 20 cm and 14 cm. Find the third side.", "options": ["19 cm", "20 cm", "21 cm", "22 cm"], "answer": 2, "explanation": "Third side = 55 − 20 − 14 = 21 cm."}, {"q": "A rectangular park is 150 m long and 120 m broad. What is its perimeter?", "options": ["270 m", "420 m", "540 m", "600 m"], "answer": 2, "explanation": "Perimeter = 2 × (150 + 120) = 540 m."}, {"q": "The park in the previous situation is fenced at ₹40 per metre. What is the total fencing cost?", "options": ["₹10,800", "₹18,600", "₹21,600", "₹24,000"], "answer": 2, "explanation": "Cost = 540 × 40 = ₹21,600."}, {"q": "A 36 cm string is used to form a square. What is the side length?", "options": ["6 cm", "8 cm", "9 cm", "12 cm"], "answer": 2, "explanation": "Each side = 36 ÷ 4 = 9 cm."}, {"q": "A 36 cm string is used to form an equilateral triangle. What is each side?", "options": ["6 cm", "9 cm", "12 cm", "18 cm"], "answer": 2, "explanation": "Each side = 36 ÷ 3 = 12 cm."}, {"q": "A 36 cm string is used to form a regular hexagon. What is each side?", "options": ["4 cm", "6 cm", "9 cm", "12 cm"], "answer": 1, "explanation": "Each side = 36 ÷ 6 = 6 cm."}, {"q": "A rectangular field is 230 m long and 160 m broad. How much rope is required for one complete round?", "options": ["390 m", "620 m", "780 m", "1,170 m"], "answer": 2, "explanation": "Perimeter = 2 × (230 + 160) = 780 m."}, {"q": "For the same 230 m by 160 m field, how much rope is needed for 3 complete rounds?", "options": ["1,560 m", "2,000 m", "2,340 m", "3,120 m"], "answer": 2, "explanation": "Three rounds require 3 × 780 = 2,340 m."}, {"q": "Akshi runs on a rectangular track 70 m long and 40 m broad. What distance does she cover in one round?", "options": ["110 m", "180 m", "220 m", "280 m"], "answer": 2, "explanation": "One round equals the perimeter: 2 × (70 + 40) = 220 m."}, {"q": "How far does Akshi run in 5 rounds of her 220 m track?", "options": ["880 m", "1,000 m", "1,100 m", "1,200 m"], "answer": 2, "explanation": "5 × 220 = 1,100 m."}, {"q": "Toshi's track has a perimeter of 200 m. How far does she run in 7 rounds?", "options": ["1,200 m", "1,300 m", "1,400 m", "1,500 m"], "answer": 2, "explanation": "7 × 200 = 1,400 m."}, {"q": "Akshi runs 1,100 m and Toshi runs 1,400 m. Who runs farther and by how much?", "options": ["Akshi by 200 m", "Akshi by 300 m", "Toshi by 200 m", "Toshi by 300 m"], "answer": 3, "explanation": "1,400 − 1,100 = 300 m, so Toshi runs 300 m farther."}, {"q": "A rectangular garden is 25 m long and has area 300 sq m. What is its width?", "options": ["10 m", "12 m", "15 m", "25 m"], "answer": 1, "explanation": "Width = area ÷ length = 300 ÷ 25 = 12 m."}, {"q": "A rectangular plot is 500 m long and 200 m wide. What is its area?", "options": ["10,000 sq m", "50,000 sq m", "100,000 sq m", "200,000 sq m"], "answer": 2, "explanation": "Area = 500 × 200 = 100,000 sq m."}, {"q": "Tiling costs ₹8 per 100 sq m. What is the cost of tiling a 100,000 sq m plot?", "options": ["₹800", "₹4,000", "₹8,000", "₹80,000"], "answer": 2, "explanation": "100,000 ÷ 100 = 1,000 units; 1,000 × ₹8 = ₹8,000."}, {"q": "A coconut grove is 100 m long and 50 m wide. What is its area?", "options": ["500 sq m", "2,500 sq m", "5,000 sq m", "10,000 sq m"], "answer": 2, "explanation": "Area = 100 × 50 = 5,000 sq m."}, {"q": "If each coconut tree requires 25 sq m, how many trees can fit in a 5,000 sq m grove?", "options": ["100", "150", "200", "250"], "answer": 2, "explanation": "Number of trees = 5,000 ÷ 25 = 200."}, {"q": "A composite figure is split into rectangles with areas 3 sq m, 8 sq m and 9 sq m. What is its total area?", "options": ["17 sq m", "18 sq m", "20 sq m", "24 sq m"], "answer": 2, "explanation": "Total area = 3 + 8 + 9 = 20 sq m."}, {"q": "An outer rectangle has area 15 sq m and an inner cut-out has area 6 sq m. What area remains?", "options": ["6 sq m", "8 sq m", "9 sq m", "21 sq m"], "answer": 2, "explanation": "Remaining area = 15 − 6 = 9 sq m."}, {"q": "In the tangram activity, which shapes are stated to have the same area?", "options": ["A, B and C", "C, E and F", "B, D and G", "A, D and F"], "answer": 1, "explanation": "The chapter states that shapes C, E and F have the same area."}, {"q": "In the tangram activity, Shape D has how many times the area of Shape C?", "options": ["The same area", "Twice the area", "Three times the area", "Four times the area"], "answer": 1, "explanation": "Shape D is stated to have twice the area of Shape C."}, {"q": "If the seven tangram pieces are rearranged from a square into a rectangle, what happens to their total area?", "options": ["It doubles", "It becomes half", "It stays the same", "It becomes zero"], "answer": 2, "explanation": "Rearranging pieces changes the shape but not the combined area."}, {"q": "The seven tangram pieces form a large square whose area is how many times the area of Shape C?", "options": ["4 times", "6 times", "8 times", "10 times"], "answer": 2, "explanation": "The chapter states that the big square has area 8 times the area of Shape C."}, {"q": "A room is 5 m long and 4 m wide. A square carpet of side 3 m is laid on it. What area remains uncovered?", "options": ["9 sq m", "10 sq m", "11 sq m", "12 sq m"], "answer": 2, "explanation": "Room area = 20 sq m, carpet area = 9 sq m, so uncovered area = 11 sq m."}, {"q": "A garden is 15 m by 12 m. Four flower beds, each 2 m by 1 m, occupy its corners. What area remains for lawn?", "options": ["164 sq m", "168 sq m", "172 sq m", "176 sq m"], "answer": 2, "explanation": "Garden area = 180 sq m. Four beds occupy 4 × 2 = 8 sq m. Lawn area = 180 − 8 = 172 sq m."}, {"q": "A square is folded in half and cut into two equal rectangles. According to the chapter, the sum of the perimeters of the two rectangles is always how many times the square's perimeter?", "options": ["1/2 times", "1 time", "1 1/2 times", "2 times"], "answer": 2, "explanation": "The chapter states that the two rectangle perimeters together equal 1½ times the square's perimeter."}];
+let current=0,answers=Array(questions.length).fill(null),student="",seconds=3600,timerHandle=null;
+
+function startQuiz(){
+  student=document.getElementById("studentName").value.trim().replace(/\s+/g," ");
+  if(student.length<2){
+    document.getElementById("errorMsg").classList.remove("hidden");
+    return;
+  }
+  document.getElementById("errorMsg").classList.add("hidden");
+  document.getElementById("studentDisplay").textContent=student;
+  document.getElementById("start").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  seconds=3600;
+  runTimer();
+  renderQuestion();
+}
+
+function runTimer(){
+  updateTimer();
+  timerHandle=setInterval(()=>{
+    seconds--;
+    updateTimer();
+    if(seconds<=0){
+      clearInterval(timerHandle);
+      timerHandle=null;
+      submitQuiz(true);
+    }
+  },1000);
+}
+
+function updateTimer(){
+  const m=Math.floor(Math.max(0,seconds)/60);
+  const s=Math.max(0,seconds)%60;
+  document.getElementById("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function renderQuestion(){
+  const q=questions[current];
+  document.getElementById("counter").textContent=`Question ${current+1} of ${questions.length}`;
+  document.getElementById("progress").style.width=((current+1)/questions.length*100)+"%";
+  document.getElementById("questionText").textContent=q.q;
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+text;
+    b.onclick=()=>{answers[current]=i;renderQuestion();};
+    box.appendChild(b);
+  });
+  document.getElementById("prevBtn").disabled=current===0;
+  document.getElementById("nextBtn").disabled=answers[current]===null;
+  document.getElementById("nextBtn").textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+
+function prevQuestion(){
+  if(current>0){current--;renderQuestion();}
+}
+
+function nextQuestion(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){current++;renderQuestion();}
+  else submitQuiz(false);
+}
+
+function submitQuiz(timedOut){
+  if(timerHandle){clearInterval(timerHandle);timerHandle=null;}
+  const c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  const p=(c/questions.length)*100;
+  const displayP=Math.round(p);
+  let g="",eligible=p>=70;
+
+  if(p>90) g="A+";
+  else if(p>=80) g="A";
+  else if(p>=70) g="B";
+  else g="No Certificate";
+
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+  document.getElementById("percentage").textContent=displayP+"%";
+  document.getElementById("grade").textContent=eligible?"Grade "+g:g;
+  document.getElementById("correct").textContent=c;
+  document.getElementById("score").textContent=c+" / "+questions.length;
+  document.getElementById("percentage2").textContent=displayP+"%";
+
+  document.getElementById("message").textContent=(timedOut?"Time is over. ":"")+
+    (eligible
+      ?"Congratulations! You qualified for a Prayatnam Academy certificate."
+      :"Your score is below the certificate threshold. Review the answers and try again.");
+
+  if(eligible){
+    document.getElementById("certificate").classList.remove("hidden");
+    document.getElementById("printBtn").classList.remove("hidden");
+    document.getElementById("certName").textContent=student;
+    document.getElementById("certGrade").textContent="Grade "+g;
+    document.getElementById("certScore").textContent=`Score: ${c}/${questions.length} • Percentage: ${displayP}%`;
+    document.getElementById("certDate").textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    document.getElementById("certId").textContent="PA-C6M6-"+Date.now().toString().slice(-8);
+  }else{
+    document.getElementById("noCertificate").classList.remove("hidden");
+  }
+
+  const review=document.getElementById("review");
+  review.innerHTML="<h3>Answer Review & Explanations</h3>";
+  questions.forEach((q,i)=>{
+    const d=document.createElement("details");
+    const ua=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+      <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${ua}</p>
+      <p class="good">Correct answer: ${q.options[q.answer]}</p>
+      <p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
