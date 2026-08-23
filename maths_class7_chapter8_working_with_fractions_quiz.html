@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 7 Maths Chapter 8 Working with Fractions Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5545d8;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:900px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,#5545d8,#8172f2);color:#fff;padding:30px;border-radius:22px}
+.hero h1{margin:6px 0;font-size:clamp(28px,5vw,42px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px}
+.timer{font-size:20px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.4;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:24px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:25px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px}
+summary{font-weight:800;cursor:pointer}
+.good{color:var(--good);font-weight:800}
+.bad,.error{color:var(--bad);font-weight:800}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row,.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 7 Mathematics</header>
+<main class="wrap">
+<section class="hero">
+<small>EXAM-ORIENTED INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 8: Working with Fractions</h1>
+<p>30 MCQs covering multiplication and division of fractions, mixed fractions, word problems, fraction of a quantity, product relationships, rates, shaded regions and telescoping products.</p>
+<div class="chips">
+<span class="chip">30 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Unlimited Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate.</p>
+<div class="row">
+<input id="studentName" placeholder="Enter full name" maxlength="60">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="errorMsg" class="error hidden">Please enter the student's name.</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="studentDisplay" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="questionText" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prevBtn" onclick="prevQuestion()">Previous</button>
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percentage"></h1>
+<h3 id="grade"></h3>
+<p id="message"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="percentage2"></b></div>
+</div>
+<button id="printBtn" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="certificate" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 7 Mathematics • Chapter 8: Working with Fractions</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the 30-question assessment.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="certDate"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="certId"></span></p>
+</div>
+
+<div id="noCertificate" class="hidden bad" style="margin-top:20px">
+Certificate is awarded only for scores of 70% or above.
+</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>
+© Prayatnam Academy •
+<a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+• Number: <a href="tel:+918115749450">8115749450</a>
+</footer>
+
+<script>
+const questions=[{"q": "Tenzin drinks 1/2 glass of milk every day. How much milk does he drink in 7 days?", "options": ["2 1/2 glasses", "3 glasses", "3 1/2 glasses", "7 glasses"], "answer": 2, "explanation": "7 × 1/2 = 7/2 = 3 1/2 glasses."}, {"q": "A team can make 1 km of canal in 8 days. How much canal can it make in 5 days?", "options": ["3/8 km", "5/8 km", "5/6 km", "8/5 km"], "answer": 1, "explanation": "In 1 day it makes 1/8 km. In 5 days: 5 × 1/8 = 5/8 km."}, {"q": "5 litres of oil are shared equally among 3 families. How much does each family get?", "options": ["1 1/3 L", "1 2/3 L", "2 L", "2 1/3 L"], "answer": 1, "explanation": "5 ÷ 3 = 5/3 = 1 2/3 litres."}, {"q": "The Moon sets 5/6 hour later each day. From Monday to Thursday, how much later will it set?", "options": ["1 1/2 hours", "2 hours", "2 1/2 hours", "3 hours"], "answer": 2, "explanation": "There are 3 daily shifts: 3 × 5/6 = 15/6 = 5/2 = 2 1/2 hours."}, {"q": "Find 7 × 3/5.", "options": ["21/5", "10/5", "7/15", "3 1/5"], "answer": 0, "explanation": "7 × 3/5 = 21/5 = 4 1/5."}, {"q": "Find 4 × 1/3.", "options": ["4/3", "3/4", "1/12", "5/3"], "answer": 0, "explanation": "4 × 1/3 = 4/3 = 1 1/3."}, {"q": "What is 1/3 × 1/5?", "options": ["1/8", "1/15", "2/15", "1/5"], "answer": 1, "explanation": "Multiply numerators and denominators: 1×1 / 3×5 = 1/15."}, {"q": "What is 2/3 × 4/5?", "options": ["6/8", "8/15", "6/15", "8/10"], "answer": 1, "explanation": "2×4 / 3×5 = 8/15."}, {"q": "What is 1/2 × 3/5?", "options": ["3/10", "3/7", "4/10", "1/5"], "answer": 0, "explanation": "1×3 / 2×5 = 3/10."}, {"q": "A tap fills 7/10 of a tank in 1 hour. How much of the tank is filled in 1/3 hour?", "options": ["7/30", "7/13", "3/10", "21/10"], "answer": 0, "explanation": "1/3 × 7/10 = 7/30."}, {"q": "A tap fills 7/10 of a tank in 1 hour. How long will it take to fill the whole tank?", "options": ["7/10 hour", "10/7 hour", "17/10 hour", "1/7 hour"], "answer": 1, "explanation": "Time = 1 ÷ 7/10 = 10/7 hour = 1 3/7 hours."}, {"q": "The government takes 1/6 of Somu's land. What fraction remains?", "options": ["1/6", "4/6", "5/6", "6/5"], "answer": 2, "explanation": "1 − 1/6 = 5/6."}, {"q": "Krishna gets half of the remaining 5/6 of Somu's land. What fraction of the original land does she get?", "options": ["5/12", "5/6", "1/12", "1/2"], "answer": 0, "explanation": "1/2 × 5/6 = 5/12."}, {"q": "Bora gets 1/3 of the remaining 5/6 land. What fraction of the original land does he get?", "options": ["5/18", "1/18", "5/9", "1/3"], "answer": 0, "explanation": "1/3 × 5/6 = 5/18."}, {"q": "The sides of a rectangle are 3 3/4 ft and 9 3/5 ft. What is its area?", "options": ["30 sq ft", "32 sq ft", "36 sq ft", "40 sq ft"], "answer": 2, "explanation": "3 3/4 = 15/4 and 9 3/5 = 48/5. Product = 15/4 × 48/5 = 36."}, {"q": "Four saplings are planted in a row with 3/4 m between consecutive saplings. Distance from first to last is:", "options": ["3/4 m", "1 1/2 m", "2 1/4 m", "3 m"], "answer": 2, "explanation": "There are 3 gaps: 3 × 3/4 = 9/4 = 2 1/4 m."}, {"q": "Which is heavier: 12/15 of 500 g or 3/20 of 4 kg?", "options": ["12/15 of 500 g", "3/20 of 4 kg", "Both are equal", "Cannot be compared"], "answer": 1, "explanation": "12/15 of 500 = 400 g; 3/20 of 4 kg = 600 g."}, {"q": "When one factor is between 0 and 1, the product is generally:", "options": ["Greater than the other factor", "Less than the other factor", "Always equal to 1", "Always zero"], "answer": 1, "explanation": "Multiplying by a positive fraction less than 1 reduces the other positive number."}, {"q": "When a divisor is between 0 and 1, the quotient is generally:", "options": ["Less than the dividend", "Equal to the dividend", "Greater than the dividend", "Always zero"], "answer": 2, "explanation": "Dividing by a positive number less than 1 makes the quotient larger than the dividend."}, {"q": "When the divisor is 1, the quotient is:", "options": ["Zero", "Greater than the dividend", "Equal to the dividend", "Less than the dividend"], "answer": 2, "explanation": "Any number divided by 1 remains unchanged."}, {"q": "Four fountains can fill a cistern in 1 day, 1/2 day, 1/4 day and 1/5 day respectively. Together, how many cisterns do they fill in one day?", "options": ["10", "11", "12", "13"], "answer": 2, "explanation": "Rates are 1, 2, 4 and 5 cisterns/day. Total = 12."}, {"q": "Maria has 8 m of lace and uses 1/4 m per bag. How many bags can she decorate?", "options": ["16", "24", "32", "40"], "answer": 2, "explanation": "8 ÷ 1/4 = 8 × 4 = 32."}, {"q": "A baker needs 1/6 kg flour for one loaf. With 5 kg flour, how many loaves can he make?", "options": ["20", "25", "30", "36"], "answer": 2, "explanation": "5 ÷ 1/6 = 5 × 6 = 30."}, {"q": "If 1/4 kg flour makes 12 rotis, how much flour makes 6 rotis?", "options": ["1/16 kg", "1/8 kg", "1/4 kg", "1/2 kg"], "answer": 1, "explanation": "6 rotis are half of 12, so flour needed is half of 1/4 = 1/8 kg."}, {"q": "Mira has a 400-page novel. She reads 1/5 yesterday and 3/10 today. How many pages remain?", "options": ["160", "180", "200", "220"], "answer": 2, "explanation": "1/5 of 400 = 80 and 3/10 of 400 = 120. Total read = 200, so 200 remain."}, {"q": "A car runs 16 km per litre. How far will it travel using 2 3/4 litres?", "options": ["32 km", "40 km", "44 km", "48 km"], "answer": 2, "explanation": "2 3/4 = 11/4. 16 × 11/4 = 44 km."}, {"q": "A train takes 5 1/6 hours and a plane takes 1/2 hour. How much time does the plane save?", "options": ["4 1/3 h", "4 2/3 h", "4 5/6 h", "5 h"], "answer": 1, "explanation": "5 1/6 − 1/2 = 31/6 − 3/6 = 28/6 = 14/3 = 4 2/3 hours."}, {"q": "Mariam and cousins eat 4/5 of a cake. The remaining cake is shared equally among 3 friends. Each friend gets:", "options": ["1/5", "1/10", "1/15", "1/20"], "answer": 2, "explanation": "Remaining = 1/5. Dividing by 3 gives 1/15."}, {"q": "A big square is divided into 4 equal squares. In one small square, 3 of 8 equal triangles are shaded. What fraction of the big square is shaded?", "options": ["3/8", "3/16", "3/32", "1/32"], "answer": 2, "explanation": "Shaded fraction = 1/4 × 3/8 = 3/32."}, {"q": "Evaluate the product (1−1/2)(1−1/3)(1−1/4)...(1−1/n).", "options": ["1/n", "1/(n−1)", "n", "(n−1)/n"], "answer": 0, "explanation": "The product telescopes: (1/2)(2/3)(3/4)...((n−1)/n) = 1/n."}];
+let current=0,answers=Array(questions.length).fill(null),student="",seconds=3600,timerHandle=null;
+
+function startQuiz(){
+  student=document.getElementById("studentName").value.trim().replace(/\s+/g," ");
+  if(student.length<2){
+    errorMsg.classList.remove("hidden");
+    return;
+  }
+  errorMsg.classList.add("hidden");
+  studentDisplay.textContent=student;
+  start.classList.add("hidden");
+  quiz.classList.remove("hidden");
+  seconds=3600;
+  runTimer();
+  renderQuestion();
+}
+
+function runTimer(){
+  updateTimer();
+  timerHandle=setInterval(()=>{
+    seconds--;
+    updateTimer();
+    if(seconds<=0){
+      clearInterval(timerHandle);
+      timerHandle=null;
+      submitQuiz(true);
+    }
+  },1000);
+}
+
+function updateTimer(){
+  const m=Math.floor(Math.max(0,seconds)/60);
+  const s=Math.max(0,seconds)%60;
+  timer.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function renderQuestion(){
+  const q=questions[current];
+  counter.textContent=`Question ${current+1} of ${questions.length}`;
+  progress.style.width=((current+1)/questions.length*100)+"%";
+  questionText.textContent=q.q;
+  options.innerHTML="";
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+text;
+    b.onclick=()=>{answers[current]=i;renderQuestion();};
+    options.appendChild(b);
+  });
+  prevBtn.disabled=current===0;
+  nextBtn.disabled=answers[current]===null;
+  nextBtn.textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+
+function prevQuestion(){
+  if(current>0){
+    current--;
+    renderQuestion();
+  }
+}
+
+function nextQuestion(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){
+    current++;
+    renderQuestion();
+  }else{
+    submitQuiz(false);
+  }
+}
+
+function submitQuiz(timedOut){
+  if(timerHandle){
+    clearInterval(timerHandle);
+    timerHandle=null;
+  }
+
+  const c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  const p=Math.round(c/questions.length*100);
+  let g="",eligible=p>=70;
+
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  quiz.classList.add("hidden");
+  result.classList.remove("hidden");
+
+  percentage.textContent=p+"%";
+  grade.textContent=eligible?"Grade "+g:g;
+  correct.textContent=c;
+  score.textContent=c+" / "+questions.length;
+  percentage2.textContent=p+"%";
+
+  message.textContent=(timedOut?"Time is over. ":"")+
+    (eligible
+      ?"Congratulations! You qualified for a Prayatnam Academy certificate."
+      :"Your score is below the certificate threshold. Review the answers and try again.");
+
+  if(eligible){
+    certificate.classList.remove("hidden");
+    printBtn.classList.remove("hidden");
+    certName.textContent=student;
+    certGrade.textContent="Grade "+g;
+    certScore.textContent=`Score: ${c}/${questions.length} • Percentage: ${p}%`;
+    certDate.textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    certId.textContent="PA-C7M8-"+Date.now().toString().slice(-8);
+  }else{
+    noCertificate.classList.remove("hidden");
+  }
+
+  review.innerHTML="<h3>Answer Review & Explanations</h3>";
+
+  questions.forEach((q,i)=>{
+    const d=document.createElement("details");
+    const ua=answers[i]===null?"Not answered":q.options[answers[i]];
+
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+    <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${ua}</p>
+    <p class="good">Correct answer: ${q.options[q.answer]}</p>
+    <p>${q.explanation}</p>`;
+
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
