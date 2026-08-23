@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 7 Maths Chapter 7 Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5545d8;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:900px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,#5545d8,#8172f2);color:#fff;padding:30px;border-radius:22px}
+.hero h1{margin:6px 0;font-size:clamp(28px,5vw,42px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px}
+.timer{font-size:20px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.4;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:24px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:25px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px}
+summary{font-weight:800;cursor:pointer}
+.good{color:var(--good);font-weight:800}
+.bad,.error{color:var(--bad);font-weight:800}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row,.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 7 Mathematics</header>
+<main class="wrap">
+<section class="hero">
+<small>EXAM-ORIENTED INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 7: A Tale of Three Intersecting Lines</h1>
+<p>25 MCQs covering triangle construction, triangle inequality, angle-sum property, exterior angles, altitudes and types of triangles.</p>
+<div class="chips">
+<span class="chip">25 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Unlimited Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate.</p>
+<div class="row">
+<input id="studentName" placeholder="Enter full name" maxlength="60">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="errorMsg" class="error hidden">Please enter the student's name.</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="studentDisplay" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="questionText" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prevBtn" onclick="prevQuestion()">Previous</button>
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percentage"></h1>
+<h3 id="grade"></h3>
+<p id="message"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="percentage2"></b></div>
+</div>
+<button id="printBtn" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="certificate" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 7 Mathematics • Chapter 7: A Tale of Three Intersecting Lines</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the 25-question assessment.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="certDate"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="certId"></span></p>
+</div>
+
+<div id="noCertificate" class="hidden bad" style="margin-top:20px">
+Certificate is awarded only for scores of 70% or above.
+</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>
+© Prayatnam Academy •
+<a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+• Number: <a href="tel:+918115749450">8115749450</a>
+</footer>
+
+<script>
+const questions=[{"q": "What happens if the three vertices of a supposed triangle lie on one straight line?", "options": ["They form an equilateral triangle", "They form a right triangle", "They are collinear and no triangle is formed", "They form an obtuse triangle"], "answer": 2, "explanation": "Three collinear points do not enclose any area, so they do not form a triangle."}, {"q": "To construct a triangle with sides 4 cm, 4 cm and 6 cm, if AB = 6 cm is drawn first, what radii should be used for arcs from A and B?", "options": ["6 cm and 6 cm", "4 cm and 4 cm", "4 cm and 6 cm", "2 cm and 4 cm"], "answer": 1, "explanation": "The remaining two sides are both 4 cm, so arcs of radius 4 cm are drawn from A and B."}, {"q": "Why does choosing two points on a circle and joining them to the centre form an isosceles triangle?", "options": ["The base is always a diameter", "The two sides from the centre are radii and are equal", "All three angles are 60°", "The chord is always equal to the radius"], "answer": 1, "explanation": "The two segments from the centre to points on the circle are radii of the same circle, so they are equal."}, {"q": "Which set of side lengths cannot form a triangle?", "options": ["3, 4, 5", "4, 4, 6", "3, 4, 8", "5, 5, 8"], "answer": 2, "explanation": "For 3,4,8, the sum 3+4=7 is less than 8, so the triangle inequality fails."}, {"q": "Which statement expresses the triangle inequality correctly?", "options": ["Each side must be greater than the sum of the other two", "Each side must be less than the sum of the other two", "All sides must be equal", "The largest side must equal the sum of the other two"], "answer": 1, "explanation": "For a triangle to exist, every side length must be strictly less than the sum of the other two side lengths."}, {"q": "Can side lengths 3 cm, 3 cm and 7 cm form a triangle?", "options": ["Yes", "No", "Only a right triangle", "Only an isosceles triangle"], "answer": 1, "explanation": "3+3=6, which is less than 7. Hence the triangle inequality fails."}, {"q": "Which set can form a triangle?", "options": ["2, 2, 5", "2, 4, 8", "10, 20, 35", "24, 26, 28"], "answer": 3, "explanation": "For 24,26,28, the sum of any two sides is greater than the third."}, {"q": "Which set cannot form a triangle because the largest side equals the sum of the other two?", "options": ["1, 100, 100", "3, 6, 9", "5, 10, 12", "10, 20, 25"], "answer": 1, "explanation": "3+6=9. The inequality must be strict, so equality is not allowed."}, {"q": "For two fixed side lengths 3 and 7, the third side x must satisfy:", "options": ["x < 4", "4 < x < 10", "x > 10", "3 < x < 7"], "answer": 1, "explanation": "The third side must be greater than |7−3|=4 and less than 7+3=10."}, {"q": "For two side lengths 1 and 100, which value could be the third side?", "options": ["50", "98", "100", "102"], "answer": 2, "explanation": "The third side must lie strictly between 99 and 101. So 100 is valid."}, {"q": "Does an equilateral triangle with sides 50, 50 and 50 exist?", "options": ["Yes", "No", "Only if drawn with a protractor", "Only if one side is changed"], "answer": 0, "explanation": "For equal positive sides, the sum of any two sides is always greater than the third."}, {"q": "When two side lengths and the included angle are given, which data are used to construct the triangle?", "options": ["SSS", "SAS", "ASA", "RHS"], "answer": 1, "explanation": "Two sides and the included angle correspond to SAS construction."}, {"q": "If two angles of a triangle are 60° and 70°, the third angle is:", "options": ["40°", "50°", "60°", "70°"], "answer": 1, "explanation": "The angles of a triangle add to 180°, so the third angle is 180−60−70=50°."}, {"q": "If two angles of a triangle are 36° and 72°, find the third angle.", "options": ["62°", "72°", "82°", "92°"], "answer": 1, "explanation": "180°−36°−72°=72°."}, {"q": "Can 35° and 150° be two angles of the same triangle?", "options": ["Yes", "No", "Only in an isosceles triangle", "Only in a right triangle"], "answer": 1, "explanation": "35°+150°=185°, already greater than 180°, so such a triangle is impossible."}, {"q": "Can 90° and 85° be two angles of the same triangle?", "options": ["Yes, third angle is 5°", "Yes, third angle is 15°", "No", "Only if two sides are equal"], "answer": 0, "explanation": "90°+85°=175°, leaving 5° for the third angle."}, {"q": "The sum of the three interior angles of any triangle is:", "options": ["90°", "180°", "270°", "360°"], "answer": 1, "explanation": "The angle-sum property of a triangle states that its three interior angles total 180°."}, {"q": "An exterior angle of a triangle is equal to:", "options": ["The adjacent interior angle", "The sum of the two opposite interior angles", "Half the sum of all interior angles", "90° always"], "answer": 1, "explanation": "The exterior angle theorem states that an exterior angle equals the sum of the two remote interior angles."}, {"q": "If two remote interior angles are 50° and 60°, the exterior angle is:", "options": ["70°", "100°", "110°", "120°"], "answer": 2, "explanation": "Exterior angle = 50°+60°=110°."}, {"q": "An altitude of a triangle is drawn from a vertex:", "options": ["Parallel to the opposite side", "Perpendicular to the opposite side or its extension", "Along the angle bisector only", "To the midpoint of the opposite side only"], "answer": 1, "explanation": "An altitude is a perpendicular segment from a vertex to the opposite side or its extended line."}, {"q": "In an obtuse triangle, an altitude from an acute vertex may fall:", "options": ["Only inside the triangle", "On the extension of the opposite side", "Along another side", "At the midpoint of every side"], "answer": 1, "explanation": "For an obtuse triangle, some altitudes meet extensions of the opposite sides outside the triangle."}, {"q": "Which statement correctly defines an acute-angled triangle?", "options": ["It has at least one acute angle", "It has exactly two acute angles", "All three angles are acute", "One angle is 90°"], "answer": 2, "explanation": "A triangle is acute-angled only when all three of its angles are less than 90°."}, {"q": "Which angle set can represent an isosceles right triangle?", "options": ["90°, 45°, 45°", "120°, 30°, 30°", "60°, 60°, 60°", "100°, 40°, 40°"], "answer": 0, "explanation": "An isosceles right triangle has one right angle and two equal angles of 45° each."}, {"q": "Which angle set can represent an isosceles obtuse triangle?", "options": ["90°, 45°, 45°", "120°, 30°, 30°", "60°, 60°, 60°", "80°, 50°, 50°"], "answer": 1, "explanation": "120°,30°,30° gives one obtuse angle and two equal angles."}, {"q": "Which statement about an equilateral triangle is correct?", "options": ["It can be right-angled", "It can be obtuse-angled", "All its angles are 60°", "Only two sides are equal"], "answer": 2, "explanation": "Every equilateral triangle has three equal sides and three equal angles of 60°."}];
+let current=0,answers=Array(questions.length).fill(null),student="",seconds=3600,timerHandle=null;
+
+function startQuiz(){
+  student=document.getElementById("studentName").value.trim().replace(/\s+/g," ");
+  if(student.length<2){errorMsg.classList.remove("hidden");return;}
+  errorMsg.classList.add("hidden");
+  studentDisplay.textContent=student;
+  start.classList.add("hidden");
+  quiz.classList.remove("hidden");
+  seconds=3600;
+  runTimer();
+  renderQuestion();
+}
+function runTimer(){
+  updateTimer();
+  timerHandle=setInterval(()=>{
+    seconds--;updateTimer();
+    if(seconds<=0){clearInterval(timerHandle);timerHandle=null;submitQuiz(true);}
+  },1000);
+}
+function updateTimer(){
+  const m=Math.floor(Math.max(0,seconds)/60),s=Math.max(0,seconds)%60;
+  timer.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+function renderQuestion(){
+  const q=questions[current];
+  counter.textContent=`Question ${current+1} of ${questions.length}`;
+  progress.style.width=((current+1)/questions.length*100)+"%";
+  questionText.textContent=q.q;
+  options.innerHTML="";
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+text;
+    b.onclick=()=>{answers[current]=i;renderQuestion();};
+    options.appendChild(b);
+  });
+  prevBtn.disabled=current===0;
+  nextBtn.disabled=answers[current]===null;
+  nextBtn.textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+function prevQuestion(){if(current>0){current--;renderQuestion();}}
+function nextQuestion(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){current++;renderQuestion();}
+  else submitQuiz(false);
+}
+function submitQuiz(timedOut){
+  if(timerHandle){clearInterval(timerHandle);timerHandle=null;}
+  const c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  const p=Math.round(c/questions.length*100);
+  let g="",eligible=p>=70;
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  quiz.classList.add("hidden");
+  result.classList.remove("hidden");
+  percentage.textContent=p+"%";
+  grade.textContent=eligible?"Grade "+g:g;
+  correct.textContent=c;
+  score.textContent=c+" / "+questions.length;
+  percentage2.textContent=p+"%";
+  message.textContent=(timedOut?"Time is over. ":"")+(eligible
+    ?"Congratulations! You qualified for a Prayatnam Academy certificate."
+    :"Your score is below the certificate threshold. Review the answers and try again.");
+
+  if(eligible){
+    certificate.classList.remove("hidden");
+    printBtn.classList.remove("hidden");
+    certName.textContent=student;
+    certGrade.textContent="Grade "+g;
+    certScore.textContent=`Score: ${c}/${questions.length} • Percentage: ${p}%`;
+    certDate.textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    certId.textContent="PA-C7M7-"+Date.now().toString().slice(-8);
+  }else{
+    noCertificate.classList.remove("hidden");
+  }
+
+  review.innerHTML="<h3>Answer Review & Explanations</h3>";
+  questions.forEach((q,i)=>{
+    const d=document.createElement("details");
+    const ua=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+    <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${ua}</p>
+    <p class="good">Correct answer: ${q.options[q.answer]}</p>
+    <p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
