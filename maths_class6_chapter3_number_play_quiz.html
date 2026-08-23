@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 6 Maths Chapter 3 Number Play Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5545d8;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:900px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,#5545d8,#8172f2);color:#fff;padding:30px;border-radius:22px}
+.hero h1{margin:6px 0;font-size:clamp(28px,5vw,42px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px}
+.timer{font-size:20px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.4;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:24px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:25px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px}
+summary{font-weight:800;cursor:pointer}
+.good{color:var(--good);font-weight:800}
+.bad,.error{color:var(--bad);font-weight:800}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row,.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 6 Mathematics</header>
+<main class="wrap">
+
+<section class="hero">
+<small>EXAM-ORIENTED INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 3: Number Play</h1>
+<p>30 MCQs covering supercells, number-line patterns, digit sums, palindromes, Kaprekar routines, clock/calendar number patterns, number patterns and Collatz reasoning.</p>
+<div class="chips">
+<span class="chip">30 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Unlimited Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate.</p>
+<div class="row">
+<input id="studentName" placeholder="Enter full name" maxlength="60">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="errorMsg" class="error hidden">Please enter the student's name.</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="studentDisplay" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="questionText" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prevBtn" onclick="prevQuestion()">Previous</button>
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percentage"></h1>
+<h3 id="grade"></h3>
+<p id="message"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="percentage2"></b></div>
+</div>
+<button id="printBtn" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="certificate" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 6 Mathematics • Chapter 3: Number Play</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the 30-question assessment.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="certDate"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="certId"></span></p>
+</div>
+
+<div id="noCertificate" class="hidden bad" style="margin-top:20px">
+Certificate is awarded only for scores of 70% or above.
+</div>
+
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>
+© Prayatnam Academy •
+<a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+• Number: <a href="tel:+918115749450">8115749450</a>
+</footer>
+
+<script>
+const questions=[{"q": "In the 'Numbers Can Tell Everything' activity, can two children standing next to each other say the same number?", "options": ["Yes", "No", "Only if they are the same height", "Only if they stand at the ends"], "answer": 0, "explanation": "The chapter states that two children standing next to each other can say the same number."}, {"q": "Which sequence is stated to be possible for five children in the chapter?", "options": ["1, 1, 1, 1, 1", "0, 1, 2, 1, 0", "5, 5, 5, 5, 5", "4, 4, 4, 4, 4"], "answer": 1, "explanation": "The chapter gives 0, 1, 2, 1, 0 as a possible sequence."}, {"q": "For a table with 9 cells, what is the maximum number of supercells described in the chapter?", "options": ["3", "4", "5", "9"], "answer": 2, "explanation": "For 9 cells, the chapter gives 5 supercells."}, {"q": "If a supercell table has n odd cells, the maximum number of supercells is:", "options": ["n/2", "(n+1)/2", "n-1", "n"], "answer": 1, "explanation": "For an odd number n of cells, the chapter gives (n+1)/2 supercells."}, {"q": "If a supercell table has n even cells, the maximum number of supercells is:", "options": ["n/2", "(n+1)/2", "n-2", "2n"], "answer": 0, "explanation": "For an even number n of cells, the chapter gives n/2 supercells."}, {"q": "Which cell in a supercell table will always be a supercell when all entries are distinct?", "options": ["The cell with the smallest number", "The cell with the largest number", "The middle cell only", "The first cell only"], "answer": 1, "explanation": "The largest number is greater than all of its adjacent neighbours, so its cell is always a supercell."}, {"q": "Can the cell containing the smallest number be a supercell when all entries are distinct?", "options": ["Always", "Never", "Only if it is the first cell", "Only if it is the last cell"], "answer": 1, "explanation": "Its neighbouring entry or entries will be larger, so it cannot be a supercell."}, {"q": "In the number-line example beginning 1990, 1995, 2000, 2005, ..., what is the common step?", "options": ["1", "2", "5", "10"], "answer": 2, "explanation": "Each successive mark increases by 5."}, {"q": "What is the smallest number whose digit sum is 14, according to the chapter?", "options": ["49", "59", "68", "77"], "answer": 1, "explanation": "The chapter gives 59 as the smallest number with digit sum 14."}, {"q": "Which number has digit sum 14?", "options": ["58", "59", "60", "61"], "answer": 1, "explanation": "5 + 9 = 14."}, {"q": "What is the digit sum of 49?", "options": ["9", "11", "12", "13"], "answer": 3, "explanation": "4 + 9 = 13."}, {"q": "What is the digit sum of 68?", "options": ["12", "13", "14", "15"], "answer": 2, "explanation": "6 + 8 = 14."}, {"q": "For a 3-digit number with consecutive digits such as 345, what is its digit sum?", "options": ["9", "10", "11", "12"], "answer": 3, "explanation": "3 + 4 + 5 = 12."}, {"q": "How many times does the digit 7 occur when writing all numbers from 1 to 100, according to the chapter?", "options": ["10", "18", "20", "21"], "answer": 2, "explanation": "The chapter states that the digit 7 occurs 20 times from 1 to 100."}, {"q": "How many times does the digit 7 occur when writing all numbers from 1 to 1000, according to the chapter?", "options": ["100", "200", "300", "400"], "answer": 2, "explanation": "The chapter states that the digit 7 occurs 300 times from 1 to 1000."}, {"q": "Which of the following is a palindrome?", "options": ["12345", "12421", "12321", "Both 12421 and 12321"], "answer": 3, "explanation": "Both numbers read the same from left to right and right to left."}, {"q": "The 5-digit palindrome puzzle in the chapter has which answer?", "options": ["12321", "12421", "13531", "21412"], "answer": 1, "explanation": "The source gives 12421 as the solution."}, {"q": "Starting with 12, reverse the digits and add. What palindrome is obtained immediately?", "options": ["22", "33", "44", "121"], "answer": 1, "explanation": "12 + 21 = 33, and 33 is a palindrome."}, {"q": "The next palindromic clock time after 10:01 is:", "options": ["10:10", "11:11", "12:12", "12:21"], "answer": 1, "explanation": "The chapter identifies 11:11 as the next palindromic time after 10:01."}, {"q": "How many minutes are there from 10:01 to 11:11?", "options": ["60", "65", "70", "80"], "answer": 2, "explanation": "11:11 is 70 minutes after 10:01."}, {"q": "What is the Kaprekar constant for 4-digit numbers in this chapter?", "options": ["495", "1089", "6174", "9999"], "answer": 2, "explanation": "The chapter identifies 6174 as the Kaprekar constant for 4-digit numbers."}, {"q": "Starting with 1234 in the Kaprekar routine, what is the first subtraction result?", "options": ["3087", "8352", "6174", "2178"], "answer": 0, "explanation": "4321 − 1234 = 3087."}, {"q": "After 3087 in the Kaprekar routine shown in the chapter, what comes next?", "options": ["8352", "6174", "495", "1998"], "answer": 0, "explanation": "8730 − 0378 = 8352."}, {"q": "What is the Kaprekar constant for 3-digit numbers given in the chapter?", "options": ["108", "495", "6174", "999"], "answer": 1, "explanation": "The chapter states that 495 starts repeating for 3-digit Kaprekar routines."}, {"q": "Which of the following is listed as a special clock time pattern in the chapter?", "options": ["01:10", "02:20", "03:30", "All of these"], "answer": 3, "explanation": "All three are included in the chapter's list of special clock times."}, {"q": "Which of the following is given as a palindromic date example?", "options": ["11/02/2011", "13/03/2014", "14/05/2016", "15/06/2017"], "answer": 0, "explanation": "11/02/2011 is explicitly identified as a palindromic date."}, {"q": "In the Collatz rule, what is done to an even number?", "options": ["Add 1", "Multiply by 3", "Divide by 2", "Subtract 2"], "answer": 2, "explanation": "For an even number, the Collatz rule is to divide by 2."}, {"q": "In the Collatz rule, what is done to an odd number?", "options": ["Divide by 2", "Multiply by 3 and add 1", "Multiply by 2", "Subtract 1"], "answer": 1, "explanation": "For an odd number, multiply by 3 and add 1."}, {"q": "Which cycle is described after reaching 1 in the Collatz sequence?", "options": ["1, 2, 3", "4, 2, 1", "8, 4, 2", "3, 6, 9"], "answer": 1, "explanation": "The chapter describes the repeating cycle 4, 2, 1."}, {"q": "In the pattern 9, 27, __, 243, __, what are the missing terms?", "options": ["54 and 486", "81 and 729", "90 and 810", "72 and 486"], "answer": 1, "explanation": "The rule is multiply by 3: 9, 27, 81, 243, 729."}];
+let current=0,answers=Array(questions.length).fill(null),student="",seconds=3600,timerHandle=null;
+
+function startQuiz(){
+  student=document.getElementById("studentName").value.trim().replace(/\s+/g," ");
+  if(student.length<2){
+    errorMsg.classList.remove("hidden");
+    return;
+  }
+  errorMsg.classList.add("hidden");
+  studentDisplay.textContent=student;
+  start.classList.add("hidden");
+  quiz.classList.remove("hidden");
+  seconds=3600;
+  runTimer();
+  renderQuestion();
+}
+
+function runTimer(){
+  updateTimer();
+  timerHandle=setInterval(()=>{
+    seconds--;
+    updateTimer();
+    if(seconds<=0){
+      clearInterval(timerHandle);
+      timerHandle=null;
+      submitQuiz(true);
+    }
+  },1000);
+}
+
+function updateTimer(){
+  const m=Math.floor(Math.max(0,seconds)/60);
+  const s=Math.max(0,seconds)%60;
+  timer.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function renderQuestion(){
+  const q=questions[current];
+  counter.textContent=`Question ${current+1} of ${questions.length}`;
+  progress.style.width=((current+1)/questions.length*100)+"%";
+  questionText.textContent=q.q;
+  options.innerHTML="";
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+text;
+    b.onclick=()=>{answers[current]=i;renderQuestion();};
+    options.appendChild(b);
+  });
+  prevBtn.disabled=current===0;
+  nextBtn.disabled=answers[current]===null;
+  nextBtn.textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+
+function prevQuestion(){
+  if(current>0){
+    current--;
+    renderQuestion();
+  }
+}
+
+function nextQuestion(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){
+    current++;
+    renderQuestion();
+  }else{
+    submitQuiz(false);
+  }
+}
+
+function submitQuiz(timedOut){
+  if(timerHandle){
+    clearInterval(timerHandle);
+    timerHandle=null;
+  }
+
+  const c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  const p=Math.round(c/questions.length*100);
+  let g="",eligible=p>=70;
+
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  quiz.classList.add("hidden");
+  result.classList.remove("hidden");
+
+  percentage.textContent=p+"%";
+  grade.textContent=eligible?"Grade "+g:g;
+  correct.textContent=c;
+  score.textContent=c+" / "+questions.length;
+  percentage2.textContent=p+"%";
+
+  message.textContent=(timedOut?"Time is over. ":"")+
+    (eligible
+      ?"Congratulations! You qualified for a Prayatnam Academy certificate."
+      :"Your score is below the certificate threshold. Review the answers and try again.");
+
+  if(eligible){
+    certificate.classList.remove("hidden");
+    printBtn.classList.remove("hidden");
+    certName.textContent=student;
+    certGrade.textContent="Grade "+g;
+    certScore.textContent=`Score: ${c}/${questions.length} • Percentage: ${p}%`;
+    certDate.textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    certId.textContent="PA-C6M3-"+Date.now().toString().slice(-8);
+  }else{
+    noCertificate.classList.remove("hidden");
+  }
+
+  review.innerHTML="<h3>Answer Review & Explanations</h3>";
+
+  questions.forEach((q,i)=>{
+    const d=document.createElement("details");
+    const ua=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+      <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${ua}</p>
+      <p class="good">Correct answer: ${q.options[q.answer]}</p>
+      <p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
