@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 9 Maths Chapter 1 Coordinates Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5545d8;--p2:#8172f2;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:920px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:30px;border-radius:22px;box-shadow:0 18px 45px #5545d833}
+.hero h1{margin:6px 0;font-size:clamp(29px,5vw,44px)}
+.hero p{line-height:1.6}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+.secondary{background:#eef0ff;color:#4235bd}button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px}.timer{font-size:21px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.45;margin:10px 0 18px}.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option:hover{border-color:#aaa4eb;background:#faf9ff}.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:25px;font-weight:900;color:#795816;margin:15px}.review{text-align:left;margin-top:28px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px;background:#fff}
+summary{font-weight:800;cursor:pointer;line-height:1.45}.good{color:var(--good);font-weight:800}.bad,.error{color:var(--bad);font-weight:800}
+.note{background:#fff7e6;border:1px solid #f0d7a0;padding:12px;border-radius:10px;margin-top:15px;color:#684e16}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row,.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}.cert h2{font-size:32px}.cert .name{font-size:29px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review,#noCertificate{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}.cert{display:block!important}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 9 Mathematics</header>
+<main class="wrap">
+
+<section class="hero">
+<small>EXAM-ORIENTED INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 1: Orienting Yourself – The Use of Coordinates</h1>
+<p>30 carefully selected MCQs covering Cartesian coordinates, axes and origin, ordered pairs, quadrants, distance, reflection, coordinate geometry applications, midpoint, trisection, collinearity and circles.</p>
+<div class="chips">
+<span class="chip">30 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Unlimited Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate.</p>
+<div class="row">
+<input id="studentName" placeholder="Enter full name" maxlength="60" autocomplete="name">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="errorMsg" class="error hidden">Please enter the student's name.</div>
+<div class="note">Grading: Above 90% = A+ • 80%–90% = A • 70%–79% = B • Below 70% = No Certificate</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="studentDisplay" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="questionText" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prevBtn" onclick="prevQuestion()">Previous</button>
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2><h1 id="percentage"></h1><h3 id="grade"></h3><p id="message"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="percentage2"></b></div>
+</div>
+<button id="printBtn" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="certificate" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 9 Mathematics • Chapter 1: Orienting Yourself – The Use of Coordinates</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the 30-question assessment.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="certDate"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="certId"></span></p>
+</div>
+
+<div id="noCertificate" class="hidden bad" style="margin-top:20px">Certificate is awarded only for scores of 70% or above.</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>
+© Prayatnam Academy •
+<a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+• Number: <a href="tel:+918115749450">8115749450</a>
+</footer>
+
+<script>
+const questions=[{"q": "What is the x-coordinate of every point lying on the y-axis?", "options": ["0", "1", "Depends on y", "Cannot be determined"], "answer": 0, "explanation": "A point on the y-axis has no horizontal distance from the y-axis, so its x-coordinate is 0."}, {"q": "What is the y-coordinate of every point lying on the x-axis?", "options": ["0", "1", "Depends on x", "Cannot be determined"], "answer": 0, "explanation": "A point on the x-axis has no vertical distance from the x-axis, so its y-coordinate is 0."}, {"q": "When do the ordered pairs (x, y) and (y, x) represent the same point?", "options": ["Always", "Only when x = y", "Only when x = 0", "Only when y = 0"], "answer": 1, "explanation": "Two ordered pairs are equal only when corresponding coordinates are equal; hence x = y."}, {"q": "From A(3,4) to D(7,1), what are the horizontal and vertical distances respectively?", "options": ["3 units, 4 units", "4 units, 3 units", "5 units, 2 units", "7 units, 1 unit"], "answer": 1, "explanation": "Horizontal change = 7−3 = 4 units and vertical distance = |1−4| = 3 units."}, {"q": "What is the distance between A(3,4) and D(7,1)?", "options": ["3 units", "4 units", "5 units", "7 units"], "answer": 2, "explanation": "Using the right triangle formed by coordinate differences: √(4²+3²)=5."}, {"q": "Under reflection in the y-axis, which coordinate changes sign?", "options": ["Only x-coordinate", "Only y-coordinate", "Both coordinates", "Neither coordinate"], "answer": 0, "explanation": "Reflection in the y-axis changes (x,y) to (−x,y)."}, {"q": "Under reflection in the x-axis, which coordinate changes sign?", "options": ["Only x-coordinate", "Only y-coordinate", "Both coordinates", "Neither coordinate"], "answer": 1, "explanation": "Reflection in the x-axis changes (x,y) to (x,−y)."}, {"q": "The room door begins at D₁=(8,0) and ends at R₁=(11.5,0). What is its width?", "options": ["2.5 units", "3 units", "3.5 units", "4 units"], "answer": 2, "explanation": "Width = 11.5−8 = 3.5 units."}, {"q": "The bathroom door has endpoints B₁=(0,1.5) and B₂=(0,4). What is its width?", "options": ["1.5 units", "2 units", "2.5 units", "4 units"], "answer": 2, "explanation": "Width = 4−1.5 = 2.5 units."}, {"q": "Three feet of a rectangular table are at (8,9), (11,9) and (11,7). Where is the fourth foot?", "options": ["(8,7)", "(9,8)", "(11,8)", "(8,11)"], "answer": 0, "explanation": "The missing vertex must share x=8 with (8,9) and y=7 with (11,7), giving (8,7)."}, {"q": "For the rectangle with corners (8,9), (11,9), (11,7), (8,7), what are its length and width?", "options": ["3 units and 2 units", "2 units and 3 units", "11 units and 9 units", "8 units and 7 units"], "answer": 0, "explanation": "Horizontal length = 11−8 = 3 units and vertical width = 9−7 = 2 units."}, {"q": "Why can the physical height of a table not be found from its top-view coordinate diagram?", "options": ["Coordinates do not use numbers", "The graph gives only two dimensions", "The axes are not perpendicular", "The table is rectangular"], "answer": 1, "explanation": "A top-view coordinate plane represents only two dimensions; height is a third dimension."}, {"q": "The four corners of Reiaan's bathroom are O=(0,0), F=(0,9), R=(−6,9), and P=(−6,0). What is its shape?", "options": ["Triangle", "Rectangle", "Trapezium", "Rhombus only"], "answer": 1, "explanation": "Opposite sides are horizontal/vertical with equal corresponding lengths, forming a rectangle."}, {"q": "The showering area has corners S=(−6,6), H=(−3,6), W=(−2,9), R=(−6,9). What shape is it?", "options": ["Square", "Rectangle", "Trapezium", "Equilateral triangle"], "answer": 2, "explanation": "It has exactly one pair of opposite sides parallel, so it is a trapezium."}, {"q": "A dining room has corners P=(−6,0), A=(12,0), U=(12,−15), V=(−6,−15). What is its length PA?", "options": ["6 ft", "12 ft", "15 ft", "18 ft"], "answer": 3, "explanation": "PA = 12−(−6) = 18 ft."}, {"q": "What is the centre of the dining room with opposite corners (−6,0) and (12,−15)?", "options": ["(3,−7.5)", "(6,−7.5)", "(3,7.5)", "(−3,−7.5)"], "answer": 0, "explanation": "Centre = ((−6+12)/2, (0−15)/2) = (3,−7.5)."}, {"q": "What are the coordinates of the origin?", "options": ["(1,1)", "(0,1)", "(1,0)", "(0,0)"], "answer": 3, "explanation": "The x-axis and y-axis intersect at the origin O=(0,0)."}, {"q": "A point H lies on the vertical line x=−5. If H is above the x-axis, in which quadrant does it lie?", "options": ["Quadrant I", "Quadrant II", "Quadrant III", "Quadrant IV"], "answer": 1, "explanation": "x is negative and y is positive, so the point lies in Quadrant II."}, {"q": "A point H lies on the vertical line x=−5. If H is below the x-axis, in which quadrant does it lie?", "options": ["Quadrant I", "Quadrant II", "Quadrant III", "Quadrant IV"], "answer": 2, "explanation": "x and y are both negative, so the point lies in Quadrant III."}, {"q": "For A(0,−2), M(−5,−2), and P(−5,2), which segments are perpendicular?", "options": ["AM and MP", "AM and AP", "MP and AP", "None"], "answer": 0, "explanation": "AM is horizontal because the y-coordinates are equal, while MP is vertical because the x-coordinates are equal."}, {"q": "Which pair of points are mirror images in the x-axis?", "options": ["(−5,−2) and (−5,2)", "(−5,−2) and (5,−2)", "(2,5) and (−2,5)", "(3,0) and (0,3)"], "answer": 0, "explanation": "Reflection in the x-axis keeps x unchanged and changes the sign of y."}, {"q": "For Z=(5,−6), I=(5,0), and N=(0,−6), what are IZ and ZN?", "options": ["5 and 6 units", "6 and 5 units", "√61 and 5 units", "6 and √61 units"], "answer": 1, "explanation": "IZ is vertical length 6; ZN is horizontal length 5."}, {"q": "For the same triangle with Z=(5,−6), I=(5,0), N=(0,−6), what is IN?", "options": ["√11", "√25", "√36", "√61"], "answer": 3, "explanation": "IN = √[(5−0)²+(0−(−6))²] = √61."}, {"q": "Are M(−3,−4), A(0,0), and G(6,8) collinear?", "options": ["Yes", "No", "Only M and A are collinear", "Cannot be checked without plotting"], "answer": 0, "explanation": "MA=5, AG=10, MG=15, and 5+10=15, so the three points lie on one straight line."}, {"q": "Which coordinates form a right-angled isosceles triangle with the origin as one vertex, as given in the chapter?", "options": ["O(0,0), A(−4,0), B(0,4)", "O(0,0), A(−4,0), B(0,3)", "O(0,0), A(2,2), B(4,4)", "O(0,0), A(4,0), B(4,4)"], "answer": 0, "explanation": "OA and OB are perpendicular axes segments, each of length 4."}, {"q": "What is the midpoint of S(−3,0) and T(3,0)?", "options": ["(−3,3)", "(0,0)", "(3,3)", "(0,3)"], "answer": 1, "explanation": "Midpoint = ((−3+3)/2,(0+0)/2)=(0,0)."}, {"q": "What is the general midpoint of S=(x₁,y₁) and T=(x₂,y₂)?", "options": ["((x₁−x₂)/2,(y₁−y₂)/2)", "((x₁+x₂)/2,(y₁+y₂)/2)", "(x₁+x₂,y₁+y₂)", "(x₁x₂,y₁y₂)"], "answer": 1, "explanation": "Each midpoint coordinate is the average of the corresponding endpoint coordinates."}, {"q": "M=(−7,1) is the midpoint of A=(3,−4) and B=(x,y). What is B?", "options": ["(−17,6)", "(−11,2)", "(17,−6)", "(−7,1)"], "answer": 0, "explanation": "From (3+x)/2=−7, x=−17; from (−4+y)/2=1, y=6."}, {"q": "Points P and Q trisect AB where A=(4,7), B=(16,−2), with P closer to A. What are P and Q?", "options": ["P=(8,4), Q=(12,1)", "P=(6,5), Q=(10,2)", "P=(8,1), Q=(12,4)", "P=(10,4), Q=(14,1)"], "answer": 0, "explanation": "The chapter derives P=(8,4) and Q=(12,1), dividing AB into three equal parts."}, {"q": "Points A=(1,−8), B=(−4,7), and C=(−7,−4) all lie on a circle centred at the origin. What is its radius?", "options": ["√61", "√65", "8", "9"], "answer": 1, "explanation": "OA²=1²+8²=65, OB²=4²+7²=65, and OC²=7²+4²=65, so the radius is √65."}];
+let current=0,answers=Array(questions.length).fill(null),student="",seconds=3600,timerHandle=null;
+
+function startQuiz(){
+  student=document.getElementById("studentName").value.trim().replace(/\s+/g," ");
+  if(student.length<2){document.getElementById("errorMsg").classList.remove("hidden");return;}
+  document.getElementById("errorMsg").classList.add("hidden");
+  studentDisplay.textContent=student;start.classList.add("hidden");quiz.classList.remove("hidden");
+  seconds=3600;runTimer();renderQuestion();
+}
+function runTimer(){
+  updateTimer();
+  timerHandle=setInterval(()=>{seconds--;updateTimer();if(seconds<=0){clearInterval(timerHandle);timerHandle=null;submitQuiz(true);}},1000);
+}
+function updateTimer(){
+  const m=Math.floor(Math.max(0,seconds)/60),s=Math.max(0,seconds)%60;
+  timer.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+function renderQuestion(){
+  const q=questions[current];
+  counter.textContent=`Question ${current+1} of ${questions.length}`;
+  progress.style.width=((current+1)/questions.length*100)+"%";
+  questionText.textContent=q.q;options.innerHTML="";
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+text;
+    b.onclick=()=>{answers[current]=i;renderQuestion();};
+    options.appendChild(b);
+  });
+  prevBtn.disabled=current===0;
+  nextBtn.disabled=answers[current]===null;
+  nextBtn.textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+function prevQuestion(){if(current>0){current--;renderQuestion();}}
+function nextQuestion(){if(answers[current]===null)return;if(current<questions.length-1){current++;renderQuestion();}else submitQuiz(false);}
+function submitQuiz(timedOut){
+  if(timerHandle){clearInterval(timerHandle);timerHandle=null;}
+  const c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  const p=(c/questions.length)*100,displayP=Math.round(p);
+  let g="",eligible=p>=70;
+  if(p>90)g="A+";else if(p>=80)g="A";else if(p>=70)g="B";else g="No Certificate";
+  quiz.classList.add("hidden");result.classList.remove("hidden");
+  percentage.textContent=displayP+"%";grade.textContent=eligible?"Grade "+g:g;correct.textContent=c;score.textContent=c+" / "+questions.length;percentage2.textContent=displayP+"%";
+  message.textContent=(timedOut?"Time is over. ":"")+(eligible?"Congratulations! You qualified for a Prayatnam Academy certificate.":"Your score is below the certificate threshold. Review the answers and try again.");
+  if(eligible){
+    certificate.classList.remove("hidden");printBtn.classList.remove("hidden");
+    certName.textContent=student;certGrade.textContent="Grade "+g;
+    certScore.textContent=`Score: ${c}/${questions.length} • Percentage: ${displayP}%`;
+    certDate.textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    certId.textContent="PA-C9M1-"+Date.now().toString().slice(-8);
+  }else noCertificate.classList.remove("hidden");
+  review.innerHTML="<h3>Answer Review & Explanations</h3>";
+  questions.forEach((q,i)=>{
+    const d=document.createElement("details");
+    const ua=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary><p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${ua}</p><p class="good">Correct answer: ${q.options[q.answer]}</p><p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
