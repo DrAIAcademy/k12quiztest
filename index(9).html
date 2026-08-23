@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Prayatnam Academy K-12 Quiz Library - class-wise and subject-wise interactive quizzes." />
+  <title>Quiz Library | Prayatnam Academy</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --ink:#182033;
+      --muted:#687086;
+      --line:#e5e8f0;
+      --primary:#5948d7;
+      --primary2:#7b6cf0;
+      --accent:#efeefe;
+      --good:#087a55;
+      --shadow:0 16px 45px rgba(28,35,58,.09);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%,rgba(123,108,240,.12),transparent 24%),
+        radial-gradient(circle at 92% 5%,rgba(89,72,215,.10),transparent 22%),
+        var(--bg);
+    }
+    a{color:inherit}
+    .topbar{
+      position:sticky;top:0;z-index:20;
+      background:rgba(20,25,44,.96);
+      backdrop-filter:blur(12px);
+      color:white;
+      padding:14px max(18px,5vw);
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      box-shadow:0 5px 18px rgba(0,0,0,.12);
+    }
+    .brand{font-weight:900;letter-spacing:.2px}
+    .brand small{display:block;font-weight:500;opacity:.72;font-size:11px;margin-top:2px}
+    .website{
+      text-decoration:none;border:1px solid #ffffff38;border-radius:999px;
+      padding:8px 12px;font-size:13px;font-weight:800;white-space:nowrap;
+    }
+    .wrap{width:min(1180px,calc(100% - 28px));margin:30px auto 55px}
+    .hero{
+      color:#fff;
+      background:linear-gradient(135deg,#5140ce,#7c6df1);
+      border-radius:26px;padding:clamp(25px,5vw,48px);
+      position:relative;overflow:hidden;box-shadow:var(--shadow);
+    }
+    .hero:before,.hero:after{
+      content:"";position:absolute;border-radius:50%;background:#ffffff0f
+    }
+    .hero:before{width:330px;height:330px;right:-120px;top:-160px}
+    .hero:after{width:210px;height:210px;right:150px;bottom:-150px}
+    .eyebrow{text-transform:uppercase;letter-spacing:1.8px;font-size:12px;font-weight:900;opacity:.88}
+    .hero h1{font-size:clamp(30px,5vw,52px);line-height:1.05;margin:9px 0 12px}
+    .hero p{max-width:760px;line-height:1.65;margin:0;opacity:.92}
+    .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    .stat{
+      border:1px solid #ffffff38;background:#ffffff16;border-radius:13px;
+      padding:10px 13px;min-width:110px
+    }
+    .stat b{font-size:22px;display:block}.stat span{font-size:12px;opacity:.82}
+    .controls{
+      background:var(--card);border:1px solid var(--line);border-radius:20px;
+      padding:18px;margin-top:20px;box-shadow:var(--shadow);
+      display:grid;grid-template-columns:1.4fr .8fr .8fr auto;gap:10px;
+    }
+    input,select,button{font:inherit}
+    input,select{
+      width:100%;border:1.5px solid #d9dce6;border-radius:12px;padding:12px 13px;
+      background:#fff;color:var(--ink);outline:none;
+    }
+    input:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(89,72,215,.09)}
+    .btn{
+      border:0;border-radius:12px;padding:11px 15px;cursor:pointer;
+      background:var(--accent);color:#4335bb;font-weight:900;
+    }
+    .status{
+      margin:17px 2px 0;color:var(--muted);font-size:13px;display:flex;
+      align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    }
+    .live{
+      display:inline-flex;align-items:center;gap:7px;font-weight:800
+    }
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 0 5px rgba(8,122,85,.08)}
+    .library{margin-top:22px;display:grid;gap:24px}
+    .subject-block{
+      background:rgba(255,255,255,.62);border:1px solid rgba(224,227,237,.9);
+      border-radius:24px;padding:18px;
+    }
+    .subject-head{
+      display:flex;justify-content:space-between;align-items:end;gap:12px;
+      margin:2px 4px 15px;
+    }
+    .subject-head h2{margin:0;font-size:25px;text-transform:capitalize}
+    .subject-head span{font-size:13px;color:var(--muted);font-weight:700}
+    .class-block{margin-top:18px}
+    .class-title{
+      display:flex;align-items:center;gap:9px;font-size:16px;font-weight:900;margin:0 4px 10px
+    }
+    .class-pill{background:#eceaff;color:#4838c8;border-radius:999px;padding:6px 10px;font-size:12px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(245px,1fr));
+      gap:13px;
+    }
+    .quiz-card{
+      background:var(--card);border:1px solid var(--line);border-radius:17px;
+      padding:17px;text-decoration:none;display:flex;flex-direction:column;min-height:168px;
+      box-shadow:0 8px 24px rgba(25,31,52,.05);transition:.18s ease;
+    }
+    .quiz-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(25,31,52,.11);border-color:#cac5fa}
+    .quiz-card .meta{font-size:11px;color:var(--primary);font-weight:900;text-transform:uppercase;letter-spacing:.8px}
+    .quiz-card h3{font-size:18px;line-height:1.35;margin:9px 0 7px}
+    .quiz-card p{font-size:13px;line-height:1.5;color:var(--muted);margin:0 0 14px}
+    .open{
+      margin-top:auto;display:flex;align-items:center;justify-content:space-between;
+      font-size:13px;font-weight:900;color:#4537bd
+    }
+    .chapter-no{
+      width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+      background:#f1efff;color:#4c3cc8;font-weight:900;flex:0 0 auto;
+    }
+    .empty{
+      background:white;border:1px dashed #ccd0dc;border-radius:18px;padding:35px;text-align:center;color:var(--muted)
+    }
+    .rules{
+      margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;
+      font-size:13px;line-height:1.6;color:var(--muted)
+    }
+    .rules code{background:#f1f2f6;color:#333;padding:2px 6px;border-radius:6px}
+    footer{text-align:center;color:var(--muted);font-size:13px;padding:10px 15px 34px}
+    footer a{color:var(--primary);font-weight:900;text-decoration:none}
+    @media(max-width:820px){
+      .controls{grid-template-columns:1fr 1fr}
+      .controls .search{grid-column:1/-1}
+    }
+    @media(max-width:540px){
+      .wrap{width:min(100% - 18px,1180px);margin-top:15px}
+      .hero{border-radius:20px}.controls{grid-template-columns:1fr}.controls .search{grid-column:auto}
+      .topbar{padding:12px 14px}.website{font-size:11px}
+      .subject-block{padding:12px}.grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Prayatnam Academy<small>K–12 Interactive Quiz Library</small></div>
+    <a class="website" href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Practice • Assess • Achieve</div>
+      <h1>Class-wise Quiz Library</h1>
+      <p>Choose a class, subject and chapter to start an interactive assessment. New quiz files are automatically discovered and placed in the correct class and subject section when their filenames follow the quiz naming convention.</p>
+      <div class="stats">
+        <div class="stat"><b id="quizCount">0</b><span>Quizzes</span></div>
+        <div class="stat"><b id="classCount">0</b><span>Classes</span></div>
+        <div class="stat"><b id="subjectCount">0</b><span>Subjects</span></div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <input class="search" id="searchInput" type="search" placeholder="Search chapter or quiz..." aria-label="Search quizzes">
+      <select id="classFilter" aria-label="Filter by class"><option value="">All Classes</option></select>
+      <select id="subjectFilter" aria-label="Filter by subject"><option value="">All Subjects</option></select>
+      <button class="btn" id="clearBtn" type="button">Clear</button>
+    </section>
+
+    <div class="status">
+      <div class="live"><span class="dot"></span><span id="sourceStatus">Loading quizzes from GitHub…</span></div>
+      <span id="resultCount"></span>
+    </div>
+
+    <section id="library" class="library"></section>
+
+    <section class="rules">
+      <b>For automatic placement of future quizzes:</b> keep quiz files anywhere in this repository and use the filename format
+      <code>subject_classN_chapterN_chapter_name_quiz.html</code>.
+      Examples: <code>maths_class8_chapter8_algebra_quiz.html</code>,
+      <code>science_class7_chapter3_heat_quiz.html</code>.
+      The page reads the GitHub repository tree, detects the subject/class/chapter from the filename, and creates the sections automatically.
+    </section>
+  </main>
+
+  <footer>
+    © Prayatnam Academy •
+    <a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+    • <a href="tel:+918115749450">8115749450</a>
+  </footer>
+
+<script>
+/*
+  AUTO-DISCOVERY
+  Repository: https://github.com/DrAIAcademy/k12quiztest
+  Naming convention:
+  subject_classN_chapterN_title.html
+  Any matching HTML file (except index.html) is automatically grouped.
+*/
+const GITHUB_OWNER = "DrAIAcademy";
+const GITHUB_REPO  = "k12quiztest";
+const GITHUB_BRANCH = "main";
+
+/* Fallback list is used only if GitHub API is temporarily unavailable/rate-limited. */
+const FALLBACK_FILES = [
+  "maths_class7_chapter1_large_numbers_exam_quiz.html",
+  "maths_class7_chapter2_arithmetic_expressions_30_mcq_quiz.html",
+  "maths_class8_chapter1_square_cube_quiz.html",
+  "maths_class8_chapter2_power_play_quiz.html",
+  "maths_class8_chapter3_story_of_numbers_quiz.html",
+  "maths_class8_chapter4_quadrilaterals_quiz.html",
+  "maths_class8_chapter5_number_play_quiz.html",
+  "maths_class8_chapter6_we_distribute_quiz.html",
+  "maths_class8_chapter7_proportional_reasoning_1_quiz.html"
+];
+
+let allQuizzes = [];
+
+const chapterTitleOverrides = {
+  "large_numbers_exam":"Large Numbers Around Us",
+  "arithmetic_expressions_30_mcq":"Arithmetic Expressions",
+  "square_cube":"A Square and A Cube",
+  "power_play":"Power Play",
+  "story_of_numbers":"A Story of Numbers",
+  "quadrilaterals":"Quadrilaterals",
+  "number_play":"Number Play",
+  "we_distribute":"We Distribute, Yet Things Multiply",
+  "proportional_reasoning_1":"Proportional Reasoning – I"
+};
+
+function titleCase(text){
+  return text
+    .replace(/[_-]+/g," ")
+    .replace(/\b\w/g, c => c.toUpperCase())
+    .replace(/\bMcq\b/g,"MCQ");
+}
+
+function prettySubject(subject){
+  const map = {
+    maths:"Mathematics",
+    math:"Mathematics",
+    mathematics:"Mathematics",
+    science:"Science",
+    english:"English",
+    hindi:"Hindi",
+    socialscience:"Social Science",
+    social_science:"Social Science",
+    sst:"Social Science",
+    computer:"Computer Science",
+    computerscience:"Computer Science"
+  };
+  return map[subject.toLowerCase()] || titleCase(subject);
+}
+
+function parseQuizFile(path){
+  const file = path.split("/").pop();
+  if(!file || file.toLowerCase()==="index.html" || !file.toLowerCase().endsWith(".html")) return null;
+
+  // Flexible pattern: subject_class7_chapter2_any_title.html
+  const m = file.match(/^(.+?)_class(\d+)_chapter(\d+)_(.+)\.html$/i);
+  if(!m) return null;
+
+  const subjectRaw = m[1].toLowerCase();
+  const classNo = Number(m[2]);
+  const chapterNo = Number(m[3]);
+  let slug = m[4].replace(/_quiz$/i,"").replace(/_exam$/i,"");
+
+  // Remove quiz metadata suffixes from display title only.
+  let cleanSlug = slug
+    .replace(/_30_mcq$/i,"")
+    .replace(/_25_mcq$/i,"")
+    .replace(/_mcq$/i,"")
+    .replace(/_exam$/i,"");
+
+  const overrideKey = slug.toLowerCase();
+  const title = chapterTitleOverrides[overrideKey] || chapterTitleOverrides[cleanSlug.toLowerCase()] || titleCase(cleanSlug);
+
+  return {
+    path,
+    file,
+    subjectRaw,
+    subject: prettySubject(subjectRaw),
+    classNo,
+    chapterNo,
+    title
+  };
+}
+
+async function loadFromGitHub(){
+  // Recursive tree API means files may also be placed in future subfolders.
+  const api = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/trees/${GITHUB_BRANCH}?recursive=1`;
+  const res = await fetch(api, {headers:{"Accept":"application/vnd.github+json"}});
+  if(!res.ok) throw new Error("GitHub API unavailable");
+  const data = await res.json();
+  return (data.tree || [])
+    .filter(x => x.type==="blob" && x.path.toLowerCase().endsWith(".html"))
+    .map(x => x.path);
+}
+
+function pageHref(path){
+  // Relative link works both on GitHub Pages and when index is opened locally.
+  return path.split("/").map(encodeURIComponent).join("/");
+}
+
+function populateFilters(){
+  const classes = [...new Set(allQuizzes.map(q=>q.classNo))].sort((a,b)=>a-b);
+  const subjects = [...new Set(allQuizzes.map(q=>q.subject))].sort();
+
+  document.getElementById("classCount").textContent = classes.length;
+  document.getElementById("subjectCount").textContent = subjects.length;
+  document.getElementById("quizCount").textContent = allQuizzes.length;
+
+  const classFilter=document.getElementById("classFilter");
+  const subjectFilter=document.getElementById("subjectFilter");
+
+  classFilter.innerHTML='<option value="">All Classes</option>'+
+    classes.map(c=>`<option value="${c}">Class ${c}</option>`).join("");
+
+  subjectFilter.innerHTML='<option value="">All Subjects</option>'+
+    subjects.map(s=>`<option value="${s}">${s}</option>`).join("");
+}
+
+function quizCard(q){
+  return `
+    <a class="quiz-card" href="${pageHref(q.path)}">
+      <div class="meta">${q.subject} • Class ${q.classNo}</div>
+      <div style="display:flex;gap:11px;align-items:flex-start;margin-top:9px">
+        <div class="chapter-no">${q.chapterNo}</div>
+        <div>
+          <h3>${q.title}</h3>
+          <p>Chapter ${q.chapterNo} interactive quiz assessment.</p>
+        </div>
+      </div>
+      <div class="open"><span>Start Quiz</span><span>→</span></div>
+    </a>`;
+}
+
+function render(){
+  const query=document.getElementById("searchInput").value.trim().toLowerCase();
+  const cls=document.getElementById("classFilter").value;
+  const subject=document.getElementById("subjectFilter").value;
+
+  const filtered=allQuizzes.filter(q=>{
+    const text=`${q.title} ${q.subject} class ${q.classNo} chapter ${q.chapterNo} ${q.file}`.toLowerCase();
+    return (!query || text.includes(query))
+      && (!cls || String(q.classNo)===cls)
+      && (!subject || q.subject===subject);
+  });
+
+  document.getElementById("resultCount").textContent=`Showing ${filtered.length} of ${allQuizzes.length} quizzes`;
+
+  const lib=document.getElementById("library");
+  if(!filtered.length){
+    lib.innerHTML='<div class="empty"><b>No quizzes found.</b><br>Try another class, subject or search term.</div>';
+    return;
+  }
+
+  const grouped={};
+  filtered.forEach(q=>{
+    if(!grouped[q.subject]) grouped[q.subject]={};
+    if(!grouped[q.subject][q.classNo]) grouped[q.subject][q.classNo]=[];
+    grouped[q.subject][q.classNo].push(q);
+  });
+
+  lib.innerHTML=Object.keys(grouped).sort().map(subjectName=>{
+    const classes=grouped[subjectName];
+    const subjectTotal=Object.values(classes).flat().length;
+    const classHtml=Object.keys(classes).map(Number).sort((a,b)=>a-b).map(classNo=>{
+      const items=classes[classNo].sort((a,b)=>a.chapterNo-b.chapterNo || a.title.localeCompare(b.title));
+      return `
+        <div class="class-block">
+          <div class="class-title"><span class="class-pill">Class ${classNo}</span><span>${items.length} ${items.length===1?"quiz":"quizzes"}</span></div>
+          <div class="grid">${items.map(quizCard).join("")}</div>
+        </div>`;
+    }).join("");
+
+    return `
+      <section class="subject-block">
+        <div class="subject-head"><h2>${subjectName}</h2><span>${subjectTotal} ${subjectTotal===1?"quiz":"quizzes"}</span></div>
+        ${classHtml}
+      </section>`;
+  }).join("");
+}
+
+async function init(){
+  let paths;
+  try{
+    paths=await loadFromGitHub();
+    document.getElementById("sourceStatus").textContent="Quiz list synced automatically from GitHub";
+  }catch(err){
+    paths=FALLBACK_FILES;
+    document.getElementById("sourceStatus").textContent="Showing saved quiz list (GitHub sync unavailable)";
+  }
+
+  allQuizzes=paths.map(parseQuizFile).filter(Boolean)
+    .sort((a,b)=>a.subject.localeCompare(b.subject)||a.classNo-b.classNo||a.chapterNo-b.chapterNo);
+
+  populateFilters();
+  render();
+}
+
+document.getElementById("searchInput").addEventListener("input",render);
+document.getElementById("classFilter").addEventListener("change",render);
+document.getElementById("subjectFilter").addEventListener("change",render);
+document.getElementById("clearBtn").addEventListener("click",()=>{
+  document.getElementById("searchInput").value="";
+  document.getElementById("classFilter").value="";
+  document.getElementById("subjectFilter").value="";
+  render();
+});
+
+init();
+</script>
+</body>
+</html>
