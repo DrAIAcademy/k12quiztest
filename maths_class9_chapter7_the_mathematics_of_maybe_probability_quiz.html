@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 9 Maths Chapter 7 Probability Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5545d8;--p2:#8172f2;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:920px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:30px;border-radius:22px;box-shadow:0 18px 45px #5545d833}
+.hero h1{margin:6px 0;font-size:clamp(29px,5vw,44px)}
+.hero p{line-height:1.6}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}
+.timer{font-size:21px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.45;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option:hover{border-color:#aaa4eb;background:#faf9ff}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:25px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:28px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px;background:#fff}
+summary{font-weight:800;cursor:pointer;line-height:1.45}
+.good{color:var(--good);font-weight:800}
+.bad,.error{color:var(--bad);font-weight:800}
+.note{background:#fff7e6;border:1px solid #f0d7a0;padding:12px;border-radius:10px;margin-top:15px;color:#684e16}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row,.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}.cert h2{font-size:32px}.cert .name{font-size:29px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review,#noCertificate{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}.cert{display:block!important}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 9 Mathematics</header>
+<main class="wrap">
+<section class="hero">
+<small>EXAM-ORIENTED INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 7: The Mathematics of Maybe – Introduction to Probability</h1>
+<p>30 carefully selected MCQs covering randomness, sample spaces, impossible and certain events, equally likely outcomes, experimental and theoretical probability, relative frequency, estimation, coins, dice, cards, bags, replacement, tree-diagram reasoning and compound events.</p>
+<div class="chips">
+<span class="chip">30 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Unlimited Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate.</p>
+<div class="row">
+<input id="studentName" placeholder="Enter full name" maxlength="60" autocomplete="name">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="errorMsg" class="error hidden">Please enter the student's name.</div>
+<div class="note">Grading: Above 90% = A+ • 80%–90% = A • 70%–79% = B • Below 70% = No Certificate</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="studentDisplay" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="questionText" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prevBtn" onclick="prevQuestion()">Previous</button>
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percentage"></h1>
+<h3 id="grade"></h3>
+<p id="message"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="percentage2"></b></div>
+</div>
+<button id="printBtn" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="certificate" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 9 Mathematics • Chapter 7: The Mathematics of Maybe – Introduction to Probability</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the 30-question assessment.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="certDate"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="certId"></span></p>
+</div>
+
+<div id="noCertificate" class="hidden bad" style="margin-top:20px">
+Certificate is awarded only for scores of 70% or above.
+</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>
+© Prayatnam Academy •
+<a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+• Number: <a href="tel:+918115749450">8115749450</a>
+</footer>
+
+<script>
+const questions=[{"q": "Why is a fair coin toss considered a fair way to decide which cricket team bats first?", "options": ["Heads is more likely than tails", "Both heads and tails have probability 1/2", "The captain can control the result", "Previous tosses determine the next toss"], "answer": 1, "explanation": "For a fair coin, P(Heads)=1/2 and P(Tails)=1/2, so both teams have an equal chance."}, {"q": "A fair die has shown 4 on eight consecutive rolls. What is the probability of getting 4 on the ninth roll?", "options": ["0", "1/12", "1/6", "1/2"], "answer": 2, "explanation": "Each roll is independent. The probability of any particular face on the next roll remains 1/6."}, {"q": "The belief that a repeated result is now less likely merely because it has occurred many times is called:", "options": ["Random sampling", "Gambler's fallacy", "Relative frequency", "Tree reasoning"], "answer": 1, "explanation": "The chapter identifies this incorrect belief as the gambler's fallacy."}, {"q": "When a coin is tossed twice, what is the probability of getting one head and one tail?", "options": ["1/4", "1/2", "3/4", "1"], "answer": 1, "explanation": "S={HH,HT,TH,TT}; favourable outcomes are HT and TH, so probability=2/4=1/2."}, {"q": "Which number represents the probability of an impossible event?", "options": ["0", "1/4", "1/2", "1"], "answer": 0, "explanation": "An impossible event has probability 0."}, {"q": "Which number represents the probability of a certain event?", "options": ["0", "1/2", "3/4", "1"], "answer": 3, "explanation": "An event that is certain to occur has probability 1."}, {"q": "What is the set of all possible outcomes of a random experiment called?", "options": ["Event frequency", "Sample space", "Relative frequency", "Trial number"], "answer": 1, "explanation": "The complete set of possible outcomes is called the sample space."}, {"q": "A sample of 30 sweets contains 10 red, 8 green, 7 yellow and 5 blue sweets. What is the experimental probability of selecting a green sweet?", "options": ["4/15", "7/30", "1/3", "8/15"], "answer": 0, "explanation": "P(green)=8/30=4/15."}, {"q": "Using the same sweet sample, how many yellow sweets would be estimated in a bag of 600 sweets?", "options": ["120", "140", "160", "180"], "answer": 1, "explanation": "Estimated number=7/30×600=140."}, {"q": "In a sample of 40 students, 9 prefer the Sports Club. Based on this sample, how many out of 800 students are estimated to prefer Sports Club?", "options": ["90", "160", "180", "220"], "answer": 2, "explanation": "Estimated number=9/40×800=180."}, {"q": "A fair coin is tossed 20 times. Regardless of those earlier results, what is the theoretical probability of tails on the next toss?", "options": ["1/20", "1/4", "1/2", "Depends on previous results"], "answer": 2, "explanation": "Each fair-coin toss is independent, so P(Tails)=1/2 on the next toss."}, {"q": "A paper cup is tossed 100 times. If it lands on its side 47 times, what is the experimental probability of landing on its side?", "options": ["0.047", "0.47", "0.53", "4.7"], "answer": 1, "explanation": "Experimental probability=47/100=0.47."}, {"q": "What is the probability of getting an even number when rolling a fair six-sided die?", "options": ["1/6", "1/3", "1/2", "2/3"], "answer": 2, "explanation": "Even outcomes are {2,4,6}, so probability=3/6=1/2."}, {"q": "A die is rolled 12 times and a 3 appears 3 times. What is the experimental probability of getting 3?", "options": ["1/6", "1/4", "1/3", "3/4"], "answer": 1, "explanation": "Experimental probability=3/12=1/4."}, {"q": "For the same fair die, what is the theoretical probability of rolling a 3?", "options": ["1/12", "1/6", "1/4", "1/3"], "answer": 1, "explanation": "A fair die has six equally likely outcomes and one favourable outcome, so P(3)=1/6."}, {"q": "As the number of trials becomes very large, experimental probability is generally expected to:", "options": ["Move closer to theoretical probability", "Always become 0", "Always become 1", "Move farther from theoretical probability"], "answer": 0, "explanation": "The chapter explains that more trials generally make experimental probability a more reliable estimate of theoretical probability."}, {"q": "A die is rolled and a coin is tossed together. How many outcomes are in the sample space?", "options": ["6", "8", "10", "12"], "answer": 3, "explanation": "There are 6 die outcomes and 2 coin outcomes, giving 6×2=12 outcomes."}, {"q": "How many integers are strictly between -5 and +5?", "options": ["8", "9", "10", "11"], "answer": 1, "explanation": "They are {-4,-3,-2,-1,0,1,2,3,4}, giving 9 outcomes."}, {"q": "At a fair there are 3 snack choices and 2 drink choices. How many snack-drink combinations are possible?", "options": ["5", "6", "8", "9"], "answer": 1, "explanation": "Each of 3 snacks can be paired with either of 2 drinks: 3×2=6."}, {"q": "Basket A contains one apple and two oranges; Basket B contains one banana and one mango. One fruit is chosen from each. What is the probability of choosing the apple and banana pair?", "options": ["1/3", "1/4", "1/6", "1/2"], "answer": 2, "explanation": "There are 6 equally likely labelled fruit pairs and only one is (Apple,Banana), so probability=1/6."}, {"q": "A box has 3 red, 4 black and 2 green pens. A pen is picked and replaced, then another is picked. What is the probability that both picks are the same colour?", "options": ["20/81", "25/81", "29/81", "35/81"], "answer": 2, "explanation": "P(same)=P(RR)+P(BB)+P(GG)=9/81+16/81+4/81=29/81."}, {"q": "In a survey of 50 students, 15 like football. What is the relative frequency?", "options": ["0.15", "0.3", "0.5", "0.7"], "answer": 1, "explanation": "Relative frequency=15/50=3/10=0.3."}, {"q": "Two fair coins are tossed together. What is the probability of getting at least one head?", "options": ["1/4", "1/2", "3/4", "1"], "answer": 2, "explanation": "From {HH,HT,TH,TT}, three outcomes contain at least one head, so probability=3/4."}, {"q": "Ten identical cards numbered 1 to 10 are placed in a box. What is the probability of drawing an even-numbered card?", "options": ["1/5", "2/5", "1/2", "3/5"], "answer": 2, "explanation": "The even cards are 2,4,6,8,10: 5 out of 10, giving 1/2."}, {"q": "A fair die is rolled once. What is the probability of getting a number greater than 4?", "options": ["1/6", "1/3", "1/2", "2/3"], "answer": 1, "explanation": "Favourable outcomes are 5 and 6, so probability=2/6=1/3."}, {"q": "A bag contains 3 red, 2 blue and 1 green ball. What is the probability of drawing a ball that is not red?", "options": ["1/3", "1/2", "2/3", "5/6"], "answer": 1, "explanation": "There are 3 non-red balls out of 6 total, so probability=3/6=1/2."}, {"q": "Three fair coins are tossed simultaneously. What is the probability of getting exactly two heads?", "options": ["1/4", "3/8", "1/2", "5/8"], "answer": 1, "explanation": "The favourable outcomes are HHT, HTH and THH among 8 equally likely outcomes, so probability=3/8."}, {"q": "The letters of PEACE are placed on five cards. What is the probability of drawing a card that is not E?", "options": ["2/5", "3/5", "4/5", "1/2"], "answer": 1, "explanation": "The non-E cards are P, A and C, so probability=3/5."}, {"q": "Two fair dice are rolled. What is the probability that their sum is a prime number greater than 5?", "options": ["1/9", "2/9", "1/3", "5/18"], "answer": 1, "explanation": "The relevant prime sums are 7 and 11. There are 8 favourable ordered pairs out of 36, so probability=8/36=2/9."}, {"q": "A bag has 4 red, 3 green and 2 blue balls. Two balls are drawn without replacement. What is the probability that the two balls are of different colours?", "options": ["5/18", "1/2", "13/18", "5/6"], "answer": 2, "explanation": "There are 36 ways to choose two balls. Different-colour pairs total 4×3+4×2+3×2=26, so probability=26/36=13/18."}];
+let current=0,answers=Array(questions.length).fill(null),student="",seconds=3600,timerHandle=null;
+
+function startQuiz(){
+  student=document.getElementById("studentName").value.trim().replace(/\s+/g," ");
+  if(student.length<2){
+    document.getElementById("errorMsg").classList.remove("hidden");
+    return;
+  }
+  document.getElementById("errorMsg").classList.add("hidden");
+  document.getElementById("studentDisplay").textContent=student;
+  document.getElementById("start").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  seconds=3600;
+  runTimer();
+  renderQuestion();
+}
+
+function runTimer(){
+  updateTimer();
+  timerHandle=setInterval(()=>{
+    seconds--;
+    updateTimer();
+    if(seconds<=0){
+      clearInterval(timerHandle);
+      timerHandle=null;
+      submitQuiz(true);
+    }
+  },1000);
+}
+
+function updateTimer(){
+  const m=Math.floor(Math.max(0,seconds)/60);
+  const s=Math.max(0,seconds)%60;
+  document.getElementById("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function renderQuestion(){
+  const q=questions[current];
+  document.getElementById("counter").textContent=`Question ${current+1} of ${questions.length}`;
+  document.getElementById("progress").style.width=((current+1)/questions.length*100)+"%";
+  document.getElementById("questionText").textContent=q.q;
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+text;
+    b.onclick=()=>{answers[current]=i;renderQuestion();};
+    box.appendChild(b);
+  });
+
+  document.getElementById("prevBtn").disabled=current===0;
+  document.getElementById("nextBtn").disabled=answers[current]===null;
+  document.getElementById("nextBtn").textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+
+function prevQuestion(){
+  if(current>0){current--;renderQuestion();}
+}
+
+function nextQuestion(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){current++;renderQuestion();}
+  else submitQuiz(false);
+}
+
+function submitQuiz(timedOut){
+  if(timerHandle){clearInterval(timerHandle);timerHandle=null;}
+
+  const c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  const p=(c/questions.length)*100;
+  const displayP=Math.round(p);
+  let g="",eligible=p>=70;
+
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  document.getElementById("percentage").textContent=displayP+"%";
+  document.getElementById("grade").textContent=eligible?"Grade "+g:g;
+  document.getElementById("correct").textContent=c;
+  document.getElementById("score").textContent=c+" / "+questions.length;
+  document.getElementById("percentage2").textContent=displayP+"%";
+
+  document.getElementById("message").textContent=(timedOut?"Time is over. ":"")+
+    (eligible
+      ?"Congratulations! You qualified for a Prayatnam Academy certificate."
+      :"Your score is below the certificate threshold. Review the answers and try again.");
+
+  if(eligible){
+    document.getElementById("certificate").classList.remove("hidden");
+    document.getElementById("printBtn").classList.remove("hidden");
+    document.getElementById("certName").textContent=student;
+    document.getElementById("certGrade").textContent="Grade "+g;
+    document.getElementById("certScore").textContent=`Score: ${c}/${questions.length} • Percentage: ${displayP}%`;
+    document.getElementById("certDate").textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    document.getElementById("certId").textContent="PA-C9M7-"+Date.now().toString().slice(-8);
+  }else{
+    document.getElementById("noCertificate").classList.remove("hidden");
+  }
+
+  const review=document.getElementById("review");
+  review.innerHTML="<h3>Answer Review & Explanations</h3>";
+  questions.forEach((q,i)=>{
+    const d=document.createElement("details");
+    const ua=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+      <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${ua}</p>
+      <p class="good">Correct answer: ${q.options[q.answer]}</p>
+      <p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
