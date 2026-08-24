@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 9 Maths Chapter 6 Measuring Space Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5545d8;--p2:#8172f2;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:920px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:30px;border-radius:22px;box-shadow:0 18px 45px #5545d833}
+.hero h1{margin:6px 0;font-size:clamp(29px,5vw,44px)}
+.hero p{line-height:1.6}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}
+.timer{font-size:21px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.45;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option:hover{border-color:#aaa4eb;background:#faf9ff}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:25px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:28px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px;background:#fff}
+summary{font-weight:800;cursor:pointer;line-height:1.45}
+.good{color:var(--good);font-weight:800}
+.bad,.error{color:var(--bad);font-weight:800}
+.note{background:#fff7e6;border:1px solid #f0d7a0;padding:12px;border-radius:10px;margin-top:15px;color:#684e16}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row,.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}.cert h2{font-size:32px}.cert .name{font-size:29px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review,#noCertificate{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}.cert{display:block!important}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 9 Mathematics</header>
+<main class="wrap">
+
+<section class="hero">
+<small>EXAM-ORIENTED INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 6: Measuring Space – Perimeter and Area</h1>
+<p>30 carefully selected MCQs covering circumference, arcs, sectors, composite perimeters, area of triangles, parallelograms and trapeziums, Heron's formula, rhombus area, equal-area theorems, scaling and geometric reasoning.</p>
+<div class="chips">
+<span class="chip">30 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Unlimited Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate.</p>
+<div class="row">
+<input id="studentName" placeholder="Enter full name" maxlength="60" autocomplete="name">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="errorMsg" class="error hidden">Please enter the student's name.</div>
+<div class="note">Grading: Above 90% = A+ • 80%–90% = A • 70%–79% = B • Below 70% = No Certificate</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="studentDisplay" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="questionText" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prevBtn" onclick="prevQuestion()">Previous</button>
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percentage"></h1>
+<h3 id="grade"></h3>
+<p id="message"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="percentage2"></b></div>
+</div>
+<button id="printBtn" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="certificate" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 9 Mathematics • Chapter 6: Measuring Space – Perimeter and Area</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the 30-question assessment.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="certDate"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="certId"></span></p>
+</div>
+
+<div id="noCertificate" class="hidden bad" style="margin-top:20px">
+Certificate is awarded only for scores of 70% or above.
+</div>
+
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>
+© Prayatnam Academy •
+<a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+• Number: <a href="tel:+918115749450">8115749450</a>
+</footer>
+
+<script>
+const questions=[{"q": "The circumference of a circle is 44 cm. Using π = 22/7, what is its radius?", "options": ["5 cm", "7 cm", "11 cm", "14 cm"], "answer": 1, "explanation": "C = 2πr. So 44 = 2 × 22/7 × r, giving r = 7 cm."}, {"q": "What is the circumference of a circle of radius 10 cm, correct to 3 significant figures, using π = 22/7?", "options": ["31.4 cm", "44.0 cm", "62.9 cm", "75.4 cm"], "answer": 2, "explanation": "C = 2πr = 2 × 22/7 × 10 = 62.857... cm ≈ 62.9 cm."}, {"q": "A circle has radius 3.5 cm and a central angle of 60°. What is the length of the corresponding arc?", "options": ["11/6 cm", "11/3 cm", "22/3 cm", "7 cm"], "answer": 1, "explanation": "Arc length = 60/360 × 2πr = 1/6 × 2 × 22/7 × 3.5 = 11/3 cm."}, {"q": "A sector has radius 14 cm and angle 75°. What is its perimeter, using π = 22/7?", "options": ["28 cm", "110/3 cm", "139/3 cm", "55 cm"], "answer": 2, "explanation": "Perimeter = arc length + 2r = 75/360 × 2 × 22/7 × 14 + 28 = 139/3 cm."}, {"q": "A car tyre has diameter 56 cm. How far does the car travel in one complete revolution?", "options": ["0.56 m", "1.12 m", "1.76 m", "3.52 m"], "answer": 2, "explanation": "Distance per revolution = circumference = πd = 22/7 × 56 = 176 cm = 1.76 m."}, {"q": "If two circles have circumferences in the ratio 5:4, what is the ratio of their radii?", "options": ["25:16", "5:4", "10:8π", "4:5"], "answer": 1, "explanation": "Circumference is directly proportional to radius, so their radii are also in the ratio 5:4."}, {"q": "Why are the side lengths alone not enough to determine the area of a parallelogram?", "options": ["Its perimeter is unknown", "Its height can change while side lengths remain fixed", "Its diagonals are always unequal", "Its angles must be 90°"], "answer": 1, "explanation": "Area = base × perpendicular height. The same side lengths can form parallelograms with different heights."}, {"q": "Among all rectangles with perimeter 40 units, which rectangle has the greatest area?", "options": ["1 × 19", "5 × 15", "8 × 12", "10 × 10"], "answer": 3, "explanation": "For a fixed perimeter, the square has maximum area. Here the square is 10 × 10, with area 100 square units."}, {"q": "For rectangles with perimeter 40 units, what can be said about the smallest possible area of a proper rectangle?", "options": ["It is exactly 0", "It is 19 square units", "There is no minimum, though the area can approach 0", "It is 100 square units"], "answer": 2, "explanation": "As one side approaches 0, the area approaches 0, but a proper rectangle cannot have a side exactly 0."}, {"q": "A triangle has base b and height h. Which rectangle has the same area as the triangle?", "options": ["b by h", "b by h/2", "b/2 by h/2", "2b by h"], "answer": 1, "explanation": "Triangle area = 1/2 bh, equal to the area of a rectangle of sides b and h/2."}, {"q": "What is the area of a sector of radius 7 cm and central angle 60°, using π = 22/7?", "options": ["49/6 cm²", "77/3 cm²", "154/3 cm²", "77 cm²"], "answer": 1, "explanation": "Area = 60/360 × π × 7² = 1/6 × 22/7 × 49 = 77/3 cm²."}, {"q": "A minute hand of length 7 cm sweeps through 10 minutes. What area does it sweep?", "options": ["77/6 cm²", "77/3 cm²", "49π cm²", "154/3 cm²"], "answer": 1, "explanation": "In 10 minutes the hand turns 60°. Sector area = 60/360 × π × 7² = 77/3 cm²."}, {"q": "What is the formula for the area of a trapezium with parallel sides a and b and height h?", "options": ["(a+b)h", "1/2(a+b)h", "1/2(a-b)h", "abh"], "answer": 1, "explanation": "Area of trapezium = 1/2 × sum of parallel sides × height."}, {"q": "The parallel sides of an isosceles trapezium are 40 cm and 20 cm, and each non-parallel side is 26 cm. What is its height?", "options": ["10 cm", "20 cm", "24 cm", "26 cm"], "answer": 2, "explanation": "Each side triangle has base (40−20)/2=10. By Pythagoras, h²=26²−10²=576, so h=24 cm."}, {"q": "For the same trapezium with parallel sides 40 cm and 20 cm and height 24 cm, what is its area?", "options": ["480 cm²", "600 cm²", "720 cm²", "960 cm²"], "answer": 2, "explanation": "Area = 1/2 × (40+20) × 24 = 720 cm²."}, {"q": "A triangle has sides 8 cm and 11 cm, and perimeter 32 cm. What is the third side?", "options": ["11 cm", "12 cm", "13 cm", "14 cm"], "answer": 2, "explanation": "Third side = 32−8−11 = 13 cm."}, {"q": "What is the area of a triangle with sides 8 cm, 11 cm and 13 cm?", "options": ["4√30 cm²", "8√30 cm²", "16√30 cm²", "30√8 cm²"], "answer": 1, "explanation": "Using Heron's formula with s=16 gives √[16×8×5×3] = 8√30 cm²."}, {"q": "The sides of a triangular plot are in the ratio 3:5:7 and its perimeter is 300 m. What are its side lengths?", "options": ["30, 50, 70 m", "60, 100, 140 m", "75, 100, 125 m", "50, 100, 150 m"], "answer": 1, "explanation": "15x=300 gives x=20, so the sides are 60 m, 100 m and 140 m."}, {"q": "What is the area of a triangle with sides 60 m, 100 m and 140 m?", "options": ["750√3 m²", "1000√3 m²", "1500√3 m²", "3000√3 m²"], "answer": 2, "explanation": "Heron's formula with s=150 gives √(150×90×50×10)=1500√3 m²."}, {"q": "One diagonal of a rhombus is twice the other. If its area is 128 cm², what is the shorter diagonal?", "options": ["4√2 cm", "8√2 cm", "16 cm", "16√2 cm"], "answer": 1, "explanation": "Let diagonals be x and 2x. Area = 1/2×x×2x=x²=128, so x=8√2 cm."}, {"q": "In a parallelogram ABCD, points P and Q lie anywhere on AB. What is Area(△PCD) : Area(△QCD)?", "options": ["1:1", "1:2", "2:1", "Depends on P and Q"], "answer": 0, "explanation": "Both triangles have the same base CD and equal perpendicular heights because P and Q lie on AB parallel to CD."}, {"q": "If the midpoints of the sides of any quadrilateral are joined in order, what fraction of the original quadrilateral's area is the area of the new parallelogram?", "options": ["1/4", "1/3", "1/2", "3/4"], "answer": 2, "explanation": "The midpoint parallelogram has exactly half the area of the original quadrilateral."}, {"q": "A median AD is drawn in △ABC, and P is any point on AD. Which relation is true?", "options": ["Area(△ABP)=Area(△ACP)", "Area(△ABP)=2Area(△ACP)", "Area(△ABP)+Area(△ACP)=0", "No fixed relation"], "answer": 0, "explanation": "The chapter proves that any point P on the median gives equal areas for triangles ABP and ACP."}, {"q": "If all side lengths of a triangle are doubled, how does its area change?", "options": ["It doubles", "It triples", "It becomes 4 times", "It becomes 8 times"], "answer": 2, "explanation": "Area scales as the square of the linear scale factor. Doubling sides multiplies area by 2²=4."}, {"q": "If all side lengths of a triangle are tripled, how does its area change?", "options": ["3 times", "6 times", "9 times", "27 times"], "answer": 2, "explanation": "Area scales by the square of the scale factor, so tripling sides multiplies area by 9."}, {"q": "A right triangle has sides 7 cm, 24 cm and 25 cm. What is its area?", "options": ["42 cm²", "84 cm²", "168 cm²", "175 cm²"], "answer": 1, "explanation": "Since 7²+24²=25², the legs are 7 and 24. Area = 1/2×7×24 = 84 cm²."}, {"q": "An isosceles triangle has base 10 cm and area 60 cm². What is the length of each equal side?", "options": ["10 cm", "12 cm", "13 cm", "15 cm"], "answer": 2, "explanation": "Height = 2×60/10 = 12 cm. Half-base = 5 cm, so equal side = √(12²+5²)=13 cm."}, {"q": "Identical circles of radius r are fitted side by side exactly inside a rectangle in one row. What fraction of the rectangle's area is occupied by the circles?", "options": ["π/2", "π/4", "1/2", "3/4"], "answer": 1, "explanation": "For n circles, circle area = nπr² and rectangle area = (2nr)(2r)=4nr², so the fraction is π/4."}, {"q": "The width of each running-track lane is 1.22 m. Approximately what stagger is needed from one lane to the next on a track with two semicircular ends, using π = 22/7?", "options": ["1.22 m", "3.84 m", "7.67 m", "15.34 m"], "answer": 2, "explanation": "Extra curved distance = 2π×1.22 ≈ 7.67 m."}, {"q": "Semicircles are drawn on all three sides of a right-angled triangle. What relation follows from the Pythagorean theorem?", "options": ["Area on hypotenuse = difference of areas on legs", "Sum of areas on the two legs = area on the hypotenuse", "All three semicircle areas are equal", "Area on hypotenuse is twice the sum on the legs"], "answer": 1, "explanation": "Semicircle areas are proportional to the squares of their diameters, so a²+b²=c² gives the same additive area relation."}];
+let current=0,answers=Array(questions.length).fill(null),student="",seconds=3600,timerHandle=null;
+
+function startQuiz(){
+  student=document.getElementById("studentName").value.trim().replace(/\s+/g," ");
+  if(student.length<2){
+    document.getElementById("errorMsg").classList.remove("hidden");
+    return;
+  }
+  document.getElementById("errorMsg").classList.add("hidden");
+  document.getElementById("studentDisplay").textContent=student;
+  document.getElementById("start").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  seconds=3600;
+  runTimer();
+  renderQuestion();
+}
+
+function runTimer(){
+  updateTimer();
+  timerHandle=setInterval(()=>{
+    seconds--;
+    updateTimer();
+    if(seconds<=0){
+      clearInterval(timerHandle);
+      timerHandle=null;
+      submitQuiz(true);
+    }
+  },1000);
+}
+
+function updateTimer(){
+  const m=Math.floor(Math.max(0,seconds)/60);
+  const s=Math.max(0,seconds)%60;
+  document.getElementById("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function renderQuestion(){
+  const q=questions[current];
+  document.getElementById("counter").textContent=`Question ${current+1} of ${questions.length}`;
+  document.getElementById("progress").style.width=((current+1)/questions.length*100)+"%";
+  document.getElementById("questionText").textContent=q.q;
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+text;
+    b.onclick=()=>{answers[current]=i;renderQuestion();};
+    box.appendChild(b);
+  });
+
+  document.getElementById("prevBtn").disabled=current===0;
+  document.getElementById("nextBtn").disabled=answers[current]===null;
+  document.getElementById("nextBtn").textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+
+function prevQuestion(){
+  if(current>0){current--;renderQuestion();}
+}
+
+function nextQuestion(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){current++;renderQuestion();}
+  else submitQuiz(false);
+}
+
+function submitQuiz(timedOut){
+  if(timerHandle){clearInterval(timerHandle);timerHandle=null;}
+
+  const c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  const p=(c/questions.length)*100;
+  const displayP=Math.round(p);
+  let g="",eligible=p>=70;
+
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  document.getElementById("percentage").textContent=displayP+"%";
+  document.getElementById("grade").textContent=eligible?"Grade "+g:g;
+  document.getElementById("correct").textContent=c;
+  document.getElementById("score").textContent=c+" / "+questions.length;
+  document.getElementById("percentage2").textContent=displayP+"%";
+
+  document.getElementById("message").textContent=(timedOut?"Time is over. ":"")+
+    (eligible
+      ?"Congratulations! You qualified for a Prayatnam Academy certificate."
+      :"Your score is below the certificate threshold. Review the answers and try again.");
+
+  if(eligible){
+    document.getElementById("certificate").classList.remove("hidden");
+    document.getElementById("printBtn").classList.remove("hidden");
+    document.getElementById("certName").textContent=student;
+    document.getElementById("certGrade").textContent="Grade "+g;
+    document.getElementById("certScore").textContent=`Score: ${c}/${questions.length} • Percentage: ${displayP}%`;
+    document.getElementById("certDate").textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    document.getElementById("certId").textContent="PA-C9M6-"+Date.now().toString().slice(-8);
+  }else{
+    document.getElementById("noCertificate").classList.remove("hidden");
+  }
+
+  const review=document.getElementById("review");
+  review.innerHTML="<h3>Answer Review & Explanations</h3>";
+  questions.forEach((q,i)=>{
+    const d=document.createElement("details");
+    const ua=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+      <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${ua}</p>
+      <p class="good">Correct answer: ${q.options[q.answer]}</p>
+      <p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
