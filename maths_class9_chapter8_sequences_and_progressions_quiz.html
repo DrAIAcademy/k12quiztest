@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 9 Maths Chapter 8 Sequences and Progressions Quiz | Prayatnam Academy</title>
+<style>
+:root{--p:#5545d8;--p2:#8172f2;--ink:#172033;--muted:#667085;--line:#e5e7ef;--bad:#c83532;--good:#087a55}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--ink)}
+header{background:#151a2d;color:#fff;padding:16px 5%;font-weight:800}
+.wrap{max-width:920px;margin:30px auto;padding:0 15px}
+.hero{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:30px;border-radius:22px;box-shadow:0 18px 45px #5545d833}
+.hero h1{margin:6px 0;font-size:clamp(29px,5vw,44px)}
+.hero p{line-height:1.6}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chip{background:#ffffff22;border:1px solid #ffffff44;padding:7px 11px;border-radius:99px}
+.panel{background:#fff;margin-top:20px;padding:26px;border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px #18203a12}
+.hidden{display:none!important}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px}
+input{width:100%;padding:14px;border:1px solid #ccd0da;border-radius:11px;font-size:16px}
+button{border:0;border-radius:11px;padding:13px 18px;background:var(--p);color:#fff;font-weight:800;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4235bd}
+button:disabled{opacity:.45;cursor:not-allowed}
+.head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}
+.timer{font-size:21px;font-weight:900;color:var(--bad);text-align:right}
+.track{height:9px;background:#eceef4;border-radius:9px;overflow:hidden;margin:15px 0 24px}
+.progress{height:100%;background:var(--p)}
+.question{font-size:23px;font-weight:800;line-height:1.45;margin:10px 0 18px}
+.options{display:grid;gap:10px}
+.option{background:#fff;color:var(--ink);text-align:left;border:1.5px solid #dfe2ea;padding:15px}
+.option:hover{border-color:#aaa4eb;background:#faf9ff}
+.option.selected{border-color:var(--p);background:#f2f0ff}
+.nav{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.result{text-align:center}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.metric{background:#fafbfc;border:1px solid var(--line);padding:15px;border-radius:12px}
+.metric b{display:block;font-size:22px}
+.cert{margin-top:25px;border:9px double #b78b2d;background:#fffdf8;padding:35px;text-align:center}
+.cert h2{font-family:Georgia,serif;font-size:43px;margin:10px}
+.cert .name{font:38px Georgia,serif;border-bottom:1px solid #cdbb92;padding:10px}
+.grade{font-size:25px;font-weight:900;color:#795816;margin:15px}
+.review{text-align:left;margin-top:28px}
+details{border:1px solid var(--line);padding:12px;margin:8px 0;border-radius:10px;background:#fff}
+summary{font-weight:800;cursor:pointer;line-height:1.45}
+.good{color:var(--good);font-weight:800}
+.bad,.error{color:var(--bad);font-weight:800}
+.note{background:#fff7e6;border:1px solid #f0d7a0;padding:12px;border-radius:10px;margin-top:15px;color:#684e16}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:14px}
+footer a{color:var(--p);font-weight:800;text-decoration:none}
+@media(max-width:600px){.row,.metrics{grid-template-columns:1fr}.nav{flex-direction:column-reverse}.nav button{width:100%}.panel,.hero{padding:20px}.cert h2{font-size:32px}.cert .name{font-size:29px}}
+@media print{header,.hero,#start,#quiz,#summary,footer,.review,#noCertificate{display:none!important}.wrap{margin:0;max-width:none}.panel{box-shadow:none;border:0}.cert{display:block!important}}
+</style>
+</head>
+<body>
+<header>Prayatnam Academy • Class 9 Mathematics</header>
+<main class="wrap">
+
+<section class="hero">
+<small>EXAM-ORIENTED INTERACTIVE ASSESSMENT</small>
+<h1>Chapter 8: Predicting What Comes Next – Exploring Sequences and Progressions</h1>
+<p>30 carefully selected MCQs covering sequences, explicit and recursive rules, arithmetic progressions, nth terms, sums, triangular numbers, geometric progressions, exponential growth, Sierpiński patterns and application-based problems.</p>
+<div class="chips">
+<span class="chip">30 MCQs</span>
+<span class="chip">60 Minutes</span>
+<span class="chip">Unlimited Attempts</span>
+<span class="chip">Certificate at 70%+</span>
+</div>
+</section>
+
+<section class="panel" id="start">
+<h2>Enter Student Details</h2>
+<p>Name is mandatory and will appear on the certificate.</p>
+<div class="row">
+<input id="studentName" placeholder="Enter full name" maxlength="60" autocomplete="name">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+<div id="errorMsg" class="error hidden">Please enter the student's name.</div>
+<div class="note">Grading: Above 90% = A+ • 80%–90% = A • 70%–79% = B • Below 70% = No Certificate</div>
+</section>
+
+<section class="panel hidden" id="quiz">
+<div class="head">
+<div><small>Student</small><b id="studentDisplay" style="display:block"></b></div>
+<div><small id="counter"></small><div id="timer" class="timer">60:00</div></div>
+</div>
+<div class="track"><div id="progress" class="progress"></div></div>
+<div id="questionText" class="question"></div>
+<div id="options" class="options"></div>
+<div class="nav">
+<button class="secondary" id="prevBtn" onclick="prevQuestion()">Previous</button>
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+</div>
+</section>
+
+<section class="panel hidden result" id="result">
+<div id="summary">
+<h2>Quiz Completed</h2>
+<h1 id="percentage"></h1>
+<h3 id="grade"></h3>
+<p id="message"></p>
+<div class="metrics">
+<div class="metric">Correct<b id="correct"></b></div>
+<div class="metric">Score<b id="score"></b></div>
+<div class="metric">Percentage<b id="percentage2"></b></div>
+</div>
+<button id="printBtn" class="hidden" onclick="window.print()">Print / Save Certificate</button>
+<button class="secondary" onclick="location.reload()">Attempt Again</button>
+</div>
+
+<div id="certificate" class="cert hidden">
+<b>PRAYATNAM ACADEMY</b>
+<h2>Certificate of Achievement</h2>
+<p>Class 9 Mathematics • Chapter 8: Sequences and Progressions</p>
+<p>This certificate is proudly presented to</p>
+<div class="name" id="certName"></div>
+<p>for successfully completing the 30-question assessment.</p>
+<div class="grade" id="certGrade"></div>
+<p id="certScore"></p>
+<p><b>Date:</b> <span id="certDate"></span> &nbsp; | &nbsp; <b>Certificate ID:</b> <span id="certId"></span></p>
+</div>
+
+<div id="noCertificate" class="hidden bad" style="margin-top:20px">
+Certificate is awarded only for scores of 70% or above.
+</div>
+<div id="review" class="review"></div>
+</section>
+</main>
+
+<footer>
+© Prayatnam Academy •
+<a href="https://www.prayatnam247.com" target="_blank" rel="noopener">www.prayatnam247.com</a>
+• Number: <a href="tel:+918115749450">8115749450</a>
+</footer>
+
+<script>
+const questions=[{"q": "Which of the following sequences is an arithmetic progression?", "options": ["1, 3, 6, 10, 15, …", "1, 4, 9, 16, 25, …", "2, 5, 8, 11, 14, …", "1, 2, 4, 8, 16, …"], "answer": 2, "explanation": "An arithmetic progression has a constant difference between consecutive terms. Here the common difference is 3."}, {"q": "What is the nth term of the odd-number sequence 1, 3, 5, 7, …?", "options": ["n + 1", "2n", "2n - 1", "n²"], "answer": 2, "explanation": "The nth odd number is given by tₙ = 2n - 1."}, {"q": "Using tₙ = 2n - 1, what is the 108th odd number?", "options": ["205", "213", "215", "217"], "answer": 2, "explanation": "t₁₀₈ = 2(108) - 1 = 215."}, {"q": "What is the nth term of the sequence of square numbers 1, 4, 9, 16, …?", "options": ["2n", "n²", "n(n+1)/2", "2n-1"], "answer": 1, "explanation": "The terms are 1², 2², 3², 4², …, so tₙ = n²."}, {"q": "For the sequence tₙ = 3n - 7, what is the 12th term?", "options": ["26", "29", "32", "36"], "answer": 1, "explanation": "t₁₂ = 3(12) - 7 = 29."}, {"q": "Which term of the sequence tₙ = 3n - 7 is 332?", "options": ["111th", "112th", "113th", "114th"], "answer": 2, "explanation": "3n - 7 = 332 gives 3n = 339, so n = 113."}, {"q": "The number of squares in a growing pattern is 1, 5, 9, 13, … . What is the nth term?", "options": ["4n + 1", "4n - 3", "5n - 4", "3n + 1"], "answer": 1, "explanation": "The first term is 1 and common difference is 4, so tₙ = 1 + 4(n-1) = 4n - 3."}, {"q": "What is the 20th term of the sequence 1, 5, 9, 13, …?", "options": ["73", "75", "77", "81"], "answer": 2, "explanation": "t₂₀ = 4(20) - 3 = 77."}, {"q": "What is the general nth-term formula for an arithmetic progression with first term a and common difference d?", "options": ["tₙ = arⁿ⁻¹", "tₙ = a + nd", "tₙ = a + (n-1)d", "tₙ = n(a+d)"], "answer": 2, "explanation": "The nth term of an AP is tₙ = a + (n-1)d."}, {"q": "Find the nth term of the AP 2, 5, 8, 11, … .", "options": ["3n - 1", "3n + 1", "2n + 3", "5n - 3"], "answer": 0, "explanation": "Here a=2, d=3. Thus tₙ = 2 + 3(n-1) = 3n - 1."}, {"q": "What recursive rule describes the AP 2, 5, 8, 11, …?", "options": ["t₁=2, tₙ=tₙ₋₁+3", "t₁=2, tₙ=3tₙ₋₁", "t₁=3, tₙ=tₙ₋₁+2", "t₁=2, tₙ=tₙ₋₁-3"], "answer": 0, "explanation": "Each term is 3 more than the previous term."}, {"q": "What is the sum of the first 100 natural numbers?", "options": ["5000", "5050", "5100", "10000"], "answer": 1, "explanation": "S₁₀₀ = 100×101/2 = 5050."}, {"q": "What is the formula for the nth triangular number?", "options": ["n²", "n(n-1)/2", "n(n+1)/2", "2n-1"], "answer": 2, "explanation": "A triangular number is the sum of the first n natural numbers, so tₙ = n(n+1)/2."}, {"q": "What is the 17th triangular number?", "options": ["136", "144", "153", "171"], "answer": 2, "explanation": "t₁₇ = 17×18/2 = 153."}, {"q": "The sequence 3, 6, 12, 24, … grows by multiplying each term by 2. Which type of progression is it?", "options": ["Arithmetic progression", "Geometric progression", "Triangular sequence", "Square-number sequence"], "answer": 1, "explanation": "A constant ratio between consecutive terms defines a geometric progression."}, {"q": "What is the nth term of a geometric progression with first term a and common ratio r?", "options": ["tₙ = a + (n-1)r", "tₙ = arⁿ⁻¹", "tₙ = nr + a", "tₙ = a/rⁿ"], "answer": 1, "explanation": "The standard nth-term formula for a GP is tₙ = arⁿ⁻¹."}, {"q": "For the GP 2, 10, 50, 250, …, what is the common ratio?", "options": ["2", "3", "5", "10"], "answer": 2, "explanation": "10/2 = 50/10 = 250/50 = 5."}, {"q": "What is the nth term of the GP 2, 10, 50, 250, …?", "options": ["2×5ⁿ⁻¹", "5×2ⁿ⁻¹", "2+5(n-1)", "10×5ⁿ"], "answer": 0, "explanation": "Here a=2 and r=5, so tₙ = 2×5ⁿ⁻¹."}, {"q": "Which recursive rule generates the GP 3, 30, 300, 3000, …?", "options": ["t₁=3, tₙ=tₙ₋₁+10", "t₁=3, tₙ=10tₙ₋₁", "t₁=10, tₙ=3tₙ₋₁", "t₁=3, tₙ=tₙ₋₁-10"], "answer": 1, "explanation": "Each term is 10 times the previous term."}, {"q": "In the Sierpiński triangle pattern, the number of black triangles at Stage n is 3ⁿ, with Stage 0 as the first stage. How many black triangles are there at Stage 5?", "options": ["81", "162", "243", "729"], "answer": 2, "explanation": "At Stage 5, the number is 3⁵ = 243."}, {"q": "In the same Sierpiński triangle, if the black area at Stage 0 is 1 square unit and 3/4 remains at each stage, what is the black area at Stage 3?", "options": ["9/16", "27/64", "81/256", "3/4"], "answer": 1, "explanation": "A₃ = (3/4)³ = 27/64."}, {"q": "For the recursive sequence t₁ = -5, tₙ₊₁ = tₙ + 3, which term is 52?", "options": ["18th", "19th", "20th", "21st"], "answer": 2, "explanation": "The explicit rule is tₙ=-5+3(n-1). Setting this equal to 52 gives n=20."}, {"q": "The sequence T₁=1, T₂=2, T₃=4 and each later term equals the sum of the previous three terms. What is T₆?", "options": ["13", "20", "24", "44"], "answer": 2, "explanation": "T₄=7, T₅=13 and T₆=13+7+4=24."}, {"q": "Find the 26th term of the AP 3, 8, 13, 18, … .", "options": ["123", "128", "133", "138"], "answer": 1, "explanation": "a=3, d=5. t₂₆ = 3 + 25×5 = 128."}, {"q": "Which term of the AP 21, 18, 15, … is -81?", "options": ["33rd", "34th", "35th", "36th"], "answer": 2, "explanation": "With a=21 and d=-3, -81 = 21 + (n-1)(-3), giving n=35."}, {"q": "An AP has 50 terms. Its 3rd term is 12 and its 50th term is 106. What is its 29th term?", "options": ["60", "62", "64", "66"], "answer": 2, "explanation": "Solving a+2d=12 and a+49d=106 gives d=2 and a=8. Then t₂₉=8+28×2=64."}, {"q": "How many two-digit numbers are divisible by 3?", "options": ["29", "30", "31", "33"], "answer": 1, "explanation": "They form the AP 12, 15, 18, …, 99. Solving for n gives 30 terms."}, {"q": "What is the sum of all two-digit numbers divisible by 3?", "options": ["1485", "1560", "1665", "1785"], "answer": 2, "explanation": "There are 30 terms from 12 to 99. Sum = 30/2 × (12+99) = 1665."}, {"q": "A ball is dropped from 80 m and rebounds to 60% of the previous height each time. What height does it reach after the 5th bounce?", "options": ["4.80 m", "6.22 m", "8.64 m", "10.37 m"], "answer": 1, "explanation": "Height after the fifth bounce = 80(0.6)⁵ = 6.2208 m ≈ 6.22 m."}, {"q": "What is the smallest n for which the sum 1+2+3+…+n is greater than 1000?", "options": ["44", "45", "46", "50"], "answer": 1, "explanation": "S₄₄=990, while S₄₅=1035. Therefore the smallest n is 45."}];
+let current=0,answers=Array(questions.length).fill(null),student="",seconds=3600,timerHandle=null;
+
+function startQuiz(){
+  student=document.getElementById("studentName").value.trim().replace(/\s+/g," ");
+  if(student.length<2){
+    document.getElementById("errorMsg").classList.remove("hidden");
+    return;
+  }
+  document.getElementById("errorMsg").classList.add("hidden");
+  document.getElementById("studentDisplay").textContent=student;
+  document.getElementById("start").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  seconds=3600;
+  runTimer();
+  renderQuestion();
+}
+
+function runTimer(){
+  updateTimer();
+  timerHandle=setInterval(()=>{
+    seconds--;
+    updateTimer();
+    if(seconds<=0){
+      clearInterval(timerHandle);
+      timerHandle=null;
+      submitQuiz(true);
+    }
+  },1000);
+}
+
+function updateTimer(){
+  const m=Math.floor(Math.max(0,seconds)/60);
+  const s=Math.max(0,seconds)%60;
+  document.getElementById("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function renderQuestion(){
+  const q=questions[current];
+  document.getElementById("counter").textContent=`Question ${current+1} of ${questions.length}`;
+  document.getElementById("progress").style.width=((current+1)/questions.length*100)+"%";
+  document.getElementById("questionText").textContent=q.q;
+
+  const box=document.getElementById("options");
+  box.innerHTML="";
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+text;
+    b.onclick=()=>{answers[current]=i;renderQuestion();};
+    box.appendChild(b);
+  });
+
+  document.getElementById("prevBtn").disabled=current===0;
+  document.getElementById("nextBtn").disabled=answers[current]===null;
+  document.getElementById("nextBtn").textContent=current===questions.length-1?"Submit Quiz":"Next";
+}
+
+function prevQuestion(){
+  if(current>0){current--;renderQuestion();}
+}
+
+function nextQuestion(){
+  if(answers[current]===null)return;
+  if(current<questions.length-1){current++;renderQuestion();}
+  else submitQuiz(false);
+}
+
+function submitQuiz(timedOut){
+  if(timerHandle){clearInterval(timerHandle);timerHandle=null;}
+
+  const c=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+  const p=(c/questions.length)*100;
+  const displayP=Math.round(p);
+  let g="",eligible=p>=70;
+
+  if(p>90)g="A+";
+  else if(p>=80)g="A";
+  else if(p>=70)g="B";
+  else g="No Certificate";
+
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  document.getElementById("percentage").textContent=displayP+"%";
+  document.getElementById("grade").textContent=eligible?"Grade "+g:g;
+  document.getElementById("correct").textContent=c;
+  document.getElementById("score").textContent=c+" / "+questions.length;
+  document.getElementById("percentage2").textContent=displayP+"%";
+
+  document.getElementById("message").textContent=(timedOut?"Time is over. ":"")+
+    (eligible
+      ?"Congratulations! You qualified for a Prayatnam Academy certificate."
+      :"Your score is below the certificate threshold. Review the answers and try again.");
+
+  if(eligible){
+    document.getElementById("certificate").classList.remove("hidden");
+    document.getElementById("printBtn").classList.remove("hidden");
+    document.getElementById("certName").textContent=student;
+    document.getElementById("certGrade").textContent="Grade "+g;
+    document.getElementById("certScore").textContent=`Score: ${c}/${questions.length} • Percentage: ${displayP}%`;
+    document.getElementById("certDate").textContent=new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});
+    document.getElementById("certId").textContent="PA-C9M8-"+Date.now().toString().slice(-8);
+  }else{
+    document.getElementById("noCertificate").classList.remove("hidden");
+  }
+
+  const review=document.getElementById("review");
+  review.innerHTML="<h3>Answer Review & Explanations</h3>";
+  questions.forEach((q,i)=>{
+    const d=document.createElement("details");
+    const ua=answers[i]===null?"Not answered":q.options[answers[i]];
+    d.innerHTML=`<summary>Q${i+1}. ${q.q}</summary>
+      <p class="${answers[i]===q.answer?"good":"bad"}">Your answer: ${ua}</p>
+      <p class="good">Correct answer: ${q.options[q.answer]}</p>
+      <p>${q.explanation}</p>`;
+    review.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
